@@ -8,6 +8,7 @@ import CardAlign from './pages/card/CardAlign';
 import AddMembers from './pages/add members/AddMembers';
 import SignInSide from './pages/Sign-In/SignInSide';
 import ECard from './pages/ecard/ECards';
+import Announcement from './pages/announcement/Announcement';
 function Main() {
     const theme= createMuiTheme({
       palette:{
@@ -33,6 +34,7 @@ function Main() {
         <Route exact path="/cards" component={CardAlign}/>
         <Route exact path="/addMembers" component={AddMembers}/>
         <Route exact path="/ecard" component={ECard}/>
+        <Route exact path="/announcement" component={Announcement}/>
       </div> 
       </Router>
    

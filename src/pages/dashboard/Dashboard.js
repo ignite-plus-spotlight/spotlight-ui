@@ -5,26 +5,29 @@ import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
-import {MenuItem, MenuList} from '@material-ui/core'
+import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import {Link} from 'react-router-dom'; 
-
-
+import Grid from '@material-ui/core/Grid';
+import DashboardList from './DashboardList'
 
 const drawerWidth = 240;
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    
   },
   appBar: {
+    
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
+      
     }),
   },
   appBarShift: {
@@ -33,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
+     
     }),
   },
   menuButton: {
@@ -49,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
     backgroundColor: theme.palette.primary.main,
-    
+   
   },
   drawerHeader: {
     display: 'flex',
@@ -84,7 +88,11 @@ export default function Dashboard(props) {
 
   const handleDrawerOpen = () => {
     setOpen(true);
+    
   };
+  const [anchorEl, setAnchorEl] = React.useState(null);
+ 
+
 
   const handleDrawerClose = () => {
     setOpen(false);
@@ -92,37 +100,52 @@ export default function Dashboard(props) {
 
   return (
     <div className={classes.root}>
-      {/* <CssBaseline /> */}
+      <CssBaseline />
      
       <AppBar
         position="fixed"
-       color="secondary"
+        color = "secondary"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
       >
         
         <Toolbar>
+        <Grid justify="space-between"  container spacing={2}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
+            // className={clsx(classes.menuButton, open && classes.hide)}
           >
             <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
+           
+           <Typography variant="h6" noWrap>
             SPOTLIGHT
           </Typography>
+          </IconButton>
+          </Grid>
+          <Grid item>
+          <IconButton
+            component={Link} to="/"
+            color="inherit"
+            edge="end"
+            className={clsx(classes.menuButton, open && classes.hide)}
+          >
+            <ExitToAppOutlinedIcon/>
+            </IconButton>
+            </Grid>
         </Toolbar>
         
+        
       </AppBar>
+
       <Drawer
         className={classes.drawer}
         variant="contained"
+        
         anchor="left"
-        style={{backgroundColor: "primary"}}
         open={open}
         classes={{
           paper: classes.drawerPaper,
@@ -130,53 +153,16 @@ export default function Dashboard(props) {
       >
         <div className={classes.drawerHeader}>
           <IconButton onClick={handleDrawerClose}> 
-             <IconButton variant="contained" color="secondary">
+             <IconButton variant="contained" >
               DASHBOARD
-             <CloseIcon variant="contained" color="secondary">
+             <CloseIcon variant="contained" >
               </CloseIcon>
           </IconButton>
         </IconButton>
         </div>
-        
+        <DashboardList/>
+         
         <Divider />
-        <MenuList>
-          <MenuItem >
-          Activity
-          </MenuItem>
-          <MenuItem>
-          Organisation
-          </MenuItem>
-          <MenuItem >
-         Recognition
-          </MenuItem>
-          <MenuItem>
-          Claim Rewards
-          </MenuItem>
-          </MenuList>
-          <Divider/>
-        <MenuList >
-        <MenuItem>
-          Activity
-          </MenuItem>
-          <MenuItem>
-          Announcement
-          </MenuItem>
-          <MenuItem component={Link} to="/cards">
-          Nominations
-          </MenuItem>
-          <MenuItem component={Link} to="/addMembers">
-          Add Members
-          </MenuItem>
-          <MenuItem>
-          Polls
-          </MenuItem>
-          <MenuItem component={Link} to="/ecard">
-          Send Personal E-Card
-          </MenuItem>
-          <MenuItem component={Link} to="/">
-            Logout
-          </MenuItem>
-        </MenuList>
         
       </Drawer>
       <main
@@ -185,10 +171,6 @@ export default function Dashboard(props) {
         })}
       >
         <div className={classes.drawerHeader} />
-       
-        <Typography paragraph>
-         
-        </Typography>
       </main>
     </div>
   );
