@@ -8,7 +8,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Layout from '../layout/Layout';
 
-export default function AddMembers() {
+export default function AddMembers(props) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -22,7 +22,7 @@ export default function AddMembers() {
   return (
       <Layout>
     <div>
-      <Button variant="contained" color="error" onClick={handleClickOpen} fullWidth>
+      <Button variant="contained" color="secondary" onClick={handleClickOpen} fullWidth>
         ADD MEMBERS
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
@@ -32,7 +32,7 @@ export default function AddMembers() {
             Please Enter The Details
           </DialogContentText>
           <TextField
-            autoFocus
+            // autoFocus
             margin="dense"
             id="name"
             label="Name"
@@ -40,7 +40,6 @@ export default function AddMembers() {
             fullWidth
           />
           <TextField
-            autoFocus
             margin="dense"
             id="name"
             label="Role"
@@ -48,7 +47,6 @@ export default function AddMembers() {
             fullWidth
           />
           <TextField
-            autoFocus
             margin="dense"
             id="name"
             label="Team"
@@ -57,10 +55,10 @@ export default function AddMembers() {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="ff1744">
+          <Button onClick={handleClose} color="secondary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="ff1744">
+          <Button onClick={handleClose} color="secondary">
             Confirm And Submit
           </Button>
         </DialogActions>

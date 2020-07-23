@@ -92,7 +92,7 @@ export default function Dashboard(props) {
 
   return (
     <div className={classes.root}>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
      
       <AppBar
         position="fixed"
@@ -122,7 +122,7 @@ export default function Dashboard(props) {
         className={classes.drawer}
         variant="contained"
         anchor="left"
-        style={{backgroundColor: "ffcdd2"}}
+        style={{backgroundColor: "primary"}}
         open={open}
         classes={{
           paper: classes.drawerPaper,

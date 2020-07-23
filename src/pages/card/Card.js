@@ -1,22 +1,18 @@
-import React from 'react';
+import React, {useState, useEffect} from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import img1 from '../../assets/images/target5.jpg';
 import Layout from '../layout/Layout';
+import axios from "axios";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,15 +40,31 @@ const useStyles = makeStyles((theme) => ({
 export default function Cards(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+  const [stateAwards, setAwardsState] = useState([])  
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  useEffect(()=> {
+    getAward();
+  },[]);
+
+  const getAward=()=>{
+    axios
+    .get("http://localhost:8081/awards").
+    then(data=>{
+      console.log(data);
+      setAwardsState(data.data)
+    })
+    .catch(err=>alert(err));
   };
+
 
   return (
       <Layout>
           <div className="container">
+          {console.log(stateAwards)}
     <Card className={classes.root} >
+    {stateAwards.map(a=>{
+       return(
+        <>
       <CardHeader
         avatar={
           <Avatar aria-label="nomination" className={classes.avatar}>
@@ -64,48 +76,22 @@ export default function Cards(props) {
             <MoreVertIcon />
           </IconButton>
         }
-        title="Nomination Category"
-        subheader="July 22,2020"
+        title={a.award_name}
+        subheader={a.points}
       />
       <CardMedia
         className={classes.media}
         image={img1}
-        title="nomination"
+       
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          Description
+        <Typography variant="body2" >
+        {a.description}
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>List Of Nominee</Typography>
-          <Typography paragraph>
-          Nominee
-          </Typography>
-          <Typography paragraph>
-          Nominee
-          </Typography>
-          <Typography paragraph>
-          Nominee
-          </Typography>
-          <Typography>
-          Nominee
-          </Typography>
-        </CardContent>
-      </Collapse>
+      </>
+      )})}
+      
     </Card>
     </div>
     </Layout>
