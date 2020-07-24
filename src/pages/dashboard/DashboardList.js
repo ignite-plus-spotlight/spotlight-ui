@@ -36,8 +36,9 @@ export default function NestedList() {
       component="nav"
       aria-labelledby="nested-list-subheader"
       className={classes.root}>
-      <ListItem button>
+      <ListItem button variant="outline" color="secondary" component={Link} to= "/activity"  >
         <ListItemText primary="Activity" />
+      
       </ListItem>
       <ListItem button onClick={handleClick}>
         <ListItemText primary="Recognition" />
@@ -47,17 +48,17 @@ export default function NestedList() {
         <List component="div" disablePadding>
           <ListItem button className={classes.nested}>
             <List>
-              <ListItem button> 
+              <ListItem button variant="outline" color="secondary" component={Link} to= "/individual"> 
               <ListItemText primary="Individual" /> 
             </ListItem >
-            <ListItem button>
+            <ListItem button variant="outline" color="secondary" component={Link} to= "team">
             <ListItemText primary="Team" />
             </ListItem>
             </List>
             </ListItem>
             </List>
             </Collapse>   
-      <ListItem button>
+      <ListItem button variant="outline" color="secondary" component={Link} to= "/claimReward">
         <ListItemText primary="Claim reward" />
       </ListItem>
       <ListItem button onClick={handleClick}>
@@ -68,10 +69,10 @@ export default function NestedList() {
         <List component="div" disablePadding>
           <ListItem button className={classes.nested}>
             <List>
-              <ListItem button> 
+              <ListItem button variant="outline" color="secondary" component={Link} to= "/members"> 
               <ListItemText primary="Members" /> 
             </ListItem >
-            <ListItem button>
+            <ListItem button variant="outline" color="secondary" component={Link} to="/surveypoll">
             <ListItemText primary="Survey/Poll" />
             </ListItem>
             </List>
@@ -88,7 +89,7 @@ export default function NestedList() {
       <ListItem button variant="outline" color="secondary" component={Link} to="/addMembers">
         <ListItemText primary="Add members" />
       </ListItem>
-      <ListItem button>
+      <ListItem button variant="outline" color="secondary" component={Link} to="/poll">
         <ListItemText primary="Polls" />
       </ListItem>
       <ListItem button  variant="outline" color="secondary" component={Link} to="/ecard">

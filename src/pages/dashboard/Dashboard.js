@@ -15,6 +15,9 @@ import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import {Link} from 'react-router-dom'; 
 import Grid from '@material-ui/core/Grid';
 import DashboardList from './DashboardList'
+import Fab from '@material-ui/core/Fab';
+import Tooltip from '@material-ui/core/Tooltip'; 
+
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -127,14 +130,9 @@ export default function Dashboard(props) {
           </IconButton>
           </Grid>
           <Grid item>
-          <IconButton
-            component={Link} to="/"
-            color="inherit"
-            edge="end"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <ExitToAppOutlinedIcon/>
-            </IconButton>
+          <Tooltip title="Want to Logout?">         
+           <Fab variant="extended" color="secondary" component={Link} to="/"><ExitToAppOutlinedIcon/>LOGout</Fab>
+        </Tooltip>
             </Grid>
         </Toolbar>
         

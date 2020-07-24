@@ -9,6 +9,14 @@ import AddMembers from './pages/add members/AddMembers';
 import SignInSide from './pages/Sign-In/SignInSide';
 import ECard from './pages/ecard/ECards';
 import Announcement from './pages/announcement/Announcement';
+import Individual from './pages/recognition/Individual';
+import Team from './pages/recognition/Team';
+import ClaimReward from './pages/claim reward/ClaimReward';
+import Activity from './pages/activity/Activity';
+import Members from './pages/Organisation/Members';
+import SurveyPoll from './pages/Organisation/SurveyPoll';
+import Poll from './pages/poll/Poll';
+
 function Main() {
     const theme= createMuiTheme({
       palette:{
@@ -35,6 +43,18 @@ function Main() {
         <Route exact path="/addMembers" component={AddMembers}/>
         <Route exact path="/ecard" component={ECard}/>
         <Route exact path="/announcement" component={Announcement}/>
+        <Route exact path="/individual" component={Individual}/>
+        <Route exact path="/team" component={Team}/>
+        <Route exact path="/claimReward" component={ClaimReward}/>
+        <Route exact path="/activity" component={Activity}/>
+        <Route exact path="/members" component={Members}/>
+        <Route exact path="/surveypoll" component={SurveyPoll}/>
+        <Route exact path="/poll" component={Poll}/>
+
+
+
+
+
       </div> 
       </Router>
    
