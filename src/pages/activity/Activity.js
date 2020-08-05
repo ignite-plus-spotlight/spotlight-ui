@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from "react";
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import CameraIcon from '@material-ui/icons/PhotoCamera';
@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import Layout from '../layout/Layout';
+import axios from "axios";
 import img1 from '../../assets/images/target1.jpg'
 import { MDBMask, MDBView, MDBContainer, MDBRow, MDBCol } from "mdbreact";
 
@@ -62,13 +63,31 @@ const useStyles = makeStyles((theme) => ({
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-export default function Album() {
+
+export default function Activity() {
   const classes = useStyles();
+  const [stateAwards, setAwardsState] = useState([]) 
 
+  useEffect(()=> {
+    getAward();
+  },[]);
   
-  return (
-    <React.Fragment>
 
+  const getAward=()=>{
+ 
+    axios
+    .get(`http://localhost:8081/teamawards`).
+    then(data=>{
+    //   console.log(data);
+    
+      setAwardsState(data.data)
+    })
+    .catch(err=>alert(err));
+  };
+
+  return (
+    <Layout>
+    <React.Fragment>
       <CssBaseline />
       <main>
         {/* Hero unit */}
@@ -85,8 +104,9 @@ export default function Album() {
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+          {stateAwards.map(a=>  (
+            // {cards.map((card) => (
+              <Grid item  xs={12} sm={6} md={4}>
                 <Card className={classes.card}  >
                   <CardMedia
                     className={classes.cardMedia}
@@ -94,16 +114,19 @@ export default function Album() {
                     title="Image title"
                   />
                   <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+                    <Typography gutterBottom variant="h5" component="h1">
+                     {a.awardName} -{a.teamPoints}
                     </Typography>
                     <Typography>
-                      This is a media card. You can use this section to describe the content.
+                      {a.teamName} - {a.periodName}
+                    </Typography>
+                    <Typography>
+                      {a.description}
                     </Typography>
                   </CardContent>
                   <CardActions>
                     <Button size="small" color="secondary">
-                      View
+                      Like 
                     </Button>
                     {/* <Button size="small" color="secondary">
                       Edit
@@ -111,11 +134,13 @@ export default function Album() {
                   </CardActions>
                 </Card>
               </Grid>
+            // ))}
             ))}
           </Grid>
         </Container>
       </main>
 
     </React.Fragment>
+    </Layout>
   );
 }

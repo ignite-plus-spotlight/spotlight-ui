@@ -147,7 +147,7 @@ const rows = [
 
 export default function CollapsibleTable() {
   return (
-    // <Layout>
+    <Layout>
                 <div >
           <Hidden xlUp color="secondary">
           <Paper><h1 align="center" >Team Awards</h1></Paper>
@@ -182,6 +182,6 @@ export default function CollapsibleTable() {
     
     </div>
 
-    // </Layout>
+    </Layout>
   );
 }
