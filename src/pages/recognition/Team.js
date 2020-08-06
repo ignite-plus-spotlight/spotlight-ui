@@ -1,187 +1,128 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles,withStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
+import React,{useState, useEffect} from 'react';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Layout from '../layout/Layout';
-import Grid from '@material-ui/core/Grid';
+import axios from "axios";
 import Hidden from '@material-ui/core/Hidden';
-import { red } from '@material-ui/core/colors';
+
+// import { useWindowSize } from 'react-use'
+// import Confetti from 'react-confetti'
 
 const StyledTableCell = withStyles((theme) => ({
-    head: {
-      backgroundColor: theme.palette.secondary.main,
+  head: {
+    backgroundColor: theme.palette.secondary.main,
       color: theme.palette.common.white,
-    },
-    body: {
-      fontSize: 14,
-    },
-  }))(TableCell);
-  const StyledTableRow = withStyles((theme) => ({
-    root: {
-      '&:nth-of-type(even)': {
-        backgroundColor: theme.palette.action.hover,
-      },
-    },
-  }))(TableRow);
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
 
-const useRowStyles = makeStyles({
+const StyledTableRow = withStyles((theme) => ({
   root: {
-    '& > *': {
-        
-      borderBottom: 'unset',
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
     },
- 
+  },
+}))(TableRow);
 
-  }
 
+const useStyles = makeStyles({
+  table: {
+    minWidth: 700,
+  },
 });
 
-function createData(Date,Awardname, Points,Period ) {
-  return {
-      
-    Date,
-    Awardname,
-    Points,
-    Period,
-   
-    history: [
-      { awardedby: 'Anusha', description: 'hardworker' },
-      
-    ],
-  };
-}
-
-function Row(props) {
-  const { row } = props;
-  const [open, setOpen] = React.useState(false);
-  const classes = useRowStyles();
-
-  return (
-      
-    <React.Fragment>
-      <StyledTableRow className={classes.root}>
-        <TableCell>
-          <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-          </IconButton>
-        </TableCell>
-        <TableCell component="th" scope="row">
-          {row.Date}
-        </TableCell>
-        <TableCell align="right">{row.Awardname}</TableCell>
-        <TableCell align="right">{row.Points}</TableCell>
-        <TableCell align="right">{row.Period}</TableCell>
-        
-        
-      </StyledTableRow>
-      <StyledTableRow>
-        <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-          <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box margin={1}>
-              {/* <Typography variant="h6" gutterBottom component="div">
-                
-              </Typography> */}
-              <Table size="small" aria-label="purchases">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell>Awarded by</StyledTableCell>
-                    <StyledTableCell>description</StyledTableCell>
-                    
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.awardedby}>
-                      <TableCell component="th" scope="row">
-                        {historyRow.awardedby}
-                      </TableCell>
-                      <TableCell>{historyRow.description}</TableCell>
-                     
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </Box>
-          </Collapse>
-        </TableCell>
-      </StyledTableRow>
-    </React.Fragment>
-  );
-}
-
-Row.propTypes = {
-  row: PropTypes.shape({
-    
-    Awardname: PropTypes.string.isRequired,
-    Points: PropTypes.number.isRequired,
-    Period: PropTypes.string.isRequired,
-    history: PropTypes.arrayOf(
-      PropTypes.shape({
-        awardedby: PropTypes.number.isRequired,
-       description: PropTypes.string.isRequired,
-        
-      }),
-    ).isRequired,
-    Date: PropTypes.number.isRequired,
-  }).isRequired,
-};
-
-const rows = [
-  createData('12-11-20','leadership','60', 'monthly'),
-  createData('01-11-20','leadership','60', 'monthly'),
-  createData('30-11-20','leadership','60', 'monthly'),
+export default function CustomizedTables() {
+  const classes = useStyles();
+  const [stateAwards, setAwardsState] = useState([]) 
   
-];
+  const [value, setValue] = React.useState(
+    JSON.parse(localStorage.getItem('userData')) 
+  );
+  var current=value.data.empId;
 
-export default function CollapsibleTable() {
+  const [data,setData]=useState({
+    award_name:"",
+    points:"",
+    description:"",
+    period:"",
+    team:""
+    
+  })
+
+  useEffect(()=> {
+    getAward();
+  },[]);
+
+  const getAward=()=>{
+    
+    console.log(current)
+    
+    axios
+    .get(`http://localhost:8081/employee/${current}`).
+    then(data1=>{
+      console.log(data1.data[0].teamId);
+      // var id = data1.data[0].teamId;
+      // console.log(id);
+    })
+
+    // var id = data.data;
+    // console.log(id);
+
+    axios
+    .get(`http://localhost:8081/teammember/400/teamawardstmd`).
+    then(data=>{
+      // console.log(data);
+      setAwardsState(data.data)
+    })
+    .catch(err=>alert(err));
+  };
+
+    // {console.log(stateAwards)}
+    // const { width, height } = useWindowSize()
+
   return (
-    <Layout>
-                <div >
-          <Hidden xlUp color="secondary">
-          <Paper><h1 align="center" >Team Awards</h1></Paper>
+      <Layout>
+            {/* <Hidden xlUp color="secondary">
+          <h1 align="center" >My Team Awards</h1>
         </Hidden>
-        
-    {/* <Grid container alignItems="center" spacing={2} > */}
-    {/* <Grid item xs={6}  > */}
-
-    <TableContainer component={Paper} >
-      <Table aria-label="collapsible table" style={{ width: 600, margin: 'auto' }} Color= 'secondary'
->
+        <Confetti
+      width={width}
+      height={height}
+    />
+    <TableContainer >
+      <Table className={classes.table} aria-label="customized table"  style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
         <TableHead>
           <TableRow>
-            <StyledTableCell />
-            <StyledTableCell>Date</StyledTableCell>
-            <StyledTableCell align="right">Awardname</StyledTableCell>
-            <StyledTableCell align="right">points</StyledTableCell>
-            <StyledTableCell align="right">period</StyledTableCell>
-           
+            <StyledTableCell>Award Name</StyledTableCell>
+            <StyledTableCell align="left">points</StyledTableCell>
+            <StyledTableCell align="left">Description</StyledTableCell>
+            <StyledTableCell align="left">Period</StyledTableCell>
+            <StyledTableCell align="left">Team Name</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <Row key={row.name} row={row} />
+        {stateAwards.map(a=>  (
+            <StyledTableRow key={a.awardName}>
+              <StyledTableCell component="th" scope="row">
+              {a.awardName}
+              </StyledTableCell>
+              <StyledTableCell align="left">{a.teamPoints}</StyledTableCell>
+              <StyledTableCell align="left">{a.description}</StyledTableCell>
+              <StyledTableCell align="left">{a.periodName}</StyledTableCell>
+              <StyledTableCell align="left">{a.teamName}</StyledTableCell>
+            </StyledTableRow>
           ))}
         </TableBody>
       </Table>
-    </TableContainer>
-    
-    {/* </Grid>
-    </Grid> */}
-    
-    </div>
-
+    </TableContainer> */}
     </Layout>
   );
 }

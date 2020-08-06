@@ -97,7 +97,7 @@ export default function Activity() {
         {/* <div className={classes.heroContent}> */}
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Welcome 
+              {/* Welcome  */}
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
             "Gratitude is the most exquisite form of courtesy."
