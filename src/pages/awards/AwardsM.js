@@ -75,7 +75,7 @@ function AwardsM() {
       
     return (
         <Layout>       
-              {team.map(team=>  (     
+               {team.map(team=>  (     
         <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -94,21 +94,21 @@ function AwardsM() {
             <StyledTableCell align="right">First Name</StyledTableCell>
             <StyledTableCell align="right">Last Name</StyledTableCell>
             <StyledTableCell align="right">Email id</StyledTableCell>
-            <StyledTableCell align="right">Reward</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
- {/* {team.teamMember.map(teamMember=>( */}
-            <StyledTableRow >
+ {team.teamMembers.map(teamMember=>(
+             <StyledTableRow >
               <StyledTableCell component="th" scope="row">
-
+                {()=>console.log(team[0])}
+                {teamMember.empId}
               </StyledTableCell>
-              {/* <StyledTableCell align="right">{teamMember.empId}</StyledTableCell>
-                <StyledTableCell align="right">{teamMember.firstName}</StyledTableCell>
-                <StyledTableCell align="right">{teamMember.lastName}</StyledTableCell>
-                <StyledTableCell align="right">{teamMember.email}</StyledTableCell> */}
-            </StyledTableRow>
- {/* ))} */}
+              <StyledTableCell align="right">{teamMember.firstName}</StyledTableCell>
+              <StyledTableCell align="right">{teamMember.lastName}</StyledTableCell>
+              <StyledTableCell align="right">{teamMember.empEmail}</StyledTableCell>
+            
+            </StyledTableRow> 
+   ))}  
         </TableBody>
       </Table>
     </TableContainer>

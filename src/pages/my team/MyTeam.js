@@ -165,6 +165,7 @@ export default function MyTeam() {
     JSON.parse(localStorage.getItem('userData')) 
   );
   var current=value.data.empId;
+  const[teamMember,setTeamMember]=useState([]);
   
 //   console.log(value);
 // const[MemberList,setMember]=useState([])
@@ -191,8 +192,11 @@ const url=`http://localhost:8081/team/${data.members}/${data.managerId}/${data.t
     axios
     .get(`http://localhost:8081/manager/${current}`).
     then(data=>{
-      // console.log(data.data.teams[0].teamMembers[0]);
-      console.log(data)
+      console.log(data.data.teams[0].teamMembers);
+      // const[teamMember,setTeamMember]=useState([]);
+      setTeamMember(data.data.teams[0].teamMembers)
+      console.log(teamMember)
+      // console.log(data)
 
     
       setTeam(data.data.teams)
@@ -327,48 +331,7 @@ const url=`http://localhost:8081/team/${data.members}/${data.managerId}/${data.t
         </Container>
 
 
-        {team.map(team=>  (     
-        <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-        <Typography className={classes.heading}>Team Name : {team.teamName}</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-            <Typography>
-            <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>Employee Id</StyledTableCell>
-            <StyledTableCell align="right">First Name</StyledTableCell>
-            <StyledTableCell align="right">Last Name</StyledTableCell>
-            <StyledTableCell align="right">Email id</StyledTableCell>
-            <StyledTableCell align="right">Reward</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
- {/* {team.teamMember.map(teamMember=>( */}
-            <StyledTableRow >
-              <StyledTableCell component="th" scope="row">
-
-              </StyledTableCell>
-              {/* <StyledTableCell align="right">{teamMember.empId}</StyledTableCell>
-                <StyledTableCell align="right">{teamMember.firstName}</StyledTableCell>
-                <StyledTableCell align="right">{teamMember.lastName}</StyledTableCell>
-                <StyledTableCell align="right">{teamMember.email}</StyledTableCell> */}
-            </StyledTableRow>
- {/* ))} */}
-        </TableBody>
-      </Table>
-    </TableContainer>
-          </Typography>
-          {/* })} */}
-        </AccordionDetails>
-      </Accordion>
-      ))}
+       
       </main>
 
     </React.Fragment>
