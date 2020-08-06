@@ -255,9 +255,15 @@ const url=`http://localhost:8081/team/${data.members}/${data.managerId}/${data.t
                       Add Members
                     </Button> */}
 
-              <Button variant="contained" color="secondary" onClick={handleClickOpen} fullWidth>
+            
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+        <Button variant="contained" color="secondary" onClick={handleClickOpen} fullWidth>
                       ADD MEMBERS 
-                     
                     </Button>
                     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
                       <DialogContent >
@@ -316,22 +322,9 @@ const url=`http://localhost:8081/team/${data.members}/${data.managerId}/${data.t
                         </Button>
                       </DialogActions>
                     </Dialog>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-
-         
-
-
-
-
-
-        </Container>
-
-
-       
+                    <Button variant="contained" color="secondary" component={Link} to="/viewMembers"  fullWidth>
+                      VIEW MEMBERS  
+                    </Button>           
       </main>
 
     </React.Fragment>

@@ -1,11 +1,6 @@
 import React, { useState ,useEffect} from 'react'
 import axios from 'axios';
 import Layout from '../layout/Layout';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -14,6 +9,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { Divider } from '@material-ui/core';
+import Hidden from '@material-ui/core/Hidden';
+
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -76,21 +74,15 @@ function AwardsM() {
     return (
         <Layout>       
                {team.map(team=>  (     
-        <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-          id="panel1a-header"
-        >
-        <Typography className={classes.heading}>Team Name : {team.teamName}</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-            <Typography>
-            <TableContainer component={Paper}>
+           <> 
+        <Hidden xlUp color="secondary">
+               <h1 align="center">Team Name : {team.teamName}</h1>
+        </Hidden>
+      <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Employee Id</StyledTableCell>
+            <StyledTableCell> Employee Id</StyledTableCell>
             <StyledTableCell align="right">First Name</StyledTableCell>
             <StyledTableCell align="right">Last Name</StyledTableCell>
             <StyledTableCell align="right">Email id</StyledTableCell>
@@ -112,12 +104,8 @@ function AwardsM() {
         </TableBody>
       </Table>
     </TableContainer>
-          </Typography>
-          {/* })} */}
-        </AccordionDetails>
-      </Accordion>
+    </>   
       ))}
-          
     </Layout>
     )
 }
