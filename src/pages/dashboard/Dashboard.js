@@ -147,10 +147,14 @@ export default function Dashboard(props) {
           </IconButton>
           </Grid>
           <Grid item>
-          <Tooltip title="Want to Logout?">         
-           <Fab variant="extended" color="secondary" component={Link} to="/"><ExitToAppOutlinedIcon/>Logout</Fab>
-  
-        </Tooltip>
+          {  <Avatar src={value.data.imageUrl}   className={classes.small} />}
+          </Grid>
+          <Grid item>
+          {/* <Tooltip title="Want to Logout?">          */}
+           {/* <Fab variant="extended" color="secondary" component={Link} to="/"><ExitToAppOutlinedIcon/>Logout</Fab> */}
+           <Typography>{value.data.firstName}</Typography>
+
+        {/* </Tooltip> */}
             </Grid>
         </Toolbar>
         
@@ -169,7 +173,7 @@ export default function Dashboard(props) {
       >
         <div  className={classes.drawerHeader} >
         
-        {  <Avatar alt="Remy" src={value.data.imageUrl}   className={classes.large} />}
+        {  <Avatar src={value.data.imageUrl}   className={classes.large} />}
           <IconButton onClick={handleDrawerClose}>   
              <CloseIcon variant="contained" >
               </CloseIcon>

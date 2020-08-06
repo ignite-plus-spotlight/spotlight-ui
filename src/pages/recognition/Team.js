@@ -11,8 +11,8 @@ import Layout from '../layout/Layout';
 import axios from "axios";
 import Hidden from '@material-ui/core/Hidden';
 
-// import { useWindowSize } from 'react-use'
-// import Confetti from 'react-confetti'
+import { useWindowSize } from 'react-use'
+import Confetti from 'react-confetti'
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -54,7 +54,6 @@ export default function CustomizedTables() {
     description:"",
     period:"",
     team:""
-    
   })
 
   useEffect(()=> {
@@ -86,11 +85,11 @@ export default function CustomizedTables() {
   };
 
     // {console.log(stateAwards)}
-    // const { width, height } = useWindowSize()
+    const { width, height } = useWindowSize()
 
   return (
       <Layout>
-            {/* <Hidden xlUp color="secondary">
+            <Hidden xlUp color="secondary">
           <h1 align="center" >My Team Awards</h1>
         </Hidden>
         <Confetti
@@ -122,7 +121,7 @@ export default function CustomizedTables() {
           ))}
         </TableBody>
       </Table>
-    </TableContainer> */}
+    </TableContainer>
     </Layout>
   );
 }

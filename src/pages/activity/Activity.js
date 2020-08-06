@@ -90,7 +90,7 @@ export default function Activity() {
   return (
     // <Layout>
     <React.Fragment>
-        <ParticlesBg type="cobweb" bg={true} />
+        <ParticlesBg color="#FF0000" type="cobweb" bg={true} />
       <CssBaseline />
       <main>
         {/* Hero unit */}

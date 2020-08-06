@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBContainer } from "mdbreact";
 import img1 from '../../assets/images/targetwelcome.png';
-
+import Typical from 'react-typical'
 // import LogoutButton from '@material-ui/core/Logout'
 import AccountCircleSharpIcon from '@material-ui/icons/AccountCircleSharp';
 import DashboardM from '../dashboard/DashboardM.js';
@@ -16,6 +16,7 @@ import Cookies from 'universal-cookie';
 import DashboardT from '../dashboard/DashboardT';
 import DashboardV from '../dashboard/DashboardV';
 import ReactDOM from 'react-dom';
+import ParticlesBg from "particles-bg";
 
 
 
@@ -98,6 +99,9 @@ export class Logintbygoogle extends Component {
            
           })
           
+          
+      
+          
       // }
   };
 
@@ -113,13 +117,19 @@ export class Logintbygoogle extends Component {
 
     return (
       <div className="App">
+        <ParticlesBg  type="lines" bg={true} />
+
 <AppBar  position="fixed" style={{ background: 'transparent', boxShadow: 'none'}}>
                 <Toolbar>
                 <Grid justify="space-between"  container spacing={24}>
-                
+{/*                 
                     <Typography class="display-2" variant="h2" color="white">SPOTLIGHT
-                    </Typography>
-                    
+                    </Typography> */}
+                    <Typical
+        steps={['SPOTLIGHT', 1000, 'Employee Recognition Platform', 500]}
+        loop={Infinity}
+        wrapper="h1"
+      />
                 </Grid>
                     <Grid item>
 
@@ -152,10 +162,10 @@ export class Logintbygoogle extends Component {
               {/* <MDBCarouselInner>
                 <MDBCarouselItem itemId="1">
                   <MDBView> */}
-                    <img
+                    {/* <img
                       className="d-block w-100"
                       src={img1} width="100%" height="100%"
-                    />
+                    /> */}
                   {/* </MDBView>
                 </MDBCarouselItem>
               </MDBCarouselInner>
