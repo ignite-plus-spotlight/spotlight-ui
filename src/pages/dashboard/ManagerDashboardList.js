@@ -84,9 +84,13 @@ export default function NestedList() {
        </Collapse>   
        <Divider/>
 
-              <ListItem button variant="outline" color="secondary" component={Link} to= "/myteam"> 
+              <ListItem button variant="outline" color="secondary" component={Link} to= "/myTeam"> 
               <ListItemIcon>{ <GroupIcon color="inherit"/>}</ListItemIcon>
               <ListItemText primary="My Team" /> 
+            </ListItem >
+            <ListItem button variant="outline" color="secondary" component={Link} to= "/viewMember"> 
+              <ListItemIcon>{ <GroupIcon color="inherit"/>}</ListItemIcon>
+              <ListItemText primary="View Members" /> 
             </ListItem >
 
             

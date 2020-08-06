@@ -38,7 +38,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
-
+import ViewMember from './ViewMember'
 
 
 
@@ -322,9 +322,9 @@ const url=`http://localhost:8081/team/${data.members}/${data.managerId}/${data.t
                         </Button>
                       </DialogActions>
                     </Dialog>
-                    <Button variant="contained" color="secondary" component={Link} to="/viewMembers"  fullWidth>
+                    {/* <Button variant="contained" color="secondary" component={Link} to="/viewMember"  fullWidth>
                       VIEW MEMBERS  
-                    </Button>           
+                    </Button>            */}
       </main>
 
     </React.Fragment>

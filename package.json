@@ -15,6 +15,7 @@
     "final-form": "^4.20.1",
     "final-form-material-ui": "^0.3.0",
     "mdbreact": "^4.27.0",
+    "particles-bg": "^2.5.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

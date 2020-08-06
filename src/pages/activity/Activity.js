@@ -17,6 +17,8 @@ import Layout from '../layout/Layout';
 import axios from "axios";
 import img1 from '../../assets/images/target1.jpg'
 import { MDBMask, MDBView, MDBContainer, MDBRow, MDBCol } from "mdbreact";
+import ParticlesBg from "particles-bg";
+
 
 
 function Copyright() {
@@ -86,12 +88,13 @@ export default function Activity() {
   };
 
   return (
-    <Layout>
+    // <Layout>
     <React.Fragment>
+        <ParticlesBg type="cobweb" bg={true} />
       <CssBaseline />
       <main>
         {/* Hero unit */}
-        <div className={classes.heroContent}>
+        {/* <div className={classes.heroContent}> */}
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
               Welcome 
@@ -100,7 +103,7 @@ export default function Activity() {
             "Gratitude is the most exquisite form of courtesy."
             </Typography>
           </Container>
-        </div>
+        {/* </div> */}
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
@@ -141,6 +144,6 @@ export default function Activity() {
       </main>
 
     </React.Fragment>
-    </Layout>
+    // {/* </Layout> */}
   );
 }

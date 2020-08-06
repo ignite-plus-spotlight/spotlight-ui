@@ -73,7 +73,7 @@ export default function NestedList() {
             <ListItemIcon>{ <SchoolIcon color="inherit"/>}</ListItemIcon>
             <ListItemText primary="Individual Awards" /> 
           </ListItem >
-          <ListItem button variant="outline" color="secondary" component={Link} to= "team">
+          <ListItem button variant="outline" color="secondary" component={Link} to= "/team">
           <ListItemIcon>{ <SchoolIcon color="inherit"/>}</ListItemIcon>
           <ListItemText primary="Team Awards" />
           </ListItem>
