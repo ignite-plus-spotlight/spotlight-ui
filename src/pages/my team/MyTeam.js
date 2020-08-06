@@ -10,7 +10,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles ,withStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import Layout from '../layout/Layout';
@@ -35,22 +35,36 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
 
 
 
 
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center">
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
+
+
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.secondary.main,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
+
+
+
+
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -78,9 +92,9 @@ const useStyles = makeStyles((theme) => ({
   cardContent: {
     flexGrow: 1,
   },
-  root: {
-    maxWidth: 345,
-  },
+  // root: {
+  //   maxWidth: 345,
+  // },
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
@@ -98,8 +112,15 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: red[500],
   },
+  root: {
+    width: '100%',
+  },
   table: {
-    minWidth: 650,
+    minWidth: 700,
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
   },
 }));
   
@@ -291,53 +312,63 @@ const url=`http://localhost:8081/team/${data.members}/${data.managerId}/${data.t
                         </Button>
                       </DialogActions>
                     </Dialog>
-
                   </CardActions>
-
-
-<CardActions disableSpacing>
-        
-        
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        > 
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph ><h3>View Members :</h3></Typography>
-<TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
-
-        <TableHead >
-          <TableRow>
-            <TableCell>Members</TableCell>
-            
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          
-        </TableBody>
-      </Table>
-    </TableContainer>
-        </CardContent>
-      </Collapse>
-
-
-
-
-
                 </Card>
               </Grid>
             ))}
           </Grid>
+
+         
+
+
+
+
+
         </Container>
+
+
+        {team.map(team=>  (     
+        <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+        <Typography className={classes.heading}>Team Name : {team.teamName}</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+            <Typography>
+            <TableContainer component={Paper}>
+      <Table className={classes.table} aria-label="customized table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>Employee Id</StyledTableCell>
+            <StyledTableCell align="right">First Name</StyledTableCell>
+            <StyledTableCell align="right">Last Name</StyledTableCell>
+            <StyledTableCell align="right">Email id</StyledTableCell>
+            <StyledTableCell align="right">Reward</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+ {/* {team.teamMember.map(teamMember=>( */}
+            <StyledTableRow >
+              <StyledTableCell component="th" scope="row">
+
+              </StyledTableCell>
+              {/* <StyledTableCell align="right">{teamMember.empId}</StyledTableCell>
+                <StyledTableCell align="right">{teamMember.firstName}</StyledTableCell>
+                <StyledTableCell align="right">{teamMember.lastName}</StyledTableCell>
+                <StyledTableCell align="right">{teamMember.email}</StyledTableCell> */}
+            </StyledTableRow>
+ {/* ))} */}
+        </TableBody>
+      </Table>
+    </TableContainer>
+          </Typography>
+          {/* })} */}
+        </AccordionDetails>
+      </Accordion>
+      ))}
       </main>
 
     </React.Fragment>

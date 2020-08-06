@@ -61,26 +61,18 @@ function AwardsM() {
       },[]);
 
       const getTeam=()=>{
-    
         console.log(current)
           axios
           .get(`http://localhost:8081/manager/${current}`).
           then(data=>{
             // console.log(data.data.teams[0].teamMembers[0]);
             console.log(data.data.teams)
-      
-          
             setTeam(data.data.teams)
             // console.log(team)
           })
           .catch(err=>alert(err));
         };
       
-
-
-
-
-
     return (
         <Layout>       
               {team.map(team=>  (     
@@ -93,7 +85,6 @@ function AwardsM() {
         <Typography className={classes.heading}>Team Name : {team.teamName}</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          
             <Typography>
             <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
@@ -103,6 +94,7 @@ function AwardsM() {
             <StyledTableCell align="right">First Name</StyledTableCell>
             <StyledTableCell align="right">Last Name</StyledTableCell>
             <StyledTableCell align="right">Email id</StyledTableCell>
+            <StyledTableCell align="right">Reward</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
