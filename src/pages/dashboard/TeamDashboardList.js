@@ -82,7 +82,10 @@ export default function NestedList() {
           </ListItem>
           </List>
           </Collapse>   
-         
+          <ListItem button  variant="outline" color="secondary" component={Link} to="/">
+      <ListItemIcon>{<EmojiEventsIcon color="inherit"/>}</ListItemIcon>
+        <ListItemText primary="Logout" />
+      </ListItem>
     
     </List>
   );

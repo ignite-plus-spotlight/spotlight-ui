@@ -117,7 +117,7 @@ export class Logintbygoogle extends Component {
 
     return (
       <div className="App">
-        <ParticlesBg  type="lines" bg={true} />
+        {/* <ParticlesBg  type="cobweb" bg={true} /> */}
 
 <AppBar  position="fixed" style={{ background: 'transparent', boxShadow: 'none'}}>
                 <Toolbar>
@@ -129,6 +129,7 @@ export class Logintbygoogle extends Component {
         steps={['SPOTLIGHT', 1000, 'Employee Recognition Platform', 500]}
         loop={Infinity}
         wrapper="h1"
+        text-color="black"
       />
                 </Grid>
                     <Grid item>
@@ -162,10 +163,10 @@ export class Logintbygoogle extends Component {
               {/* <MDBCarouselInner>
                 <MDBCarouselItem itemId="1">
                   <MDBView> */}
-                    {/* <img
+                    <img
                       className="d-block w-100"
                       src={img1} width="100%" height="100%"
-                    /> */}
+                    />
                   {/* </MDBView>
                 </MDBCarouselItem>
               </MDBCarouselInner>
