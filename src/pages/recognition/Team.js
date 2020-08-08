@@ -76,7 +76,7 @@ export default function CustomizedTables() {
     // console.log(id);
 
     axios
-    .get(`http://localhost:8081/teammember/400/teamawardstmd`).
+    .get(`http://localhost:8081/teammember/100/teamawardstmd`).
     then(data=>{
       // console.log(data);
       setAwardsState(data.data)

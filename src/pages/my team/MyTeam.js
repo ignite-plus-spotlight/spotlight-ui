@@ -183,7 +183,7 @@ const [data,setData]=useState({
     getTeam();
   },[]);
   
-const url=`http://localhost:8081/team/${data.members}/${data.managerId}/${data.teamId}`
+const url=`http://localhost:8081/team/${data.members}/${current}/${data.teamId}`
   
 
   const getTeam=()=>{
@@ -271,7 +271,7 @@ const url=`http://localhost:8081/team/${data.members}/${data.managerId}/${data.t
                         <DialogContentText>
                           Please Enter The Details
                         </DialogContentText>
-                        <TextField
+                        {/* <TextField
                           autoFocus
                           margin="dense"
                           id="managerId"
@@ -280,7 +280,7 @@ const url=`http://localhost:8081/team/${data.members}/${data.managerId}/${data.t
                           input onChange={(e)=>handle(e)}
                           value={data.managerId}
                           fullWidth
-                        />
+                        /> */}
                         <TextField
                           autoFocus
                           margin="dense"
@@ -305,7 +305,7 @@ const url=`http://localhost:8081/team/${data.members}/${data.managerId}/${data.t
                           autoFocus
                           margin="dense"
                           id="members"
-                          label=" Members"
+                          label=" Member Id"
                           type="text"
                           input onChange={(e)=>handle(e)}
                           value={data.members}
