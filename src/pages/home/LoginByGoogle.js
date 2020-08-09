@@ -75,15 +75,16 @@ export class Logintbygoogle extends Component {
             console.log(roles)
             if (roles[0].roleName == "leader")
             {
-              this.props.history.push('/DashboardV')
+              // this.props.history.push('/DashboardV')
               // return ReactDOM.render(<DashboardV/>,document.getElementById('root'))
-              // <Dashboard/>
+             return  <DashboardV/>
             }
             else {
               if(roles[0].roleName=="manager")
               {
               this.props.history.push('/DashboardM')
                 // return ReactDOM.render(<DashboardM/>,document.getElementById('root'))
+                return <DashboardM/>
               }
               else
               {
@@ -91,6 +92,7 @@ export class Logintbygoogle extends Component {
                  {
                   this.props.history.push('/DashboardT')
                   // return ReactDOM.render(<DashboardT/>,document.getElementById('root'))
+                  return <DashboardT/>
                 }
                 
               }

@@ -1,5 +1,5 @@
 import React,{useState, useEffect} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles,withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -11,20 +11,30 @@ import axios from "axios";
 import Cookies from 'universal-cookie';
 import Layout from '../layout/Layout'
 
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.secondary.main,
+      color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+  },
+}))(TableRow);
+
+
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
+    minWidth: 700,
   },
 });
-
-// function createData(award_name, points, description, period, team) {
-//   return { award_name, points, description, period, team };
-// }
-
-// const rows = [
-//   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  
-// ];
 
 export default function SimpleTable() {
   const classes = useStyles();
@@ -66,38 +76,40 @@ export default function SimpleTable() {
     .catch(err=>alert(err));
   };
 
-//   {console.log(stateAwards)}
-//   {stateAwards.map(a=>{
+
   return (
     <Layout>
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
+    <TableContainer >
+      <Table className={classes.table} aria-label="customized table"  style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
         <TableHead >
           <TableRow>
-            <TableCell>Award </TableCell>
-            <TableCell align="left">Department</TableCell>
-            <TableCell align="left">Period</TableCell>
-            <TableCell align="left">Points</TableCell>
-            <TableCell align="left">Name</TableCell>
-            {/* <TableCell align="right">Team Name</TableCell> */}
+            <StyledTableCell>Name </StyledTableCell>
+            <StyledTableCell align="left">Department</StyledTableCell>
+            <StyledTableCell align="left">Period</StyledTableCell>
+            <StyledTableCell align="left">Points</StyledTableCell>
+            <StyledTableCell align="left">Award</StyledTableCell>
+            
           </TableRow>
         </TableHead>
         <TableBody>
-          {stateAwards.map(a=>  (
-            <TableRow key={a.awardName}>
-              <TableCell component="th" scope="row">
-                {a.awardName}
-              </TableCell>
-              <TableCell align="left">{a.department}</TableCell>
-              <TableCell align="left">{a.periodName}</TableCell>
-              <TableCell align="left">{a.empPoints}</TableCell>
-              {/* {a.employee.map(employee=>( */}
-               <TableCell align="left">{a.employee.firstName} {a.employee.lastName}</TableCell>
-
-               {/* ))}  */}
-
-             </TableRow>
-           ))} 
+          {stateAwards.map(a=> (
+             <TableRow >
+              <StyledTableCell component="th" scope="row">
+                {a.employee.firstName}
+              </StyledTableCell>
+             
+              {a.employeeAwardsTMS.map(b=>(
+                 <>
+                <StyledTableCell align="left">{b.department}</StyledTableCell>
+                <StyledTableCell align="left">{b.periodName}</StyledTableCell>
+                <StyledTableCell align="left">{b.empPoints}</StyledTableCell> 
+                <StyledTableCell align="left">{b.awardName}</StyledTableCell>
+                </>
+              ))}
+             
+                
+             </TableRow> 
+           ))}  
         </TableBody>
       </Table>
     </TableContainer>
