@@ -39,39 +39,14 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ViewMember from './ViewMember'
-
-
-
-
-
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
-    },
-  },
-}))(TableRow);
-
-
-
-
+import Fab from '@material-ui/core/Fab';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
   },
   heroContent: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.secondary.main,
     padding: theme.spacing(8, 0, 6),
   },
   heroButtons: {
@@ -220,15 +195,66 @@ const url=`http://localhost:8081/team/${data.members}/${current}/${data.teamId}`
     setData(newdata)
   }
 
-
-
-  
   return (
     <Layout>
     <React.Fragment>
 
       <CssBaseline />
       <main>
+      
+      <Fab variant="extended" color="secondary" onClick={handleClickOpen} align="right">
+        ADD MEMBERS
+     </Fab>
+
+   <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
+     <DialogContent >
+     <DialogTitle id="form-dialog-title" >ADD MEMBERS</DialogTitle>
+       <DialogContentText>
+         Please Enter The Details
+       </DialogContentText>
+  
+       <TextField
+         autoFocus
+         margin="dense"
+         id="teamId"
+         label="Team id"
+         type="text"
+         input onChange={(e)=>handle(e)}
+         value={data.teamId}
+         fullWidth
+       />
+       <TextField
+         autoFocus
+         margin="dense"
+         id="teamName"
+         label="Team name"
+         type="text"
+         input onChange={(e)=>handle(e)}
+         value={data.teamName}
+         fullWidth
+       />
+       <TextField
+         autoFocus
+         margin="dense"
+         id="members"
+         label=" Member Id"
+         type="text"
+         input onChange={(e)=>handle(e)}
+         value={data.members}
+         fullWidth
+       />
+       
+     </DialogContent>
+     <DialogActions>
+       <Button onClick={handleClose} color="secondary">
+         Cancel
+       </Button>
+       <Button onClick={(e)=>submit(e)} color="secondary">
+       Send 
+       </Button>
+     </DialogActions>
+   </Dialog>
+
         {/* Hero unit */}
         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
@@ -262,69 +288,12 @@ const url=`http://localhost:8081/team/${data.members}/${current}/${data.teamId}`
             ))}
           </Grid>
         </Container>
-        <Button variant="contained" color="secondary" onClick={handleClickOpen} fullWidth>
-                      ADD MEMBERS 
-                    </Button>
-                    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
-                      <DialogContent >
-                      <DialogTitle id="form-dialog-title" >ADD MEMBERS</DialogTitle>
-                        <DialogContentText>
-                          Please Enter The Details
-                        </DialogContentText>
-                        {/* <TextField
-                          autoFocus
-                          margin="dense"
-                          id="managerId"
-                          label="Manager Id"
-                          type="text"
-                          input onChange={(e)=>handle(e)}
-                          value={data.managerId}
-                          fullWidth
-                        /> */}
-                        <TextField
-                          autoFocus
-                          margin="dense"
-                          id="teamId"
-                          label="Team id"
-                          type="text"
-                          input onChange={(e)=>handle(e)}
-                          value={data.teamId}
-                          fullWidth
-                        />
-                        <TextField
-                          autoFocus
-                          margin="dense"
-                          id="teamName"
-                          label="Team name"
-                          type="text"
-                          input onChange={(e)=>handle(e)}
-                          value={data.teamName}
-                          fullWidth
-                        />
-                        <TextField
-                          autoFocus
-                          margin="dense"
-                          id="members"
-                          label=" Member Id"
-                          type="text"
-                          input onChange={(e)=>handle(e)}
-                          value={data.members}
-                          fullWidth
-                        />
-                        
-                      </DialogContent>
-                      <DialogActions>
-                        <Button onClick={handleClose} color="secondary">
-                          Cancel
-                        </Button>
-                        <Button onClick={(e)=>submit(e)} color="secondary">
-                        Send 
-                        </Button>
-                      </DialogActions>
-                    </Dialog>
-                    {/* <Button variant="contained" color="secondary" component={Link} to="/viewMember"  fullWidth>
-                      VIEW MEMBERS  
-                    </Button>            */}
+    
+
+                  
+
+                    
+                  
       </main>
 
     </React.Fragment>

@@ -64,13 +64,13 @@ export default function CustomizedTables() {
     
     console.log(current)
     
-    axios
-    .get(`http://localhost:8081/employee/${current}`).
-    then(data1=>{
-      console.log(data1.data[0].teamId);
-      // var id = data1.data[0].teamId;
-      // console.log(id);
-    })
+    // axios
+    // .get(`http://localhost:8081/employee/${current}`).
+    // then(data1=>{
+    //   console.log(data1.data[0].teamId);
+    //   // var id = data1.data[0].teamId;
+    //   // console.log(id);
+    // })
 
     // var id = data.data;
     // console.log(id);
@@ -78,7 +78,7 @@ export default function CustomizedTables() {
     axios
     .get(`http://localhost:8081/teammember/${current}/teamawardstmd`).
     then(data=>{
-      // console.log(data);
+      console.log(data);
       setAwardsState(data.data)
     })
     .catch(err=>alert(err));
