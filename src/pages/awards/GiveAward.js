@@ -15,6 +15,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Fab from '@material-ui/core/Fab';
 
 
 
@@ -145,9 +146,9 @@ const [data,setData]=useState({
 
       <CssBaseline />
       <main>
-      <Button variant="contained" color="secondary" onClick={handleClickOpen} fullWidth>
-                      Give Award
-      </Button>
+      <Fab variant="extended" color="secondary" onClick={handleClickOpen} align="right">
+        Give Award
+     </Fab>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
           <DialogContent >
             <DialogTitle id="form-dialog-title" >Give Award</DialogTitle>

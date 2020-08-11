@@ -11,6 +11,8 @@ import axios from "axios";
 import Cookies from 'universal-cookie';
 import Layout from '../layout/Layout';
 import Fab from '@material-ui/core/Fab';
+import GiveAward from '../awards/GiveAward'
+import Grid from '@material-ui/core/Grid'
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -90,9 +92,6 @@ export default function SimpleTable() {
 
   return (
     <Layout>
-        <Fab variant="extended" color="secondary" onClick={handleClickOpen} align="right">
-        Give Award
-     </Fab>
     <TableContainer >
       <Table className={classes.table} aria-label="customized table"  style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
         <TableHead >
@@ -128,6 +127,7 @@ export default function SimpleTable() {
       </TableBody>
       </Table>
     </TableContainer>
+    <GiveAward/>   
     </Layout>
   );
  

@@ -1,17 +1,19 @@
-import React from 'react'
-import { Form, Field } from 'react-final-form'
+import React, { useState } from "react";
+import Layout from '../layout/Layout'
+import {
+    Typography,
+    Paper,
+    Grid,
+    Button,
+    CssBaseline,
+    FormControlLabel,
+  } from '@material-ui/core';
+  import { Form, Field } from 'react-final-form'
 import { Checkbox } from 'final-form-material-ui';
 import TextField from '@material-ui/core/TextField';
-import {
-  Typography,
-  Paper,
-  Grid,
-  Button,
-  CssBaseline,
-  FormControlLabel,
-} from '@material-ui/core';
-import Layout from '../layout/Layout';
 import { makeStyles } from '@material-ui/core/styles';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -28,11 +30,30 @@ const useStyles = makeStyles((theme) => ({
 const onSubmit = async values => {
 };
 
-export default function Activity() {
-    const classes = useStyles();
-    return (
-        <Layout>
-             <div style={{ padding: 16, margin: 'auto', maxWidth: 600 }}>
+function Poll() {
+  const [inputList, setInputList] = useState([{ firstName: "", lastName: "" }]);
+  const classes = useStyles();
+
+  // handle input change
+  const handleInputChange = (e, index) => {
+    const { name, value } = e.target;
+    const list = [...inputList];
+    list[index][name] = value;
+    setInputList(list);
+  };
+
+
+  // handle click event of the Add button
+  const handleAddClick = () => {
+    setInputList([...inputList, { Description: ""}]);
+  };
+
+
+//  const url=`http://localhost:8081/${pollname}/${description}/${nomstart}/${nomend}/${pollstart}/${pollend}/${pollid}`
+
+  return (
+    <Layout>
+         <div style={{ padding: 16, margin: 'auto', maxWidth: 600 }}>
       <CssBaseline />
       <Typography variant="h4" align="center" component="h1" gutterBottom>
          POLL
@@ -50,28 +71,46 @@ export default function Activity() {
                   <Field
                     fullWidth
                     required
+                    color="secondary"
                     name="Poll Name"
                     component={TextField}
                     type="text"
                     label="Poll Name"
                   />
                 </Grid>
-              
-                <Grid item xs={12}>
-                  <Field
+                
+      {inputList.map((x, i) => {
+        return (
+        <Grid item xs={12}>
+        <Grid item xs={12}>
+              <Field
                     name="Poll Description"
+                    color="secondary"
                     fullWidth
                     component={TextField}
                     type="text"
                     label="Poll Description"
+                    value={x.firstName}
+                    onChange={e => handleInputChange(e, i)}
                   />
-                </Grid>
-                {/* <form className={classes.container} noValidate> */}
-                <Grid item xs={12}>
+ </Grid>
+            <Grid item xs={2}>
+              {/* {inputList.length - 1 === i && <button onClick={handleAddClick}>Add</button>} */}
+              {inputList.length - 1 === i && 
+              <Fab color="secondary" size="small" aria-label="add" onClick={handleAddClick}>
+             <AddIcon />
+            </Fab>}
+              </Grid>
+          
+         </Grid>
+        );
+       })} 
+       <Grid item xs={12}>
                  <TextField
                     id="datetime-local"
                     label="Nomination Start Date"
                     type="datetime-local"
+                    color="secondary"
                     // defaultValue="2017-05-24T10:30"
                     className={classes.textField}
                     InputLabelProps={{
@@ -82,6 +121,7 @@ export default function Activity() {
                     id="datetime-local"
                     label="Nomination End Date"
                     type="datetime-local"
+                    color="secondary"
                     // defaultValue="2017-05-24T10:30"
                     className={classes.textField}
                     InputLabelProps={{
@@ -94,6 +134,7 @@ export default function Activity() {
                     id="datetime-local"
                     label="Poll Start Date"
                     type="datetime-local"
+                    color="secondary"
                     // defaultValue="2017-05-24T10:30"
                     className={classes.textField}
                     InputLabelProps={{
@@ -104,6 +145,7 @@ export default function Activity() {
                     id="datetime-local"
                     label="Poll End Date"
                     type="datetime-local"
+                    color="secondary"
                     // defaultValue="2017-05-24T10:30"
                     className={classes.textField}
                     InputLabelProps={{
@@ -139,7 +181,10 @@ export default function Activity() {
           </form>
         )}
       />
-    </div>
-        </Layout>
-    )
+      
+      </div>
+    </Layout>
+  );
 }
+
+export default Poll;
