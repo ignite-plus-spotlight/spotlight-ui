@@ -113,14 +113,11 @@ export default function NestedList() {
             <ListItemText primary="Survey/Poll" />
             </ListItem> */}
 
-    
       {/* <ListItem button  variant="outline" color="secondary" component={Link} to="/awards">
       <ListItemIcon>{<BallotIcon color="inherit"/>}</ListItemIcon>
         <ListItemText primary="Nominations" />
       </ListItem> */}
 
-  
-     
       {/* <ListItem button variant="outline" color="secondary" component={Link} to="/poll">
       <ListItemIcon>{ <HowToVoteIcon color="inherit"/>}</ListItemIcon>
         <ListItemText primary="Polls" />

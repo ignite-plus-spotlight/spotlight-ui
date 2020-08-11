@@ -134,11 +134,7 @@ export default function DashboardV(props) {
           </Typography>
           </IconButton>
           </Grid>
-          <Grid item>
-          <Tooltip title="Want to Logout?">         
-           <Fab variant="extended" color="secondary" component={Link} to="/"><ExitToAppOutlinedIcon/>LOGOUT</Fab>
-        </Tooltip>
-            </Grid>
+   
         </Toolbar>
         
         
