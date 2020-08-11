@@ -13,7 +13,7 @@ import VPDashboardList from './VPDashboardList'
 import DashboardRoundedIcon from '@material-ui/icons/DashboardRounded';
 import img1 from '../../assets/images/target7.jpg';
 import Activity from '../activity/Activity';
-
+import Avatar from '@material-ui/core/Avatar';
 
 
 
@@ -23,6 +23,11 @@ const useStyles = makeStyles((theme) => ({
   
     display: 'flex',
    
+  },
+  large: {
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+    
   },
   appBar: {
     
@@ -63,11 +68,11 @@ const useStyles = makeStyles((theme) => ({
   drawerHeader: {
     display: 'flex',
     alignItems: 'center',
-    textAlign:'left',
-    padding: theme.spacing(0, 1),
+    textAlign:'center',
+    padding: theme.spacing(2, 0),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
   },
   content: {
     flexGrow: 1,
@@ -88,6 +93,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function DashboardV(props) {
+  const [value, setValue] = React.useState(
+    JSON.parse(localStorage.getItem('userData')) 
+  );
   const classes = useStyles();
   //const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -135,10 +143,14 @@ export default function DashboardV(props) {
           </IconButton>
           </Grid>
           <Grid item>
-          <Tooltip title="Want to Logout?">         
-           <Fab variant="extended" color="secondary" component={Link} to="/"><ExitToAppOutlinedIcon/>LOGOUT</Fab>
-        </Tooltip>
+          {  <Avatar src={value.data.imageUrl}   className={classes.small} />}
+          </Grid>
+          <Grid item>
+           <Typography>{value.data.firstName}</Typography>
+
+        {/* </Tooltip> */}
             </Grid>
+   
         </Toolbar>
         
         
@@ -155,18 +167,15 @@ export default function DashboardV(props) {
           paper: classes.drawerPaper,
         }}
       >
-        <div className={classes.drawerHeader} textAlign="left">
-        { <DashboardRoundedIcon color="inherit"/>}
-          <h2 > DASHBOARD</h2>
-          <IconButton onClick={handleDrawerClose}> 
-             {/* <IconButton variant="contained" textAlign="left" > */}
-              {/* HEY */}
+        <div className={classes.drawerHeader} >
+        {  <Avatar  src={value.data.imageUrl}   className={classes.large} />}
+          <IconButton onClick={handleDrawerClose}>   
              <CloseIcon variant="contained" >
               </CloseIcon>
-          {/* </IconButton> */}
         </IconButton>
-        
         </div>
+      <h3 align="center">Welcome {value.data.firstName}  </h3>
+        
         <VPDashboardList/>
         <Divider />
       </Drawer>

@@ -16,7 +16,7 @@ import DashboardV from './pages/dashboard/DashboardV';
 import MyTeam from './pages/my team/MyTeam';
 import AwardsM from './pages/awards/AwardsM';
 import ViewMember from './pages/my team/ViewMember';
-
+import GiveAward from './pages/awards/GiveAward'
 
 function Main() {
     const theme= createMuiTheme({
@@ -51,6 +51,7 @@ function Main() {
         {/* <Route exact path="/surveypoll" component={SurveyPoll}/> */}
         <Route exact path="/poll" component={Poll}/>
         <Route exact path ="/awards" component={AwardsM}/>
+        <Route exact path="/giveAwards" component={GiveAward}/>
         <Route exact path="/viewMember" component={ViewMember}/>
 
       </div> 

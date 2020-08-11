@@ -67,7 +67,7 @@ export default function CustomizedTables() {
     axios
     .get(`http://localhost:8081/employee/${current}`).
     then(data1=>{
-      console.log(data1.data[0].teamId);
+      console.log(data1.data);
       // var id = data1.data[0].teamId;
       // console.log(id);
     })

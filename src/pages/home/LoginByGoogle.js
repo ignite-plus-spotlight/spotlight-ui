@@ -75,7 +75,7 @@ export class Logintbygoogle extends Component {
             console.log(roles)
             if (roles[0].roleName == "leader")
             {
-              // this.props.history.push('/DashboardV')
+              this.props.history.push('/DashboardV')
               // return ReactDOM.render(<DashboardV/>,document.getElementById('root'))
              return  <DashboardV/>
             }

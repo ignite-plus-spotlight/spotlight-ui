@@ -9,7 +9,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import axios from "axios";
 import Cookies from 'universal-cookie';
-import Layout from '../layout/Layout'
+import Layout from '../layout/Layout';
+import Fab from '@material-ui/core/Fab';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -36,9 +37,19 @@ const useStyles = makeStyles({
   },
 });
 
+
 export default function SimpleTable() {
   const classes = useStyles();
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   
 //   const url="http://localhost:8081/employee/${this.var}/employeeawards"
   
@@ -79,11 +90,15 @@ export default function SimpleTable() {
 
   return (
     <Layout>
+        <Fab variant="extended" color="secondary" onClick={handleClickOpen} align="right">
+        Give Award
+     </Fab>
     <TableContainer >
       <Table className={classes.table} aria-label="customized table"  style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
         <TableHead >
           <TableRow>
             <StyledTableCell>Name </StyledTableCell>
+            
             <StyledTableCell align="left">Department</StyledTableCell>
             <StyledTableCell align="left">Period</StyledTableCell>
             <StyledTableCell align="left">Points</StyledTableCell>
@@ -92,25 +107,25 @@ export default function SimpleTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {stateAwards.map(a=> (
-             <TableRow >
-              <StyledTableCell component="th" scope="row">
-                {a.employee.firstName}
-              </StyledTableCell>
+{stateAwards.map(a=> (          
              
-              {a.employeeAwardsTMS.map(b=>(
-                 <>
+            
+              a.employeeAwardsTMS.map(b=>(
+                
+                <>
+                <TableRow >
+                 <StyledTableCell >{a.employee.firstName}</StyledTableCell>
                 <StyledTableCell align="left">{b.department}</StyledTableCell>
                 <StyledTableCell align="left">{b.periodName}</StyledTableCell>
                 <StyledTableCell align="left">{b.empPoints}</StyledTableCell> 
                 <StyledTableCell align="left">{b.awardName}</StyledTableCell>
+                </TableRow> 
                 </>
-              ))}
-             
-                
-             </TableRow> 
+               
+              ))
+  
            ))}  
-        </TableBody>
+      </TableBody>
       </Table>
     </TableContainer>
     </Layout>

@@ -59,85 +59,21 @@ export default function NestedList() {
         <ListItemText primary="Activity" />
       
       </ListItem>
-      <ListItem button onClick={handleClick1}>
-      <ListItemIcon>{ <EmojiEventsIcon color="inherit"/>}</ListItemIcon>
-        <ListItemText primary="Recognition" />
-       
-        {open1 ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      
-      <Collapse in={open1} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItem button className={classes.nested}>
-            <List>
-              <ListItem button variant="outline" color="secondary" component={Link} to= "/individual"> 
-              <ListItemIcon>{ <SchoolIcon color="inherit"/>}</ListItemIcon>
-              <ListItemText primary="Individual" /> 
-            </ListItem >
-            <ListItem button variant="outline" color="secondary" component={Link} to= "team">
-            <ListItemIcon>{ <SchoolIcon color="inherit"/>}</ListItemIcon>
-            <ListItemText primary="Team" />
-            </ListItem>
-            
-            </List>
-            </ListItem>
-            </List>
-            </Collapse>   
-            <ListItem button onClick={handleClick2}>
-            <ListItemIcon>{ <BusinessIcon color="inherit"/>}</ListItemIcon>
-        <ListItemText primary="Organisation" />
-        
-        {open2 ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={open2}  timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          <ListItem button className={classes.nested}>
-            <List>
-              <ListItem button variant="outline" color="secondary" component={Link} to= "/members"> 
-              <ListItemIcon>{ <NaturePeopleTwoToneIcon color="inherit"/>}</ListItemIcon>
-              <ListItemText primary="Members" /> 
-            </ListItem >
-            <ListItem button variant="outline" color="secondary" component={Link} to="/surveypoll">
-            <ListItemIcon>{ <HowToVoteIcon color="inherit"/>}</ListItemIcon>
-            <ListItemText primary="Survey/Poll" />
-            </ListItem>
-            </List>
-            </ListItem>
-            </List>
-            </Collapse>
-            <ListItem button variant="outline" color="secondary" component={Link} to= "/ecard"  >
-            <ListItemIcon>{ <RedeemIcon color="inherit"/>}</ListItemIcon>
-        <ListItemText primary="E-cards" />
-      
-      </ListItem>
-       
-      <Divider/>
-      <ListItem button variant="outline" color="secondary" component={Link} to= "/announcement">
-      <ListItemIcon>{ <CastForEducationIcon color="inherit"/>}</ListItemIcon>
-        <ListItemText primary="Announcements"  />
-      </ListItem>
-      <ListItem button  variant="outline" color="secondary" component={Link} to="/cards">
-      
-      <ListItemIcon>{<BallotIcon color="inherit"/>}</ListItemIcon>
-        <ListItemText primary="Nominations" />
-      
-      </ListItem>
-      <ListItem button variant="outline" color="secondary" component={Link} to="/addMembers">
-  <ListItemIcon>{ <PersonAddIcon color="inherit"/>}</ListItemIcon>
-        <ListItemText primary="Add members" />
-      </ListItem>
-      <ListItem button variant="outline" color="secondary" component={Link} to="/addTeam">
+
+
+  
+      {/* <ListItem button variant="outline" color="secondary" component={Link} to="/addTeam">
       <ListItemIcon>{ <GroupAddIcon color="inherit"/>}</ListItemIcon>
         <ListItemText primary="Add team" />
-      </ListItem>
+      </ListItem> */}
       <ListItem button variant="outline" color="secondary" component={Link} to="/poll">
       <ListItemIcon>{ <HowToVoteIcon color="inherit"/>}</ListItemIcon>
-        <ListItemText primary="Polls" />
+        <ListItemText primary="Poll" />
       </ListItem>
-      <ListItem button  variant="outline" color="secondary" component={Link} to="/ecard">
+      {/* <ListItem button  variant="outline" color="secondary" component={Link} to="/ecard">
       <ListItemIcon>{ <CardMembershipRoundedIcon color="inherit"/>}</ListItemIcon>
         <ListItemText primary="Send personal E-card" />
-      </ListItem>
+      </ListItem> */}
       <ListItem button  variant="outline" color="secondary" component={Link} to="/">
       <ListItemIcon>{<EmojiEventsIcon color="inherit"/>}</ListItemIcon>
         <ListItemText primary="Logout" />

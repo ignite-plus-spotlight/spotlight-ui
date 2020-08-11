@@ -101,6 +101,12 @@ export default function NestedList() {
       <ListItemIcon>{<EmojiEventsIcon color="inherit"/>}</ListItemIcon>
         <ListItemText primary="Awards" />
       </ListItem>
+
+      <ListItem button  variant="outline" color="secondary" component={Link} to="/giveawards">
+      <ListItemIcon>{<EmojiEventsIcon color="inherit"/>}</ListItemIcon>
+        <ListItemText primary="Give Award" />
+      </ListItem>
+      
       <ListItem button  variant="outline" color="secondary" component={Link} to="/">
       <ListItemIcon>{<EmojiEventsIcon color="inherit"/>}</ListItemIcon>
         <ListItemText primary="Logout" />
