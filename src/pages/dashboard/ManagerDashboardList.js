@@ -23,6 +23,7 @@ import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import CardMembershipRoundedIcon from '@material-ui/icons/CardMembershipRounded';
 import GroupIcon from '@material-ui/icons/Group';
 import PersonIcon from '@material-ui/icons/Person';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -92,30 +93,39 @@ export default function NestedList() {
               <ListItemIcon>{ <GroupIcon color="inherit"/>}</ListItemIcon>
               <ListItemText primary="View Members" /> 
             </ListItem >
+
+            <ListItem button  variant="outline" color="secondary" component={Link} to="/awards">
+            <ListItemIcon>{<EmojiEventsIcon color="inherit"/>}</ListItemIcon>
+              <ListItemText primary="Awards" />
+            </ListItem>
+
             <ListItem button  variant="outline" color="secondary" component={Link} to="/nominations">
                 <ListItemIcon>{<BallotIcon color="inherit"/>}</ListItemIcon>
                   <ListItemText primary="Nominate" />
                 </ListItem>
 
-      <ListItem button  variant="outline" color="secondary" component={Link} to="/awards">
-      <ListItemIcon>{<EmojiEventsIcon color="inherit"/>}</ListItemIcon>
-        <ListItemText primary="Awards" />
-      </ListItem>
+                <ListItem button variant="outline" color="secondary" component={Link} to="/nominationhistory">
+            <ListItemIcon>{ <BallotIcon color="inherit"/>}</ListItemIcon>
+            <ListItemText primary="Nomination History" />
+            </ListItem>
 
+      
+
+    {/* remove */}
       <ListItem button  variant="outline" color="secondary" component={Link} to="/nominate">
       <ListItemIcon>{<EmojiEventsIcon color="inherit"/>}</ListItemIcon>
         <ListItemText primary="Nominate check" />
       </ListItem>
+
+       
+
       
       <ListItem button  variant="outline" color="secondary" component={Link} to="/">
-      <ListItemIcon>{<EmojiEventsIcon color="inherit"/>}</ListItemIcon>
+      <ListItemIcon>{<ExitToAppIcon color="inherit"/>}</ListItemIcon>
         <ListItemText primary="Logout" />
       </ListItem>
 
-        {/* <ListItem button variant="outline" color="secondary" component={Link} to="/surveypoll">
-            <ListItemIcon>{ <HowToVoteIcon color="inherit"/>}</ListItemIcon>
-            <ListItemText primary="Survey/Poll" />
-            </ListItem> */}
+       
 
     
      

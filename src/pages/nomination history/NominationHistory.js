@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-function ViewMember() {
+function NominationHistory() {
     const classes = useStyles();
     const [team, setTeam] = useState([]);
     const [value, setValue] = React.useState(
@@ -76,19 +76,19 @@ function ViewMember() {
                {team.map(team=>  (     
            <> 
         <Hidden xlUp color="secondary">
-               <h1 align="center">Team Name : {team.teamName}</h1>
+               <h1 align="center">Nomination History</h1>
         </Hidden>
-      <TableContainer >
+      <TableContainer>
       <Table className={classes.table} aria-label="customized table" style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
         <TableHead>
           <TableRow>
-            <StyledTableCell> Employee Id</StyledTableCell>
-            <StyledTableCell align="left">First Name</StyledTableCell>
-            <StyledTableCell align="left">Last Name</StyledTableCell>
-            <StyledTableCell align="left">Email id</StyledTableCell>
+            <StyledTableCell> Poll Name</StyledTableCell>
+            <StyledTableCell align="left">Description</StyledTableCell>
+            <StyledTableCell align="left">Employee Name</StyledTableCell>
+            <StyledTableCell align="left">Date</StyledTableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+        {/* <TableBody>
  {team.teamMembers.map(teamMember=>(
              <StyledTableRow >
               <StyledTableCell component="th" scope="row">
@@ -101,7 +101,7 @@ function ViewMember() {
             
             </StyledTableRow> 
    ))}  
-        </TableBody>
+        </TableBody> */}
       </Table>
     </TableContainer>
     </>   
@@ -109,4 +109,4 @@ function ViewMember() {
     </Layout>
     )
 }
-export default ViewMember
+export default NominationHistory

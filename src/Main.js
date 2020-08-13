@@ -18,6 +18,7 @@ import MyTeam from './pages/my team/MyTeam';
 import AwardsM from './pages/awards/AwardsM';
 import ViewMember from './pages/my team/ViewMember';
 import GiveAward from './pages/awards/GiveAward'
+import NominationHistory from './pages/nomination history/NominationHistory'
 
 function Main() {
     const theme= createMuiTheme({
@@ -49,6 +50,7 @@ function Main() {
         <Route exact path="/activity" component={Activity}/>
         <Route exact path="/myteam" component={MyTeam}/>
         <Route exact path="/nominations" component={Nominations}/>
+        <Route exact path="/nominationhistory" component={NominationHistory}/>
         <Route exact path="/nominate" component={Nominate}/>
         <Route exact path="/poll" component={Poll}/>
         <Route exact path ="/awards" component={AwardsM}/>
