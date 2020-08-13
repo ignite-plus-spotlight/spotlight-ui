@@ -64,7 +64,7 @@ export default function Activity() {
   const getAward=()=>{
  
     axios
-    .get(`http://localhost:8081/teamawards`).
+    .get(`http://localhost:8081/employee/employeeawards`).
     then(data=>{
     //   console.log(data);
     
@@ -99,7 +99,7 @@ export default function Activity() {
                 <Card className={classes.card}  >
                   <CardMedia
                     className={classes.cardMedia}
-                    image={img1}
+                    image={a.imgsrc}
                     title="Image title"
                   />
                   <CardContent className={classes.cardContent}>

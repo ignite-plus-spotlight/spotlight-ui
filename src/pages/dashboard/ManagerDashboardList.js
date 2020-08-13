@@ -12,10 +12,6 @@ import {Link} from 'react-router-dom';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 import ScheduleIcon from '@material-ui/icons/Schedule';
-import BusinessIcon from '@material-ui/icons/Business';
-import RedeemIcon from '@material-ui/icons/Redeem';
-import SchoolIcon from '@material-ui/icons/School';
-import NaturePeopleTwoToneIcon from '@material-ui/icons/NaturePeopleTwoTone';
 import BallotIcon from '@material-ui/icons/Ballot';
 import HowToVoteIcon from '@material-ui/icons/HowToVote';
 import CastForEducationIcon from '@material-ui/icons/CastForEducation';
@@ -112,10 +108,10 @@ export default function NestedList() {
       
 
     {/* remove */}
-      <ListItem button  variant="outline" color="secondary" component={Link} to="/nominate">
+      {/* <ListItem button  variant="outline" color="secondary" component={Link} to="/nominate">
       <ListItemIcon>{<EmojiEventsIcon color="inherit"/>}</ListItemIcon>
         <ListItemText primary="Nominate check" />
-      </ListItem>
+      </ListItem> */}
 
        
 

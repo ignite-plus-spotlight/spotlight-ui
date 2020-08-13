@@ -49,23 +49,23 @@ const useStyles = makeStyles((theme) => ({
 
 function NominationHistory() {
     const classes = useStyles();
-    const [team, setTeam] = useState([]);
+    const [nomination, setNomination] = useState([]);
     const [value, setValue] = React.useState(
         JSON.parse(localStorage.getItem('userData')) 
       );
       var current=value.data.empId;
       useEffect(()=> {
-        getTeam();
+        getNomination();
       },[]);
 
-      const getTeam=()=>{
+      const getNomination=()=>{
         console.log(current)
           axios
-          .get(`http://localhost:8081/manager/${current}`).
+          .get(`http://localhost:8081/nominationhistoryfromdto/manager/${current}`).
           then(data=>{
             // console.log(data.data.teams[0].teamMembers[0]);
-            console.log(data.data.teams)
-            setTeam(data.data.teams)
+            console.log(data.data)
+            setNomination(data.data)
             // console.log(team)
           })
           .catch(err=>alert(err));
@@ -73,7 +73,7 @@ function NominationHistory() {
       
     return (
         <Layout>       
-               {team.map(team=>  (     
+               {nomination.map(a=>  (     
            <> 
         <Hidden xlUp color="secondary">
                <h1 align="center">Nomination History</h1>
@@ -88,20 +88,20 @@ function NominationHistory() {
             <StyledTableCell align="left">Date</StyledTableCell>
           </TableRow>
         </TableHead>
-        {/* <TableBody>
- {team.teamMembers.map(teamMember=>(
+        <TableBody>
+ {/* {team.employee.map(teamMember=>( */}
              <StyledTableRow >
               <StyledTableCell component="th" scope="row">
-                {()=>console.log(team[0])}
-                {teamMember.empId}
+                
+                {a.pollName}
               </StyledTableCell>
-              <StyledTableCell align="right">{teamMember.firstName}</StyledTableCell>
-              <StyledTableCell align="right">{teamMember.lastName}</StyledTableCell>
-              <StyledTableCell align="right">{teamMember.empEmail}</StyledTableCell>
+              <StyledTableCell align="left">{a.description}</StyledTableCell>
+              <StyledTableCell align="left">{a.employee.firstName}</StyledTableCell>
+              <StyledTableCell align="left">{a.createDate}</StyledTableCell>
             
             </StyledTableRow> 
-   ))}  
-        </TableBody> */}
+   {/* ))}   */}
+        </TableBody>
       </Table>
     </TableContainer>
     </>   

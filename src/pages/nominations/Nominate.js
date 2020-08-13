@@ -51,21 +51,21 @@ export default function CustomizedSelects() {
     JSON.parse(localStorage.getItem('userData')) 
   );
   var current=value.data.empId;
-  const [stateGiveAwards, setGiveAwardsState] = useState([]) 
+  const [statePollName, setPollState] = useState([]) 
   const [stateEmployee, setEmployeeState] = useState([]) 
   
 
-const [data,setData]=useState({
-  description:""
-})
+
+
 
 
    function submit(e) {
     e.preventDefault()
-    // axios.post(url,data)
-    // .then(res=>{
-    //   console.log(res.data)
-    // })
+    axios.post(url,data,{
+      headers: {
+        'Content-Type': 'application/json',
+    }
+    })
   }
 
   function handle(e) {
@@ -76,38 +76,42 @@ const [data,setData]=useState({
 
   //poll
 
-  const [award, setaward] = React.useState('');
+  const [pollName, setPollName] = React.useState('');
   const handleChange = (event) => {
-    setaward(event.target.value);
+    setPollName(event.target.value);
     console.log(event.target.value)
   };
 
   
 
   const [employee, setemployee] = React.useState('');
-  const handleChange4 = (event) => {
+  const handleChange1 = (event) => {
     setemployee(event.target.value);
     console.log(event.target.value)
   };
 
-//   const url=`http://localhost:8081/employee/${employee}/employeeawards/award/${award}/period/${period}/department/${department}/manager/${current}`
+  const [data,setData]=useState({
+    description:"",
+    managerId:current,   
+  })
+  const url=`http://localhost:8081/nominate/${pollName}/${employee}`
 //   const [stateAwards, setAwardsState] = useState([]) 
   
 
 //poll
   useEffect(()=> {
-      receiveAward();
+    receivePollName();
     },[]);
   
-  const receiveAward=()=>{
+  const receivePollName=()=>{
       
       // console.log(current)
         axios
-        .get(`http://localhost:8081/employee/individualawards`).
+        .get(`http://localhost:8081/poll`).
         then(data=>{
-          console.log(data.data);
+          // console.log(data.data);
         
-          setGiveAwardsState(data.data)
+          setPollState(data.data)
         })
         .catch(err=>alert(err));
       };
@@ -122,7 +126,7 @@ const [data,setData]=useState({
           axios
           .get(`http://localhost:8081/manager/${current}`).
           then(data=>{
-            console.log(data.data.teams);
+            // console.log(data.data.teams);
           
             setEmployeeState(data.data.teams)
           })
@@ -130,7 +134,6 @@ const [data,setData]=useState({
         };
       
   return (
-    <Layout>
     <React.Fragment>
 
       <CssBaseline />
@@ -150,9 +153,9 @@ const [data,setData]=useState({
         <InputLabel id="demo-simple-select-outlined-label"  color="secondary">Employee</InputLabel>
                    <Select
                        labelId="demo-simple-select-outlined-label"
-                       id="demo-simple-select-outlined"
+                       id="employeeId"
                        value={employee}
-                       onChange={handleChange4}
+                       onChange={handleChange1}
                        label="Employee"
                        color="secondary"
                       //  input={<BootstrapInput />}
@@ -176,8 +179,8 @@ const [data,setData]=useState({
         <InputLabel id="demo-simple-select-outlined-label"  color="secondary">Poll Name</InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-        //   value={poll}
+          id="pollId"
+          value={pollName}
           onChange={handleChange}
           label="Poll"
           color="secondary"
@@ -186,17 +189,26 @@ const [data,setData]=useState({
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          {/* {stateGiveAwards.map(a=> (
-          <MenuItem value={a.awardName}>{a.awardName}</MenuItem>
+          {statePollName.map(a=> (
+          <MenuItem value={a.pollId}>{a.pollName}</MenuItem>
           
-          ))} */}
+          ))}
          
         </Select>
       </FormControl>
       </div>
       <div>
       <FormControl variant="outlined" className={classes.formControl}>
-        <TextField id="outlined-basic" label="Description" variant="outlined" color="secondary"/>
+        <TextField
+         label="Description" 
+         variant="outlined" 
+         color="secondary"
+         name="Poll Description"
+         fullWidth
+         id="description"
+         type="text"
+         input onChange={(e)=>handle(e)}
+        value={data.description}/>
       </FormControl>
       </div>
       
@@ -215,6 +227,5 @@ const [data,setData]=useState({
       </main>
 
     </React.Fragment>
-    </Layout>
   );
 }

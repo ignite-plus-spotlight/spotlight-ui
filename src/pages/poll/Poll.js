@@ -14,6 +14,7 @@ import {
 import Layout from '../layout/Layout';
 import { makeStyles } from '@material-ui/core/styles';
 
+
 const useStyles = makeStyles((theme) => ({
     container: {
       display: 'flex',
@@ -137,7 +138,7 @@ export default function Poll() {
                       </Grid>
                
                       <Grid item xs={12}>
-
+                     
                         <TextField
                             id="nomStart"
                             label="Nomination Start Date"
@@ -149,6 +150,7 @@ export default function Poll() {
                             shrink: true,
                             }}
                         />
+                      
 
                         <TextField
                           id="nomEnd"

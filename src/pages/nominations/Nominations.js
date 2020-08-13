@@ -18,7 +18,7 @@ import axios from "axios";
 import img1 from '../../assets/images/target1.jpg'
 import { MDBMask, MDBView, MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import ParticlesBg from "particles-bg";
-
+import Nominate from './Nominate';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -54,35 +54,35 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Activity() {
   const classes = useStyles();
-//   const [stateAwards, setAwardsState] = useState([]) 
+  const [stateNomination, setNominationState] = useState([]) 
 
-//   useEffect(()=> {
-//     getAward();
-//   },[]);
+  useEffect(()=> {
+    getNomination();
+  },[]);
   
 
-//   const getAward=()=>{
+  const getNomination=()=>{
  
-//     axios
-//     .get(`http://localhost:8081/teamawards`).
-//     then(data=>{
-//     //   console.log(data);
+    axios
+    .get(`http://localhost:8081/nominationalert`).
+    then(data=>{
+      console.log(data);
     
-//       setAwardsState(data.data)
-//     })
-//     .catch(err=>alert(err));
-//   };
+      setNominationState(data.data)
+    })
+    .catch(err=>alert(err));
+  };
 
   return (
     <Layout>
     <React.Fragment>
       <CssBaseline />
       <main>
-     
+      
         <Container className={classes.cardGrid} maxWidth="md">
-         
+        
           <Grid container spacing={4}>
-          {/* {stateAwards.map(a=>  ( */}
+          {stateNomination.map(a=>  (
           
               <Grid item  xs={12} sm={6} md={4}>
                 <Card className={classes.card}  >
@@ -93,25 +93,23 @@ export default function Activity() {
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h1">
-                     {/* {a.awardName} -{a.teamPoints} */}
+                     {a.pollName}
                     </Typography>
                     <Typography>
-                      {/* {a.teamName} - {a.periodName} */}
+                     {a.description}
                     </Typography>
-                    <Typography>
-                      {/* {a.description} */}
-                    </Typography>
+                    {/* <Typography>
+                     {a.nominationStartDate}-{a.nominationEndDate}
+                    </Typography> */}
                   </CardContent>
                   <CardActions>
-                    <Button size="small" color="secondary">
-                      {/* Like  */}
-                    </Button>
+                  <Nominate/>
                    
                   </CardActions>
                 </Card>
               </Grid>
            
-            {/* ))} */}
+              ))}  
           </Grid>
         </Container>
       </main>
