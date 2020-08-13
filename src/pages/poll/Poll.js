@@ -34,7 +34,7 @@ export default function Poll() {
 
     const [data,setData]=useState({
       pollName:"",
-      pollId:"",
+      // pollId:"",
       description:"",
       pollStart:"",
       pollEnd:"",
@@ -94,7 +94,7 @@ export default function Poll() {
                    <Paper style={{ padding: 16 }}>
                      <Grid container alignItems="flex-start" spacing={2}>
 
-                     <Grid item xs={12}>
+                     {/* <Grid item xs={12}>
                           <Field
                             fullWidth
                             required
@@ -106,7 +106,7 @@ export default function Poll() {
                             input onChange={(e)=>handle(e)}
                              value={data.pollId}
                           />
-                      </Grid>
+                      </Grid> */}
 
                        <Grid item xs={12}>
                           <Field
