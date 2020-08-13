@@ -17,11 +17,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Fab from '@material-ui/core/Fab';
 
-
-
-
-
-    const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
       formControl: {
         margin: theme.spacing(1),
         minWidth: 500,
@@ -32,7 +28,7 @@ import Fab from '@material-ui/core/Fab';
        
       }));
 
-export default function CustomizedSelects() {
+export default function ADDMembers() {
 
   const classes = useStyles();
 
@@ -50,8 +46,8 @@ export default function CustomizedSelects() {
     JSON.parse(localStorage.getItem('userData')) 
   );
   var current=value.data.empId;
-  const [stateGiveAwards, setGiveAwardsState] = useState([]) 
-  const [stateEmployee, setEmployeeState] = useState([]) 
+  const [stateemployee, setemployeeState] = useState([]) 
+  const [stateTeam, setTeamState] = useState([]) 
   
 
 const [data,setData]=useState({
@@ -79,79 +75,69 @@ const [data,setData]=useState({
   }
 
 
-  const [award, setaward] = React.useState('');
+  const [team, setTeam] = React.useState('');
   const handleChange = (event) => {
-    setaward(event.target.value);
-    console.log(event.target.value)
-  };
-
-  const [period, setperiod] = React.useState('');
-  const handleChange2 = (event) => {
-    setperiod(event.target.value);
-    console.log(event.target.value)
-  };
-
-  const [department, setdepartment] = React.useState('');
-  const handleChange3 = (event) => {
-    setdepartment(event.target.value);
+    setTeam(event.target.value);
     console.log(event.target.value)
   };
 
   const [employee, setemployee] = React.useState('');
-  const handleChange4 = (event) => {
+  const handleChange2 = (event) => {
     setemployee(event.target.value);
     console.log(event.target.value)
   };
 
-  const url=`http://localhost:8081/employee/${employee}/employeeawards/award/${award}/period/${period}/department/${department}/manager/${current}`
+
+
+  const url=`http://localhost:8081/team/${employee}/${current}/${team}`
 //   const [stateAwards, setAwardsState] = useState([]) 
   
   useEffect(()=> {
-      receiveAward();
+      employeeget();
     },[]);
   
-  const receiveAward=()=>{
+  const employeeget=()=>{
       
-      // console.log(current)
+      
         axios
-        .get(`http://localhost:8081/employee/individualawards`).
+        .get(`http://localhost:8081/employee`).
         then(data=>{
           console.log(data.data);
         
-          setGiveAwardsState(data.data)
+          setemployeeState(data.data)
         })
         .catch(err=>alert(err));
       };
 
       useEffect(()=> {
-        getEmployee();
+        getTeam();
       },[]);
 
-      const getEmployee=()=>{
+      const getTeam=()=>{
       
         // console.log(current)
           axios
-          .get(`http://localhost:8081/manager/${current}`).
+          .get(`http://localhost:8081/team/${current}`).
           then(data=>{
-            console.log(data.data.teams);
+            console.log(data.data);
           
-            setEmployeeState(data.data.teams)
+            setTeamState(data.data)
           })
           .catch(err=>alert(err));
         };
       
   return (
-   
+    <Layout>
     <React.Fragment>
 
       <CssBaseline />
       <main>
       <Fab variant="extended" color="secondary" onClick={handleClickOpen} align="right">
-        Give Award
+        ADD MEMBERS
      </Fab>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
           <DialogContent >
-            <DialogTitle id="form-dialog-title" >Give Award</DialogTitle>
+            <DialogTitle id="form-dialog-title" >Add Members</DialogTitle>
                 <DialogContentText>
                     Please Enter The Details
                 </DialogContentText>
@@ -163,17 +149,17 @@ const [data,setData]=useState({
                        labelId="demo-simple-select-outlined-label"
                        id="demo-simple-select-outlined"
                        value={employee}
-                       onChange={handleChange4}
+                       onChange={handleChange2}
                        label="Employee"
                       //  input={<BootstrapInput />}
                    >
                        <MenuItem value="">
                          <em>None</em>
                        </MenuItem>
-                       {stateEmployee.map(a=> (
-                         a.teamMembers.map(b=>(
-                          <MenuItem value={b.empId}>{b.firstName}</MenuItem>
-                         ))
+                       {stateemployee.map(a=> (
+                        //  a.teamMembers.map(b=>(
+                          <MenuItem value={a.empId}>{a.firstName}</MenuItem>
+                        //  ))
                          
           
                        ))}
@@ -183,76 +169,35 @@ const [data,setData]=useState({
                 </div>
                 <div>
                 <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Award</InputLabel>
+        <InputLabel id="demo-simple-select-outlined-label">Team</InputLabel>
         <Select
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
-          value={award}
+          value={team}
           onChange={handleChange}
-          label="Award"
+          label="Team"
           // input={<BootstrapInput />}
         >
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
-          {stateGiveAwards.map(a=> (
-          <MenuItem value={a.awardName}>{a.awardName}</MenuItem>
+          {stateTeam.map(a=> (
+          <MenuItem value={a.teamId}>{a.teamName}</MenuItem>
           
           ))}
          
         </Select>
       </FormControl>
       </div>
-      <div>
-      <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Period</InputLabel>
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          value={period}
-          onChange={handleChange2}
-          label="Period"
-          // input={<BootstrapInput />}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-         
-          <MenuItem value={"monthly"}>Monthly</MenuItem>
-          <MenuItem value={"quarterly"}>Quarterly</MenuItem>
-          <MenuItem value={"yearly"}>yearly</MenuItem>
-        </Select>
-      </FormControl>
-      </div>
-      <div>
-      <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Department</InputLabel>
-        <Select
-           labelId="demo-simple-select-outlined-label"
-           id="demo-simple-select-outlined"
-          value={department}
-          onChange={handleChange3}
-          label="Department"
-          // input={<BootstrapInput />}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-         
-          <MenuItem value={"Technology"}>Technology</MenuItem>
-          <MenuItem value={"Management"}>Management</MenuItem>
-          <MenuItem value={"Finance"}>Finance</MenuItem>
-        </Select>
-      </FormControl>
-      </div>
-    {/* </div> */}
+     
+      
     </DialogContent>
                       <DialogActions>
                         <Button onClick={handleClose} color="secondary">
                           Cancel
                         </Button>
                         <Button onClick={(e)=>submit(e)} color="secondary">
-                        Send 
+                        confirm 
                         </Button>
                       </DialogActions>
                     </Dialog>
@@ -260,6 +205,6 @@ const [data,setData]=useState({
       </main>
 
     </React.Fragment>
- 
+    </Layout>
   );
 }

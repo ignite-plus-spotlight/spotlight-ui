@@ -103,7 +103,6 @@ export default function CustomizedTables() {
             <StyledTableCell>Award Name</StyledTableCell>
             <StyledTableCell align="left">points</StyledTableCell>
             <StyledTableCell align="left">Description</StyledTableCell>
-            <StyledTableCell align="left">Period</StyledTableCell>
             <StyledTableCell align="left">Team Name</StyledTableCell>
           </TableRow>
         </TableHead>
@@ -115,7 +114,6 @@ export default function CustomizedTables() {
               </StyledTableCell>
               <StyledTableCell align="left">{a.teamPoints}</StyledTableCell>
               <StyledTableCell align="left">{a.description}</StyledTableCell>
-              <StyledTableCell align="left">{a.periodName}</StyledTableCell>
               <StyledTableCell align="left">{a.teamName}</StyledTableCell>
             </StyledTableRow>
           ))}

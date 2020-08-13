@@ -93,6 +93,8 @@ export default function SimpleTable() {
   return (
     <Layout>
     <TableContainer >
+      <div align="center" className="container"><GiveAward/></div>
+      <div>
       <Table className={classes.table} aria-label="customized table"  style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
         <TableHead >
           <TableRow>
@@ -106,6 +108,7 @@ export default function SimpleTable() {
           </TableRow>
         </TableHead>
         <TableBody>
+
 {stateAwards.map(a=> (          
              
             
@@ -124,10 +127,12 @@ export default function SimpleTable() {
               ))
   
            ))}  
+         
+
       </TableBody>
       </Table>
+      </div>
     </TableContainer>
-    <GiveAward/>   
     </Layout>
   );
  

@@ -39,7 +39,7 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ViewMember from './ViewMember'
-
+import ADDMembers from './AddMembers'
 
 
 
@@ -262,7 +262,7 @@ const url=`http://localhost:8081/team/${data.members}/${current}/${data.teamId}`
             ))}
           </Grid>
         </Container>
-        <Button variant="contained" color="secondary" onClick={handleClickOpen} fullWidth>
+        {/* <Button variant="contained" color="secondary" onClick={handleClickOpen} fullWidth>
                       ADD MEMBERS 
                     </Button>
                     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
@@ -271,16 +271,6 @@ const url=`http://localhost:8081/team/${data.members}/${current}/${data.teamId}`
                         <DialogContentText>
                           Please Enter The Details
                         </DialogContentText>
-                        {/* <TextField
-                          autoFocus
-                          margin="dense"
-                          id="managerId"
-                          label="Manager Id"
-                          type="text"
-                          input onChange={(e)=>handle(e)}
-                          value={data.managerId}
-                          fullWidth
-                        /> */}
                         <TextField
                           autoFocus
                           margin="dense"
@@ -321,11 +311,9 @@ const url=`http://localhost:8081/team/${data.members}/${current}/${data.teamId}`
                         Send 
                         </Button>
                       </DialogActions>
-                    </Dialog>
-                    {/* <Button variant="contained" color="secondary" component={Link} to="/viewMember"  fullWidth>
-                      VIEW MEMBERS  
-                    </Button>            */}
-      </main>
+                    </Dialog> */}
+                    <ADDMembers/>
+                         </main>
 
     </React.Fragment>
     </Layout>
