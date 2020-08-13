@@ -54,47 +54,36 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Activity() {
   const classes = useStyles();
-  const [stateAwards, setAwardsState] = useState([]) 
+//   const [stateAwards, setAwardsState] = useState([]) 
 
-  useEffect(()=> {
-    getAward();
-  },[]);
+//   useEffect(()=> {
+//     getAward();
+//   },[]);
   
 
-  const getAward=()=>{
+//   const getAward=()=>{
  
-    axios
-    .get(`http://localhost:8081/teamawards`).
-    then(data=>{
-    //   console.log(data);
+//     axios
+//     .get(`http://localhost:8081/teamawards`).
+//     then(data=>{
+//     //   console.log(data);
     
-      setAwardsState(data.data)
-    })
-    .catch(err=>alert(err));
-  };
+//       setAwardsState(data.data)
+//     })
+//     .catch(err=>alert(err));
+//   };
 
   return (
-    // <Layout>
+    <Layout>
     <React.Fragment>
-        <ParticlesBg color="#FF0000" type="cobweb" bg={true} />
       <CssBaseline />
       <main>
-        {/* Hero unit */}
-        {/* <div className={classes.heroContent}> */}
-          <Container maxWidth="sm">
-            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              {/* Welcome  */}
-            </Typography>
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
-            "Gratitude is the most exquisite form of courtesy."
-            </Typography>
-          </Container>
-        {/* </div> */}
+     
         <Container className={classes.cardGrid} maxWidth="md">
-          {/* End hero unit */}
+         
           <Grid container spacing={4}>
-          {stateAwards.map(a=>  (
-            // {cards.map((card) => (
+          {/* {stateAwards.map(a=>  ( */}
+          
               <Grid item  xs={12} sm={6} md={4}>
                 <Card className={classes.card}  >
                   <CardMedia
@@ -104,32 +93,29 @@ export default function Activity() {
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h1">
-                     {a.awardName} -{a.teamPoints}
+                     {/* {a.awardName} -{a.teamPoints} */}
                     </Typography>
                     <Typography>
-                      {a.teamName} - {a.periodName}
+                      {/* {a.teamName} - {a.periodName} */}
                     </Typography>
                     <Typography>
-                      {a.description}
+                      {/* {a.description} */}
                     </Typography>
                   </CardContent>
                   <CardActions>
                     <Button size="small" color="secondary">
-                      Like 
+                      {/* Like  */}
                     </Button>
-                    {/* <Button size="small" color="secondary">
-                      Edit
-                    </Button> */}
+                   
                   </CardActions>
                 </Card>
               </Grid>
-            // ))}
-            ))}
+           
+            {/* ))} */}
           </Grid>
         </Container>
       </main>
-
     </React.Fragment>
-    // {/* </Layout> */}
+    </Layout>
   );
 }

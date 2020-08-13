@@ -3,7 +3,8 @@ import LoginByGoogle from './pages/home/LoginByGoogle';
 import {MuiThemeProvider,createMuiTheme} from '@material-ui/core';
 import red from '@material-ui/core/colors/red'
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
-import CardAlign from './pages/card/CardAlign';
+import Nominations from './pages/nominations/Nominations.js';
+import Nominate from './pages/nominations/Nominate.js';
 import SignInSide from './pages/Sign-In/SignInSide';
 import Individual from './pages/recognition/Individual';
 import Team from './pages/recognition/Team';
@@ -43,12 +44,12 @@ function Main() {
         <Route exact path="/DashboardM" component={DashboardM}/>
         <Route exact path="/DashboardT" component={DashboardT}/>
         <Route exact path="/DashboardV" component={DashboardV}/>
-        <Route exact path="/cards" component={CardAlign}/>
         <Route exact path="/individual" component={Individual}/>
         <Route exact path="/team" component={Team}/>
         <Route exact path="/activity" component={Activity}/>
         <Route exact path="/myteam" component={MyTeam}/>
-        {/* <Route exact path="/surveypoll" component={SurveyPoll}/> */}
+        <Route exact path="/nominations" component={Nominations}/>
+        <Route exact path="/nominate" component={Nominate}/>
         <Route exact path="/poll" component={Poll}/>
         <Route exact path ="/awards" component={AwardsM}/>
         <Route exact path="/giveAwards" component={GiveAward}/>
