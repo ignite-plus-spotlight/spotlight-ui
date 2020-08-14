@@ -127,7 +127,7 @@ const [data,setData]=useState({
         };
       
   return (
-    <Layout>
+   
     <React.Fragment>
 
       <CssBaseline />
@@ -203,8 +203,8 @@ const [data,setData]=useState({
                     </Dialog>
                   
       </main>
-
-    </React.Fragment>
-    </Layout>
+ 
+    </React.Fragment> 
+  
   );
 }

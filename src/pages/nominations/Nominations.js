@@ -76,11 +76,13 @@ export default function Activity() {
   return (
     <Layout>
     <React.Fragment>
+    <ParticlesBg color="#FF0000" type="cobweb" bg={true} />
       <CssBaseline />
       <main>
-      
+        <div align="right">
+      <Nominate/>
+      </div>
         <Container className={classes.cardGrid} maxWidth="md">
-        
           <Grid container spacing={4}>
           {stateNomination.map(a=>  (
           
@@ -103,8 +105,6 @@ export default function Activity() {
                     </Typography> */}
                   </CardContent>
                   <CardActions>
-                  <Nominate/>
-                   
                   </CardActions>
                 </Card>
               </Grid>

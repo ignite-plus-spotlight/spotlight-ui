@@ -40,7 +40,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import ViewMember from './ViewMember'
 import ADDMembers from './AddMembers'
-
+import ParticlesBg from "particles-bg";
 
 
 
@@ -226,11 +226,14 @@ const url=`http://localhost:8081/team/${data.members}/${current}/${data.teamId}`
   return (
     <Layout>
     <React.Fragment>
-
+    <ParticlesBg color="#FF0000" type="cobweb" bg={true} />
       <CssBaseline />
       <main>
+        <div align="right">
+      <ADDMembers/>
+      </div>
         {/* Hero unit */}
-        <Container className={classes.cardGrid} maxWidth="md">
+        <Container className={classes.cardGrid} maxWidth="lg">
           {/* End hero unit */}
           <Grid container spacing={4}>
           {team.map(a=>  (
@@ -312,7 +315,7 @@ const url=`http://localhost:8081/team/${data.members}/${current}/${data.teamId}`
                         </Button>
                       </DialogActions>
                     </Dialog> */}
-                    <ADDMembers/>
+                   
                          </main>
 
     </React.Fragment>

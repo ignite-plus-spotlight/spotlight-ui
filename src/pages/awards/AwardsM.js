@@ -13,6 +13,7 @@ import Layout from '../layout/Layout';
 import Fab from '@material-ui/core/Fab';
 import GiveAward from '../awards/GiveAward'
 import Grid from '@material-ui/core/Grid'
+import ParticlesBg from "particles-bg";
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -92,8 +93,9 @@ export default function SimpleTable() {
 
   return (
     <Layout>
+          <ParticlesBg color="#FF0000" type="cobweb" bg={true} />
     <TableContainer >
-      <div align="center" className="container"><GiveAward/></div>
+      <div align="right" className="container"><GiveAward/></div>
       <div>
       <Table className={classes.table} aria-label="customized table"  style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
         <TableHead >
@@ -115,13 +117,13 @@ export default function SimpleTable() {
               a.employeeAwardsTMS.map(b=>(
                 
                 <>
-                <TableRow >
+                <StyledTableRow >
                  <StyledTableCell >{a.employee.firstName}</StyledTableCell>
                 <StyledTableCell align="left">{b.department}</StyledTableCell>
                 <StyledTableCell align="left">{b.periodName}</StyledTableCell>
                 <StyledTableCell align="left">{b.empPoints}</StyledTableCell> 
                 <StyledTableCell align="left">{b.awardName}</StyledTableCell>
-                </TableRow> 
+                </StyledTableRow> 
                 </>
                
               ))

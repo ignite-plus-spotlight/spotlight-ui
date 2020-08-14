@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import Layout from '../layout/Layout';
 import { makeStyles } from '@material-ui/core/styles';
-
+import ParticlesBg from "particles-bg";
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -78,6 +78,7 @@ export default function Poll() {
     
     return (
         <Layout>
+          <ParticlesBg color="#FF0000" type="cobweb" bg={true} />
           <div style={{ padding: 16, margin: 'auto', maxWidth: 600 }}>
              <CssBaseline />
              <Typography variant="h4" align="center" component="h1" gutterBottom>

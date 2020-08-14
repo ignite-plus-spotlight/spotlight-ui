@@ -11,7 +11,7 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { Divider } from '@material-ui/core';
 import Hidden from '@material-ui/core/Hidden';
-
+import ParticlesBg from "particles-bg";
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -73,7 +73,7 @@ function NominationHistory() {
       
     return (
         <Layout>       
-               {nomination.map(a=>  (     
+               <ParticlesBg color="#FF0000" type="cobweb" bg={true} />
            <> 
         <Hidden xlUp color="secondary">
                <h1 align="center">Nomination History</h1>
@@ -89,7 +89,7 @@ function NominationHistory() {
           </TableRow>
         </TableHead>
         <TableBody>
- {/* {team.employee.map(teamMember=>( */}
+        {nomination.map(a=>  (     
              <StyledTableRow >
               <StyledTableCell component="th" scope="row">
                 
@@ -100,12 +100,12 @@ function NominationHistory() {
               <StyledTableCell align="left">{a.createDate}</StyledTableCell>
             
             </StyledTableRow> 
-   {/* ))}   */}
+              ))}
         </TableBody>
       </Table>
     </TableContainer>
     </>   
-      ))}
+    
     </Layout>
     )
 }
