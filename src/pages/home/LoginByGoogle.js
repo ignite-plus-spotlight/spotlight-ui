@@ -7,7 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBContainer } from "mdbreact";
-import img1 from '../../assets/images/targetwelcome.png';
+import img1 from '../../assets/images/cover.jpg';
 import Typical from 'react-typical'
 // import LogoutButton from '@material-ui/core/Logout'
 import AccountCircleSharpIcon from '@material-ui/icons/AccountCircleSharp';

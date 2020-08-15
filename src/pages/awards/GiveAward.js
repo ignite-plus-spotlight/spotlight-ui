@@ -69,7 +69,7 @@ const [data,setData]=useState({
     axios.post(url,data)
     .then(res=>{
       console.log(res.data)
-     
+     reload();
         // console.log(res)
       
     })
@@ -113,6 +113,8 @@ const [data,setData]=useState({
   useEffect(()=> {
       receiveAward();
     },[]);
+
+    const reload=()=>window.location.reload();
   
   const receiveAward=()=>{
       

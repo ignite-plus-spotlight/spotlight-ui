@@ -104,10 +104,10 @@ export default function Activity() {
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h1">
-                     {a.awardName} -{a.teamPoints}
+                     {a.awardName} 
                     </Typography>
                     <Typography>
-                      {a.teamName} - {a.periodName}
+                      {a.department} - {a.periodName}
                     </Typography>
                     <Typography>
                       {a.description}

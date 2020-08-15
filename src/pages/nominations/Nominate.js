@@ -66,6 +66,7 @@ export default function CustomizedSelects() {
         'Content-Type': 'application/json',
     }
     })
+    reload();
   }
 
   function handle(e) {
@@ -96,7 +97,7 @@ export default function CustomizedSelects() {
   })
   const url=`http://localhost:8081/nominate/${pollName}/${employee}`
 //   const [stateAwards, setAwardsState] = useState([]) 
-  
+const reload=()=>window.location.reload(); 
 
 //poll
   useEffect(()=> {

@@ -59,11 +59,13 @@ const [data,setData]=useState({
   // // team:""
 })
 
+const reload=()=>window.location.reload();
 
    function submit(e) {
     e.preventDefault()
     axios.post(url,data)
     .then(res=>{
+      reload();
       console.log(res.data)
     })
   }

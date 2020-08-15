@@ -83,7 +83,7 @@ function ViewMember() {
       <Table className={classes.table} aria-label="customized table" style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
         <TableHead>
           <TableRow>
-            <StyledTableCell> Employee Id</StyledTableCell>
+            {/* <StyledTableCell> Employee Id</StyledTableCell> */}
             <StyledTableCell align="left">First Name</StyledTableCell>
             <StyledTableCell align="left">Last Name</StyledTableCell>
             <StyledTableCell align="left">Email id</StyledTableCell>
@@ -92,13 +92,13 @@ function ViewMember() {
         <TableBody>
  {team.teamMembers.map(teamMember=>(
              <StyledTableRow >
-              <StyledTableCell component="th" scope="row">
+              {/* <StyledTableCell component="th" scope="row">
                 {()=>console.log(team[0])}
                 {teamMember.empId}
-              </StyledTableCell>
-              <StyledTableCell align="right">{teamMember.firstName}</StyledTableCell>
-              <StyledTableCell align="right">{teamMember.lastName}</StyledTableCell>
-              <StyledTableCell align="right">{teamMember.empEmail}</StyledTableCell>
+              </StyledTableCell> */}
+              <StyledTableCell align="left">{teamMember.firstName}</StyledTableCell>
+              <StyledTableCell align="left">{teamMember.lastName}</StyledTableCell>
+              <StyledTableCell align="left">{teamMember.empEmail}</StyledTableCell>
             
             </StyledTableRow> 
    ))}  
