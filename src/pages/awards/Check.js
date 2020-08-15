@@ -17,6 +17,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Fab from '@material-ui/core/Fab';
 import Snackbar from '@material-ui/core/Snackbar'
+import IconButton from '@material-ui/core/IconButton'
 import MuiAlert from '@material-ui/lab/Alert';
 
 
@@ -66,8 +67,6 @@ export default function CustomizedSelects() {
     }
 
     setsnackbarSuccess(false);
-    reload();
-
   };
 
   
@@ -100,14 +99,21 @@ const [data,setData]=useState({
     axios.post(url,data)
     .then(res=>{
       // console.log(res)
+    //   alert('Success')
     setsnackbarSuccess(true);
+    reload();
+
+      
+   
         // console.log(res) 
     })
     .catch(error=>{
+    //   alert('Failed ! Enter again')
       setsnackbarFail(true);
     //   reload();
 
     })
+
   }
 
   function handle(e) {

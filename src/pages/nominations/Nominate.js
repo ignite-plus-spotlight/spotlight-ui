@@ -17,8 +17,12 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Fab from '@material-ui/core/Fab';
 import TextField from '@material-ui/core/TextField';
+import Snackbar from '@material-ui/core/Snackbar'
+import MuiAlert from '@material-ui/lab/Alert';
 
-
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 
 
@@ -56,6 +60,26 @@ export default function CustomizedSelects() {
   
 
 
+  const [snackbarSuccess, setsnackbarSuccess] = React.useState(false);
+  const [snackbarFail, setsnackbarFail] = React.useState(false);
+
+  const handleClose1 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setsnackbarSuccess(false);
+    reload();
+
+  };
+
+  
+ 
+  const handleClose2 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setsnackbarFail(false);
+  };
 
 
 
@@ -65,8 +89,14 @@ export default function CustomizedSelects() {
       headers: {
         'Content-Type': 'application/json',
     }
-    })
-    reload();
+    
+  }) .then(res=>{
+  setsnackbarSuccess(true);
+  })
+  .catch(error=>{
+    setsnackbarFail(true);
+  })
+    
   }
 
   function handle(e) {
@@ -136,7 +166,16 @@ const reload=()=>window.location.reload();
       
   return (
     <React.Fragment>
-
+    <Snackbar open={snackbarSuccess} autoHideDuration={10000} onClose={handleClose1}>
+        <Alert onClose={handleClose1} severity="success">
+          Awarded Successfully
+        </Alert>
+      </Snackbar>
+      <Snackbar open={snackbarFail} autoHideDuration={10000} onClose={handleClose2}>
+        <Alert onClose={handleClose2} severity="error">
+         Oops ! Try Again 
+        </Alert>
+      </Snackbar>
       <CssBaseline />
       <main>
       <Fab variant="extended" color="secondary" onClick={handleClickOpen} align="right">

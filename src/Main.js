@@ -19,7 +19,7 @@ import AwardsM from './pages/awards/AwardsM';
 import ViewMember from './pages/my team/ViewMember';
 import GiveAward from './pages/awards/GiveAward'
 import NominationHistory from './pages/nomination history/NominationHistory'
-
+import Check from './pages/awards/Check'
 function Main() {
     const theme= createMuiTheme({
       palette:{
@@ -56,6 +56,8 @@ function Main() {
         <Route exact path ="/awards" component={AwardsM}/>
         <Route exact path="/giveAwards" component={GiveAward}/>
         <Route exact path="/viewMember" component={ViewMember}/>
+        <Route exact path="/check" component={Check}/>
+
 
       </div> 
       </Router>

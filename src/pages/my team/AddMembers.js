@@ -16,6 +16,13 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Fab from '@material-ui/core/Fab';
+import Snackbar from '@material-ui/core/Snackbar'
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 
 const useStyles = makeStyles((theme) => ({
       formControl: {
@@ -33,6 +40,25 @@ export default function ADDMembers() {
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
+  const [snackbarSuccess, setsnackbarSuccess] = React.useState(false);
+  const [snackbarFail, setsnackbarFail] = React.useState(false);
+
+  const handleClose1 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setsnackbarSuccess(false);
+    reload();
+  };
+
+  
+ 
+  const handleClose2 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setsnackbarFail(false);
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -61,14 +87,19 @@ const [data,setData]=useState({
 
 const reload=()=>window.location.reload();
 
-   function submit(e) {
-    e.preventDefault()
-    axios.post(url,data)
-    .then(res=>{
-      reload();
-      console.log(res.data)
-    })
-  }
+function submit(e) {
+  axios.post(url,data)
+  .then(res=>{
+    // console.log(res)
+  setsnackbarSuccess(true);
+      // console.log(res) 
+  })
+  .catch(error=>{
+    setsnackbarFail(true);
+  //   reload();
+  })
+}
+
 
   function handle(e) {
     const newdata={...data}
@@ -131,7 +162,16 @@ const reload=()=>window.location.reload();
   return (
    
     <React.Fragment>
-
+        <Snackbar open={snackbarSuccess} autoHideDuration={10000} onClose={handleClose1}>
+        <Alert onClose={handleClose1} severity="success">
+          Awarded Successfully
+        </Alert>
+      </Snackbar>
+      <Snackbar open={snackbarFail} autoHideDuration={10000} onClose={handleClose2}>
+        <Alert onClose={handleClose2} severity="error">
+         Oops ! Try Again 
+        </Alert>
+      </Snackbar>
       <CssBaseline />
       <main>
       <Fab variant="extended" color="secondary" onClick={handleClickOpen} align="right">
