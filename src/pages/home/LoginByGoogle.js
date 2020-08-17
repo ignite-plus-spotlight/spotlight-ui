@@ -79,24 +79,25 @@ export class Logintbygoogle extends Component {
               // return ReactDOM.render(<DashboardV/>,document.getElementById('root'))
             //  return  <DashboardV/>
             }
-            else {
-              if(roles[0].roleName=="manager")
+             else if(roles[0].roleName=="manager")
               {
               this.props.history.push('/DashboardM')
                 // return ReactDOM.render(<DashboardM/>,document.getElementById('root'))
                 // return <DashboardM/>
               }
-              else
-              {
-                if(roles[0].roleName=="team member")
+              else if(roles[0].roleName=="team member")
                  {
                   this.props.history.push('/DashboardT')
                   // return ReactDOM.render(<DashboardT/>,document.getElementById('root'))
                   // return <DashboardT/>
                 }
+                else  if(roles[0].roleName=="vp")
+                   {
+                    this.props.history.push('/DashboardV')
+                    // return ReactDOM.render(<DashboardT/>,document.getElementById('root'))
+                    // return <DashboardT/>
+                  }
                 
-              }
-            }
             
            
           })

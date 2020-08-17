@@ -19,7 +19,11 @@ import AwardsM from './pages/awards/AwardsM';
 import ViewMember from './pages/my team/ViewMember';
 import GiveAward from './pages/awards/GiveAward'
 import NominationHistory from './pages/nomination history/NominationHistory'
-import Members from './pages/members/Members'
+import Members from './pages/members/Members';
+import MembersVp from './pages/members/MembersVp'
+import DashboardV from './pages/dashboard/DashboardV'
+import Check from './pages/awards/Check'
+
 function Main() {
     const theme= createMuiTheme({
       palette:{
@@ -45,6 +49,7 @@ function Main() {
         <Route exact path="/DashboardM" component={DashboardM}/>
         <Route exact path="/DashboardT" component={DashboardT}/>
         <Route exact path="/DashboardD" component={DashboardD}/>
+        <Route exact path="/DashboardV" component={DashboardV}/>
         <Route exact path="/individual" component={Individual}/>
         <Route exact path="/team" component={Team}/>
         <Route exact path="/activity" component={Activity}/>
@@ -57,6 +62,10 @@ function Main() {
         <Route exact path="/giveAwards" component={GiveAward}/>
         <Route exact path="/viewMember" component={ViewMember}/>
         <Route exact path="/members" component={Members}/>
+        <Route exact path="/membersVp" component={MembersVp}/>
+        <Route exact path="/check" component={Check}/>
+
+
 
 
       </div> 

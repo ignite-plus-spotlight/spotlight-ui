@@ -43,7 +43,11 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
+    flexBasis: '33.33%',
+    flexShrink: 0,
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
   },
 }));
 
@@ -82,8 +86,9 @@ function Members() {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-        <Typography className={classes.heading}><b>Manager : </b>  {member.value.firstName} </Typography>
-        </AccordionSummary>
+          <Typography className={classes.heading}><b> Manager : </b>{member.value.firstName} {member.value.lastName}</Typography>
+            <Typography className={classes.secondaryHeading}><b>Email : </b>{member.value.empEmail}</Typography>        
+          </AccordionSummary>
         <AccordionDetails>
             <Typography>
             <TableContainer component={Paper}>
@@ -98,6 +103,7 @@ function Members() {
         <TableBody>
         {member.children.map(emp=> (            
         <StyledTableRow >
+
                 <StyledTableCell align="left">{emp.value.firstName}</StyledTableCell>
                 <StyledTableCell align="left">{emp.value.lastName}</StyledTableCell>
                 <StyledTableCell align="left">{emp.value.empEmail}</StyledTableCell>
@@ -105,6 +111,8 @@ function Members() {
   ))}
         </TableBody>
       </Table>
+
+
     </TableContainer>
           </Typography>
           {/* })} */}
