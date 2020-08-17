@@ -13,13 +13,13 @@ import Activity from './pages/activity/Activity';
 import Poll from './pages/poll/Poll';
 import DashboardT from './pages/dashboard/DashboardT';
 import DashboardM from './pages/dashboard/DashboardM';
-import DashboardV from './pages/dashboard/DashboardV';
+import DashboardD from './pages/dashboard/DashboardD';
 import MyTeam from './pages/my team/MyTeam';
 import AwardsM from './pages/awards/AwardsM';
 import ViewMember from './pages/my team/ViewMember';
 import GiveAward from './pages/awards/GiveAward'
 import NominationHistory from './pages/nomination history/NominationHistory'
-import Check from './pages/awards/Check'
+import Members from './pages/members/Members'
 function Main() {
     const theme= createMuiTheme({
       palette:{
@@ -44,7 +44,7 @@ function Main() {
         <Route exact path="/login" component={SignInSide} />
         <Route exact path="/DashboardM" component={DashboardM}/>
         <Route exact path="/DashboardT" component={DashboardT}/>
-        <Route exact path="/DashboardV" component={DashboardV}/>
+        <Route exact path="/DashboardD" component={DashboardD}/>
         <Route exact path="/individual" component={Individual}/>
         <Route exact path="/team" component={Team}/>
         <Route exact path="/activity" component={Activity}/>
@@ -56,7 +56,7 @@ function Main() {
         <Route exact path ="/awards" component={AwardsM}/>
         <Route exact path="/giveAwards" component={GiveAward}/>
         <Route exact path="/viewMember" component={ViewMember}/>
-        <Route exact path="/check" component={Check}/>
+        <Route exact path="/members" component={Members}/>
 
 
       </div> 

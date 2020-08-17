@@ -68,7 +68,7 @@ export default function CustomizedSelects() {
       return;
     }
     setsnackbarSuccess(false);
-    reload();
+ 
 
   };
 
@@ -92,6 +92,7 @@ export default function CustomizedSelects() {
     
   }) .then(res=>{
   setsnackbarSuccess(true);
+  reload();
   })
   .catch(error=>{
     setsnackbarFail(true);

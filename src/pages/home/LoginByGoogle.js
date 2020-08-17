@@ -14,7 +14,7 @@ import AccountCircleSharpIcon from '@material-ui/icons/AccountCircleSharp';
 import DashboardM from '../dashboard/DashboardM.js';
 import Cookies from 'universal-cookie';
 import DashboardT from '../dashboard/DashboardT';
-import DashboardV from '../dashboard/DashboardV';
+import DashboardD from '../dashboard/DashboardD';
 import ReactDOM from 'react-dom';
 import ParticlesBg from "particles-bg";
 
@@ -73,18 +73,18 @@ export class Logintbygoogle extends Component {
             const roles = res.data;
             this.setState({ roles });
             console.log(roles)
-            if (roles[0].roleName == "leader")
+            if (roles[0].roleName == "director")
             {
-              this.props.history.push('/DashboardV')
+              this.props.history.push('/DashboardD')
               // return ReactDOM.render(<DashboardV/>,document.getElementById('root'))
-             return  <DashboardV/>
+            //  return  <DashboardV/>
             }
             else {
               if(roles[0].roleName=="manager")
               {
               this.props.history.push('/DashboardM')
                 // return ReactDOM.render(<DashboardM/>,document.getElementById('root'))
-                return <DashboardM/>
+                // return <DashboardM/>
               }
               else
               {
@@ -92,7 +92,7 @@ export class Logintbygoogle extends Component {
                  {
                   this.props.history.push('/DashboardT')
                   // return ReactDOM.render(<DashboardT/>,document.getElementById('root'))
-                  return <DashboardT/>
+                  // return <DashboardT/>
                 }
                 
               }

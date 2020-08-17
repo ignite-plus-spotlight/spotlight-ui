@@ -9,7 +9,6 @@ import {Link} from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import ManagerDashboardList from './ManagerDashboardList'
 import TeamDashboardList from './TeamDashboardList'
-import VPDashboardList from './VPDashboardList'
 import DashboardRoundedIcon from '@material-ui/icons/DashboardRounded';
 import img1 from '../../assets/images/target7.jpg';
 import Avatar from '@material-ui/core/Avatar';

@@ -48,7 +48,7 @@ export default function ADDMembers() {
       return;
     }
     setsnackbarSuccess(false);
-    reload();
+  
   };
 
   
@@ -92,6 +92,7 @@ function submit(e) {
   .then(res=>{
     // console.log(res)
   setsnackbarSuccess(true);
+  reload();
       // console.log(res) 
   })
   .catch(error=>{

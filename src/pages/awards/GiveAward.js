@@ -66,7 +66,7 @@ export default function CustomizedSelects() {
     }
 
     setsnackbarSuccess(false);
-    reload();
+   
 
   };
 
@@ -101,6 +101,7 @@ const [data,setData]=useState({
     .then(res=>{
       // console.log(res)
     setsnackbarSuccess(true);
+    reload();
         // console.log(res) 
     })
     .catch(error=>{

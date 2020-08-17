@@ -8,7 +8,6 @@ import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 import {Link} from 'react-router-dom'; 
 import Grid from '@material-ui/core/Grid';
 import TeamDashboardList from './TeamDashboardList'
-import VPDashboardList from './VPDashboardList'
 import Activity from '../activity/Activity';
 import Avatar from '@material-ui/core/Avatar';
 
