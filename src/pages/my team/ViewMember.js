@@ -12,8 +12,8 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import { Divider } from '@material-ui/core';
 import Hidden from '@material-ui/core/Hidden';
 import ParticlesBg from "particles-bg";
-
-
+import GiveAward from '../awards/GiveAward';
+import Button from '@material-ui/core/Button'
 const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.secondary.main,
@@ -71,9 +71,12 @@ function ViewMember() {
           .catch(err=>alert(err));
         };
       
+        const handleClick=(teamMember)=>{
+          console.log(teamMember)
+        }
+
     return (
         <Layout>  
-           <ParticlesBg color="#FF0000" type="cobweb" bg={true} />     
                {team.map(team=>  (     
            <> 
         <Hidden xlUp color="secondary">
@@ -87,6 +90,8 @@ function ViewMember() {
             <StyledTableCell align="left">First Name</StyledTableCell>
             <StyledTableCell align="left">Last Name</StyledTableCell>
             <StyledTableCell align="left">Email id</StyledTableCell>
+            <StyledTableCell align="left">Give Awards</StyledTableCell>
+
           </TableRow>
         </TableHead>
         <TableBody>
@@ -99,7 +104,8 @@ function ViewMember() {
               <StyledTableCell align="left">{teamMember.firstName}</StyledTableCell>
               <StyledTableCell align="left">{teamMember.lastName}</StyledTableCell>
               <StyledTableCell align="left">{teamMember.empEmail}</StyledTableCell>
-            
+              <StyledTableCell align="left"><GiveAward/></StyledTableCell>
+
             </StyledTableRow> 
    ))}  
         </TableBody>

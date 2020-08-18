@@ -95,7 +95,7 @@ export default function SimpleTable() {
     <Layout>
           <ParticlesBg color="#FF0000" type="cobweb" bg={true} />
     <TableContainer >
-      <div align="right" className="container"><GiveAward/></div>
+      {/* <div align="right" className="container"><GiveAward/></div> */}
       <div>
       <Table className={classes.table} aria-label="customized table"  style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
         <TableHead >

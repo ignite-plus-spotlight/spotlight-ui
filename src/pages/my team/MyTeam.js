@@ -230,7 +230,7 @@ const url=`http://localhost:8081/team/${data.members}/${current}/${data.teamId}`
       <CssBaseline />
       <main>
         <div align="right">
-      <ADDMembers/>
+      
       </div>
         {/* Hero unit */}
         <Container className={classes.cardGrid} maxWidth="lg">
@@ -254,68 +254,14 @@ const url=`http://localhost:8081/team/${data.members}/${current}/${data.teamId}`
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    {/* <Button size="small" color="secondary">
-                      Add Members
-                    </Button> */}
-
-            
+                  <ADDMembers/>
                   </CardActions>
                 </Card>
               </Grid>
             ))}
           </Grid>
         </Container>
-        {/* <Button variant="contained" color="secondary" onClick={handleClickOpen} fullWidth>
-                      ADD MEMBERS 
-                    </Button>
-                    <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
-                      <DialogContent >
-                      <DialogTitle id="form-dialog-title" >ADD MEMBERS</DialogTitle>
-                        <DialogContentText>
-                          Please Enter The Details
-                        </DialogContentText>
-                        <TextField
-                          autoFocus
-                          margin="dense"
-                          id="teamId"
-                          label="Team id"
-                          type="text"
-                          input onChange={(e)=>handle(e)}
-                          value={data.teamId}
-                          fullWidth
-                        />
-                        <TextField
-                          autoFocus
-                          margin="dense"
-                          id="teamName"
-                          label="Team name"
-                          type="text"
-                          input onChange={(e)=>handle(e)}
-                          value={data.teamName}
-                          fullWidth
-                        />
-                        <TextField
-                          autoFocus
-                          margin="dense"
-                          id="members"
-                          label=" Member Id"
-                          type="text"
-                          input onChange={(e)=>handle(e)}
-                          value={data.members}
-                          fullWidth
-                        />
-                        
-                      </DialogContent>
-                      <DialogActions>
-                        <Button onClick={handleClose} color="secondary">
-                          Cancel
-                        </Button>
-                        <Button onClick={(e)=>submit(e)} color="secondary">
-                        Send 
-                        </Button>
-                      </DialogActions>
-                    </Dialog> */}
-                   
+                 
                          </main>
 
     </React.Fragment>

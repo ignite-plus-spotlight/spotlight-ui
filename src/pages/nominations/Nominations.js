@@ -80,7 +80,6 @@ export default function Activity() {
       <CssBaseline />
       <main>
         <div align="right">
-      <Nominate/>
       </div>
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
@@ -105,6 +104,7 @@ export default function Activity() {
                     </Typography> */}
                   </CardContent>
                   <CardActions>
+                  <Nominate/>
                   </CardActions>
                 </Card>
               </Grid>

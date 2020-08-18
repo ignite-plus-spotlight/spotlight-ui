@@ -16,6 +16,7 @@ import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Fab from '@material-ui/core/Fab';
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -41,12 +42,17 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   table: {
-    minWidth: 700,
+    minWidth: 500,
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
     flexBasis: '33.33%',
     flexShrink: 0,
+  },
+  primaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: '50%',
+
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
@@ -83,7 +89,6 @@ function MembersVp() {
     return (
         <Layout>       
               {member.map(member=>  (     
-
         <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -91,18 +96,22 @@ function MembersVp() {
           id="panel1a-header"
         >
           <Typography className={classes.heading}><b> Director : </b>{member.value.firstName} {member.value.lastName}</Typography>
-            <Typography className={classes.secondaryHeading}><b>Email : </b>{member.value.empEmail}</Typography>        
+            <Typography className={classes.primaryHeading}><b>Email : </b>{member.value.empEmail}</Typography> 
+            <Typography className={classes.secondaryHeading}>
+            <Fab variant="extended" color="secondary"  align="right">
+         Award</Fab>
+              </Typography>       
           </AccordionSummary>
-           <Typography>
-           {member.children.map(emp=> (  
+          {member.children.map(emp=> (  
              <>
-            <AccordionSummary
-          // expandIcon={<ExpandMoreIcon/>}
-          // aria-controls="panel1a-content"
-          // id="panel1a-header"
-        >
+           {/* <Typography> */}
+            <AccordionSummary>
           <Typography className={classes.heading}><b> Manager : </b>{emp.value.firstName} {emp.value.lastName}</Typography>
-            <Typography className={classes.secondaryHeading}><b>Email : </b>{emp.value.empEmail}</Typography>        
+            <Typography className={classes.primaryHeading}><b>Email : </b>{emp.value.empEmail}</Typography>  
+            <Typography className={classes.secondaryHeading}>
+            <Fab variant="extended" color="secondary"  align="right">
+         Award</Fab>
+              </Typography>         
           </AccordionSummary>
             <AccordionDetails>
          <TableContainer component={Paper}>
@@ -116,33 +125,21 @@ function MembersVp() {
         </TableHead>
         <TableBody>
         {emp.children.map(emp1=> (            
-        <StyledTableRow >
-
+        <StyledTableRow>
                 <StyledTableCell align="left">{emp1.value.firstName}</StyledTableCell>
                 <StyledTableCell align="left">{emp1.value.lastName}</StyledTableCell>
                 <StyledTableCell align="left">{emp1.value.empEmail}</StyledTableCell>
             </StyledTableRow>
-
   ))}
         </TableBody>
       </Table>
-
-
     </TableContainer>
         </AccordionDetails>
-        {/* </AccordionSummary> */}
-        {/* </AccordionSummary> */}
-        </>
-        ))}
-          </Typography>
-
-  
-         
-       
-      </Accordion>
-          
-       ))} 
-          
+          {/* </Typography> */}
+          </>
+        ))} 
+      </Accordion>    
+       ))}    
     </Layout>
     )
 }

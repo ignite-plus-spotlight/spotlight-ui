@@ -8,8 +8,6 @@ import InputBase from '@material-ui/core/InputBase';
 import axios from "axios";
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Layout from '../layout/Layout'
-import { red } from '@material-ui/core/colors';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
