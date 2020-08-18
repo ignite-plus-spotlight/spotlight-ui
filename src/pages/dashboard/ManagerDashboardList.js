@@ -92,7 +92,7 @@ export default function NestedList() {
 
             <ListItem button  variant="outline" color="secondary" component={Link} to="/awards">
             <ListItemIcon>{<EmojiEventsIcon color="inherit"/>}</ListItemIcon>
-              <ListItemText primary="Awards" />
+              <ListItemText primary="Awards History" />
             </ListItem>
 
             <ListItem button  variant="outline" color="secondary" component={Link} to="/nominations">
