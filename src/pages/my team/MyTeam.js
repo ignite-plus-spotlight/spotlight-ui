@@ -1,47 +1,31 @@
 import React,{useState,useEffect}from 'react';
-import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-import CameraIcon from '@material-ui/icons/PhotoCamera';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles ,withStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Link from '@material-ui/core/Link';
 import Layout from '../layout/Layout';
 import img1 from '../../assets/images/target1.jpg'
-import { MDBMask, MDBView, MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import axios from "axios";
-import Collapse from '@material-ui/core/Collapse';
-import clsx from 'clsx';
 import { red } from '@material-ui/core/colors';
-import IconButton from '@material-ui/core/IconButton';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import ViewMember from './ViewMember'
-import ADDMembers from './AddMembers'
 import ParticlesBg from "particles-bg";
-
+import Fab from '@material-ui/core/Fab';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -122,6 +106,13 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 500,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
 }));
   
 // }));
@@ -149,7 +140,9 @@ export default function MyTeam() {
 
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (a) => {
+    console.log(a)
+    setTeamState(a);
     setOpen(true);
   };
 
@@ -166,6 +159,14 @@ export default function MyTeam() {
   );
   var current=value.data.empId;
   const[teamMember,setTeamMember]=useState([]);
+  const [stateemployee, setemployeeState] = useState([]) 
+  const [employee, setemployee] = React.useState('');
+  const [stateTeam, setTeamState] = useState([]) 
+  const handleChange2 = (event) => {
+    setemployee(event.target.value);
+    console.log(event.target.value)
+  };
+
   
 //   console.log(value);
 // const[MemberList,setMember]=useState([])
@@ -183,7 +184,7 @@ const [data,setData]=useState({
     getTeam();
   },[]);
   
-const url=`http://localhost:8081/team/${data.members}/${current}/${data.teamId}`
+const url=`http://localhost:8081/team/${employee}/${current}/${stateTeam}`
   
 
   const getTeam=()=>{
@@ -204,6 +205,27 @@ const url=`http://localhost:8081/team/${data.members}/${current}/${data.teamId}`
     })
     .catch(err=>alert(err));
   };
+
+
+  
+  useEffect(()=> {
+    employeeget();
+  },[]);
+
+const employeeget=()=>{
+    
+    
+      axios
+      .get(`http://localhost:8081/employee`).
+      then(data=>{
+        console.log(data.data);
+      
+        setemployeeState(data.data)
+      })
+      .catch(err=>alert(err));
+    };
+
+    
 
   
   function submit(e) {
@@ -236,10 +258,11 @@ const url=`http://localhost:8081/team/${data.members}/${current}/${data.teamId}`
         <Container className={classes.cardGrid} maxWidth="lg">
           {/* End hero unit */}
           <Grid container spacing={4}>
-          {team.map(a=>  (
-            // {cards.map((card) => (
+        
               <Grid item  xs={12} sm={6} md={4}>
                 <Card className={classes.card}  >
+                {team.map(a=>  (
+                   <>
                   <CardMedia
                     className={classes.cardMedia}
                     image={img1}
@@ -254,16 +277,62 @@ const url=`http://localhost:8081/team/${data.members}/${current}/${data.teamId}`
                     </Typography>
                   </CardContent>
                   <CardActions>
-                  <ADDMembers/>
+                    <>
+                  <Fab variant="extended" color="secondary" onClick={()=>handleClickOpen(a.teamId)} align="right">
+                    ADD MEMBERS
+                </Fab>
+                  </>
                   </CardActions>
-                </Card>
-              </Grid>
-            ))}
+                  </>
+                         ))}
+                        
+                   </Card>
+                   </Grid>
           </Grid>
-        </Container>
-                 
-                         </main>
+          <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
+          <DialogContent >
+            <DialogTitle id="form-dialog-title" >Add Members</DialogTitle>
+                <DialogContentText>
+                    Please Enter The Details
+                </DialogContentText>
+<div>
 
+<FormControl variant="outlined" className={classes.formControl}>
+        <InputLabel id="demo-simple-select-outlined-label">Employee</InputLabel>
+                   <Select
+                       labelId="demo-simple-select-outlined-label"
+                       id="demo-simple-select-outlined"
+                       value={employee}
+                       onChange={handleChange2}
+                       label="Employee"
+                      //  input={<BootstrapInput />}
+                   >
+                       <MenuItem value="">
+                         <em>None</em>
+                       </MenuItem>
+                       {stateemployee.map(a=> (
+                        //  a.teamMembers.map(b=>(
+                          <MenuItem value={a.empId}>{a.firstName}</MenuItem>
+                        //  ))
+                         
+          
+                       ))}
+         
+                    </Select>
+                </FormControl>
+                </div>
+    </DialogContent>
+                      <DialogActions>
+                        <Button onClick={handleClose} color="secondary">
+                          Cancel
+                        </Button>
+                        <Button onClick={(e)=>submit(e)} color="secondary">
+                        confirm 
+                        </Button>
+                      </DialogActions>
+                    </Dialog>
+        </Container>
+            </main>
     </React.Fragment>
     </Layout>
   );

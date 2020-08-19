@@ -93,7 +93,7 @@ export default function NestedList() {
 <ListItem button onClick={handleClick2}>
       <ListItemIcon>{ <GroupAddIcon color="inherit"/>}</ListItemIcon>
         <ListItemText primary="Team Outlook" />
-        {open1 ? <ExpandLess /> : <ExpandMore />}
+        {open2 ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
 <Collapse in={open2} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
