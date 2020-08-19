@@ -74,10 +74,11 @@ function ViewMember() {
       );
   var current=value.data.empId;
   const [stateGiveAwards, setGiveAwardsState] = useState([]) 
+  const [open, setOpen] = React.useState(false);
   const [employee, setemployee] = React.useState('');
   const [snackbarSuccess, setsnackbarSuccess] = React.useState(false);
   const [snackbarFail, setsnackbarFail] = React.useState(false);
-      const [open, setOpen] = React.useState(false);
+      
 
       const handleClickOpen = (teamMember) => {
         console.log(teamMember)

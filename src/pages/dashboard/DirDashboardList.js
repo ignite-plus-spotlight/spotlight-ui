@@ -22,6 +22,8 @@ import CastForEducationIcon from '@material-ui/icons/CastForEducation';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import CardMembershipRoundedIcon from '@material-ui/icons/CardMembershipRounded';
 import Layout from '../layout/Layout'
+import GroupIcon from '@material-ui/icons/Group';
+import PersonIcon from '@material-ui/icons/Person';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,18 +63,69 @@ export default function NestedList() {
       </ListItem>
 
 
-  
+      <ListItem button onClick={handleClick1}>
+      <ListItemIcon>{ <EmojiEventsIcon color="inherit"/>}</ListItemIcon>
+        <ListItemText primary=" My Recognition" />
+        {open1 ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      
+      <Collapse in={open1} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem button className={classes.nested}>
+            <List>
+              <ListItem button variant="outline" color="secondary" component={Link} to= "/individual"> 
+              <ListItemIcon>{ <PersonIcon color="inherit"/>}</ListItemIcon>
+              <ListItemText primary="Individual Awards" /> 
+            </ListItem >
+            <ListItem button variant="outline" color="secondary" component={Link} to= "team">
+            <ListItemIcon>{ <GroupIcon color="inherit"/>}</ListItemIcon>
+            <ListItemText primary="Team Awards" />
+            </ListItem>
+          </List>
+          </ListItem>
+         </List>
+       </Collapse>   
+       <Divider/>
       {/* <ListItem button variant="outline" color="secondary" component={Link} to="/addTeam">
       <ListItemIcon>{ <GroupAddIcon color="inherit"/>}</ListItemIcon>
         <ListItemText primary="Add team" />
       </ListItem> */}
-      <ListItem button variant="outline" color="secondary" component={Link} to="/poll">
+<ListItem button onClick={handleClick2}>
+      <ListItemIcon>{ <GroupAddIcon color="inherit"/>}</ListItemIcon>
+        <ListItemText primary="Team Outlook" />
+        {open1 ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+<Collapse in={open2} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem button className={classes.nested}>
+            <List>
+              <ListItem button variant="outline" color="secondary" component={Link} to= "/myteam"> 
+              <ListItemIcon>{ <PersonIcon color="inherit"/>}</ListItemIcon>
+              <ListItemText primary="Add to Team" /> 
+            </ListItem >
+            <ListItem button variant="outline" color="secondary" component={Link} to= "/members">
+            <ListItemIcon>{ <GroupIcon color="inherit"/>}</ListItemIcon>
+            <ListItemText primary="Reward" />
+            </ListItem>
+          </List>
+          </ListItem>
+         </List>
+       </Collapse>   
+      {/* <ListItem button variant="outline" color="secondary" component={Link} to="/poll">
       <ListItemIcon>{ <HowToVoteIcon color="inherit"/>}</ListItemIcon>
         <ListItemText primary="Poll" />
-      </ListItem>
-      <ListItem button  variant="outline" color="secondary" component={Link} to="/members">
+      </ListItem> */}
+      <ListItem button  variant="outline" color="secondary" component={Link} to="/nominate">
       <ListItemIcon>{ <CardMembershipRoundedIcon color="inherit"/>}</ListItemIcon>
-        <ListItemText primary="Members" />
+        <ListItemText primary="Nominate" />
+      </ListItem>
+        <ListItem button  variant="outline" color="secondary" component={Link} to="/nominationhistory">
+      <ListItemIcon>{ <CardMembershipRoundedIcon color="inherit"/>}</ListItemIcon>
+        <ListItemText primary="Nomination Records" />
+      </ListItem>
+      <ListItem button  variant="outline" color="secondary" component={Link} to="/awards">
+      <ListItemIcon>{ <CardMembershipRoundedIcon color="inherit"/>}</ListItemIcon>
+        <ListItemText primary="Grants" />
       </ListItem>
       <ListItem button  variant="outline" color="secondary" component={Link} to="/">
       <ListItemIcon>{<EmojiEventsIcon color="inherit"/>}</ListItemIcon>
