@@ -97,6 +97,12 @@ export class Logintbygoogle extends Component {
                     // return ReactDOM.render(<DashboardT/>,document.getElementById('root'))
                     // return <DashboardT/>
                   }
+                  else  if(roles[0].roleName=="admin")
+                  {
+                   this.props.history.push('/DashboardA')
+                   // return ReactDOM.render(<DashboardT/>,document.getElementById('root'))
+                   // return <DashboardT/>
+                 }
                 
             
            

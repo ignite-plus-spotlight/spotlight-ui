@@ -11,7 +11,7 @@ import axios from "axios";
 import Cookies from 'universal-cookie';
 import Layout from '../layout/Layout';
 import Fab from '@material-ui/core/Fab';
-import GiveAward from '../awards/GiveAward'
+import GiveAward from './GiveAward'
 import Grid from '@material-ui/core/Grid'
 import ParticlesBg from "particles-bg";
 

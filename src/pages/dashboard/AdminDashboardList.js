@@ -54,33 +54,10 @@ export default function NestedList() {
       aria-labelledby="nested-list-subheader"
       className={classes.root}>
         
-      <ListItem button variant="outline" color="secondary" component={Link} to= "/activity"  >
-      <ListItemIcon>{ <ScheduleIcon color="inherit"/>}</ListItemIcon>
-        <ListItemText primary="Activity" />
-      
-      </ListItem>
 
-
-  
-      {/* <ListItem button variant="outline" color="secondary" component={Link} to="/addTeam">
-      <ListItemIcon>{ <GroupAddIcon color="inherit"/>}</ListItemIcon>
-        <ListItemText primary="Add team" />
-      </ListItem> */}
-      {/* <ListItem button variant="outline" color="secondary" component={Link} to="/poll">
-      <ListItemIcon>{ <HowToVoteIcon color="inherit"/>}</ListItemIcon>
-        <ListItemText primary="Poll" />
-      </ListItem> */}
-      <ListItem button  variant="outline" color="secondary" component={Link} to="/membersVp">
+      <ListItem button  variant="outline" color="secondary" component={Link} to="/launch">
       <ListItemIcon>{ <CardMembershipRoundedIcon color="inherit"/>}</ListItemIcon>
-        <ListItemText primary="Reward" />
-      </ListItem>
-      <ListItem button  variant="outline" color="secondary" component={Link} to="/awards">
-      <ListItemIcon>{ <CardMembershipRoundedIcon color="inherit"/>}</ListItemIcon>
-        <ListItemText primary="Grants" />
-      </ListItem>
-      <ListItem button  variant="outline" color="secondary" component={Link} to="/approval">
-      <ListItemIcon>{ <CardMembershipRoundedIcon color="inherit"/>}</ListItemIcon>
-        <ListItemText primary="Stamp of Approval" />
+        <ListItemText primary="Launch Nominations" />
       </ListItem>
       <ListItem button  variant="outline" color="secondary" component={Link} to="/">
       <ListItemIcon>{<EmojiEventsIcon color="inherit"/>}</ListItemIcon>

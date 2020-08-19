@@ -81,18 +81,35 @@ export default function NestedList() {
        </Collapse>   
        <Divider/>
 
-              <ListItem button variant="outline" color="secondary" component={Link} to= "/myTeam"> 
-              <ListItemIcon>{ <GroupIcon color="inherit"/>}</ListItemIcon>
-              <ListItemText primary="My Team" /> 
+
+       <ListItem button onClick={handleClick2}>
+      <ListItemIcon>{ <GroupAddIcon color="inherit"/>}</ListItemIcon>
+        <ListItemText primary="Team Outlook" />
+        {open2 ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+<Collapse in={open2} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <ListItem button className={classes.nested}>
+            <List>
+              <ListItem button variant="outline" color="secondary" component={Link} to= "/myteam"> 
+              <ListItemIcon>{ <PersonIcon color="inherit"/>}</ListItemIcon>
+              <ListItemText primary="Add to Team" /> 
             </ListItem >
-            <ListItem button variant="outline" color="secondary" component={Link} to= "/viewMember"> 
-              <ListItemIcon>{ <GroupIcon color="inherit"/>}</ListItemIcon>
-              <ListItemText primary="View Members" /> 
-            </ListItem >
+            <ListItem button variant="outline" color="secondary" component={Link} to= "/members">
+            <ListItemIcon>{ <GroupIcon color="inherit"/>}</ListItemIcon>
+            <ListItemText primary="Reward" />
+            </ListItem>
+          </List>
+          </ListItem>
+         </List>
+       </Collapse>   
+
+
+
 
             <ListItem button  variant="outline" color="secondary" component={Link} to="/awards">
             <ListItemIcon>{<EmojiEventsIcon color="inherit"/>}</ListItemIcon>
-              <ListItemText primary="Awards History" />
+              <ListItemText primary="Grants" />
             </ListItem>
 
             <ListItem button  variant="outline" color="secondary" component={Link} to="/nominations">
@@ -102,7 +119,7 @@ export default function NestedList() {
 
                 <ListItem button variant="outline" color="secondary" component={Link} to="/nominationhistory">
             <ListItemIcon>{ <BallotIcon color="inherit"/>}</ListItemIcon>
-            <ListItemText primary="Nomination History" />
+            <ListItemText primary="Nomination Record" />
             </ListItem>
 
       

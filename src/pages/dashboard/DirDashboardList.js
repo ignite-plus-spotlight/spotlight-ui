@@ -111,21 +111,22 @@ export default function NestedList() {
           </ListItem>
          </List>
        </Collapse>   
-      {/* <ListItem button variant="outline" color="secondary" component={Link} to="/poll">
-      <ListItemIcon>{ <HowToVoteIcon color="inherit"/>}</ListItemIcon>
-        <ListItemText primary="Poll" />
-      </ListItem> */}
+       <ListItem button  variant="outline" color="secondary" component={Link} to="/awards">
+      <ListItemIcon>{ <CardMembershipRoundedIcon color="inherit"/>}</ListItemIcon>
+        <ListItemText primary="Grants" />
+      </ListItem>
+     
       <ListItem button  variant="outline" color="secondary" component={Link} to="/nominate">
       <ListItemIcon>{ <CardMembershipRoundedIcon color="inherit"/>}</ListItemIcon>
         <ListItemText primary="Nominate" />
       </ListItem>
+      <ListItem button  variant="outline" color="secondary" component={Link} to="/approval">
+      <ListItemIcon>{ <CardMembershipRoundedIcon color="inherit"/>}</ListItemIcon>
+        <ListItemText primary="Stamp of Approval" />
+      </ListItem>
         <ListItem button  variant="outline" color="secondary" component={Link} to="/nominationhistory">
       <ListItemIcon>{ <CardMembershipRoundedIcon color="inherit"/>}</ListItemIcon>
         <ListItemText primary="Nomination Records" />
-      </ListItem>
-      <ListItem button  variant="outline" color="secondary" component={Link} to="/awards">
-      <ListItemIcon>{ <CardMembershipRoundedIcon color="inherit"/>}</ListItemIcon>
-        <ListItemText primary="Grants" />
       </ListItem>
       <ListItem button  variant="outline" color="secondary" component={Link} to="/">
       <ListItemIcon>{<EmojiEventsIcon color="inherit"/>}</ListItemIcon>
