@@ -144,8 +144,8 @@ export default function Poll() {
                           <Field
                             fullWidth
                             required
-                            id="nominationName"
-                            name="Nomination Name"
+                            id="pollName"
+                            name="Poll Name"
                             component={TextField}
                             type="text"
                             label="Nomination Name"

@@ -78,7 +78,7 @@ export default function NestedList() {
       <ListItemIcon>{ <CardMembershipRoundedIcon color="inherit"/>}</ListItemIcon>
         <ListItemText primary="Grants" />
       </ListItem>
-      <ListItem button  variant="outline" color="secondary" component={Link} to="/approval">
+      <ListItem button  variant="outline" color="secondary" component={Link} to="/approvalv">
       <ListItemIcon>{ <CardMembershipRoundedIcon color="inherit"/>}</ListItemIcon>
         <ListItemText primary="Stamp of Approval" />
       </ListItem>

@@ -24,6 +24,8 @@ import DashboardV from './pages/dashboard/DashboardV'
 import Check from './pages/awards/Check'
 import DashboardA from './pages/dashboard/DashboardA'
 import StartNomination from './pages/nominations/StartNomination'
+import ApprovalD from './pages/approval/ApprovalD';
+import ApprovalV from './pages/approval/ApprovalV';
 
 function Main() {
     const theme= createMuiTheme({
@@ -66,6 +68,9 @@ function Main() {
         <Route exact path="/membersVp" component={MembersVp}/>
         <Route exact path="/check" component={Check}/>
         <Route exact path="/launch" component={StartNomination}/>
+        <Route exact path="/approvald" component={ApprovalD}/>
+        <Route exact path="/approvalv" component={ApprovalV}/>
+
 
 
 
