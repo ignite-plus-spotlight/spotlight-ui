@@ -13,6 +13,13 @@ import {
 import Layout from '../layout/Layout';
 import { makeStyles } from '@material-ui/core/styles';
 import ParticlesBg from "particles-bg";
+import Snackbar from '@material-ui/core/Snackbar'
+import MuiAlert from '@material-ui/lab/Alert';
+
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -34,12 +41,10 @@ export default function Poll() {
 
     const [data,setData]=useState({
       pollName:"",
-      // pollId:"",
       description:"",
       pollStart:"",
       pollEnd:"",
-      nomStart:"",
-      nomEnd:""
+      period :""
     })
 
     function handle(e) {
@@ -66,10 +71,37 @@ export default function Poll() {
       headers: {
         'Content-Type': 'application/json',
     }
+    }).then(res=>{
+      setsnackbarSuccess(true);
+    }).catch(error=>{
+      setsnackbarFail(true);
     })
+  }
     
-};
+  const [snackbarSuccess, setsnackbarSuccess] = React.useState(false);
+  const [snackbarFail, setsnackbarFail] = React.useState(false);
+  const reload=()=>window.location.reload();
+
+
+  const handleClose1 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setsnackbarSuccess(false);
+    reload();
+
+  };
+
   
+ 
+  const handleClose2 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setsnackbarFail(false);
+  };
 
     
     
@@ -77,15 +109,20 @@ export default function Poll() {
     
     return (
         <Layout>
+          <Snackbar open={snackbarSuccess} autoHideDuration={10000} onClose={handleClose1}>
+        <Alert onClose={handleClose1} severity="success">
+          Nomination Process started successfully
+        </Alert>
+      </Snackbar>
+      <Snackbar open={snackbarFail} autoHideDuration={10000} onClose={handleClose2}>
+        <Alert onClose={handleClose2} severity="error">
+         Oops ! Try Again 
+        </Alert>
+      </Snackbar>
           <ParticlesBg color="#FF0000" type="cobweb" bg={true} />
           <div style={{ padding: 16, margin: 'auto', maxWidth: 600 }}>
              <CssBaseline />
-             <Typography variant="h4" align="center" component="h1" gutterBottom>
-                Start Nomination
-             </Typography>
-             <Typography variant="h5" align="center" component="h2" gutterBottom>
-                   Enter the Details
-             </Typography>
+            
 
              <Form
         onSubmit={onSubmit}
@@ -93,21 +130,15 @@ export default function Poll() {
           <form onSubmit={handleSubmit} noValidate >
 
                    <Paper style={{ padding: 16 }}>
-                     <Grid container alignItems="flex-start" spacing={2}>
+                   <Typography variant="h4" align="center" component="h1" gutterBottom>
+                      Start Nomination
+                  </Typography>
+                  <Typography variant="h5" align="center" component="h2" gutterBottom>
+                        Enter the Details
+                  </Typography>
+                          <Grid container alignItems="flex-start" spacing={2}>
 
-                     {/* <Grid item xs={12}>
-                          <Field
-                            fullWidth
-                            required
-                            id="pollId"
-                            name="Poll ID"
-                            component={TextField}
-                            type="text"
-                            label="Poll ID"
-                            input onChange={(e)=>handle(e)}
-                             value={data.pollId}
-                          />
-                      </Grid> */}
+                    
 
                        <Grid item xs={12}>
                           <Field
@@ -118,8 +149,23 @@ export default function Poll() {
                             component={TextField}
                             type="text"
                             label="Nomination Name"
+                            color="secondary"
                             input onChange={(e)=>handle(e)}
                             value={data.pollName}
+                          />
+                      </Grid>
+                      <Grid item xs={12}>
+                          <Field
+                            fullWidth
+                            required
+                            id="period"
+                            name="Nomination period"
+                            component={TextField}
+                            type="text"
+                            color="secondary"
+                            label="Nomination Period"
+                            input onChange={(e)=>handle(e)}
+                            value={data.period}
                           />
                       </Grid>
 
@@ -131,6 +177,7 @@ export default function Poll() {
                           component={TextField}
                           type="text"
                           label="Nomination Description"
+                          color="secondary"
                           input onChange={(e)=>handle(e)}
                           value={data.description}
   
@@ -138,33 +185,33 @@ export default function Poll() {
                       </Grid>
                
                       <Grid item xs={12}>
-                     
-                        <TextField
-                            id="nomStart"
-                            label="Process Start Date"
-                            type="datetime-local"
-                            input onChange={(e)=>handle(e)}
-                            value={data.nominationStartDate}
-                            // className={classes.textField}
-                            InputLabelProps={{
-                            shrink: true,
-                            }}
-                        />
-                      
-
-                        <TextField
-                          id="nomEnd"
-                          label="Process End Date"
-                          type="datetime-local"
-                          input onChange={(e)=>handle(e)}
-                          value={data.nominationEndDate}
-                         
-                          // className={classes.textField}
-                          InputLabelProps={{
-                          shrink: true,
-                          }}
-                        />
-                      </Grid>
+                 <TextField
+                    id="pollStart"
+                    label="Process Start Date"
+                    type="datetime-local"
+                    // defaultValue="2017-05-24T10:30"
+                    input onChange={(e)=>handle(e)}
+                    value={data.pollStartDate}
+                    
+                    // className={classes.textField}
+                    InputLabelProps={{
+                     shrink: true,
+                    }}
+                 />
+                   <TextField
+                    id="pollEnd"
+                    label="Process End Date"
+                    type="datetime-local"
+                    // defaultValue="2017-05-24T10:30"
+                    input onChange={(e)=>handle(e)}
+                    value={data.pollEndDate}
+                    
+                    // className={classes.textField}
+                    InputLabelProps={{
+                     shrink: true,
+                    }}
+                 />
+                 </Grid>
                 {/* <Grid item xs={12}>
                   <FormControlLabel
                     label="Confirm"

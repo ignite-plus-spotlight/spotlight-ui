@@ -130,8 +130,8 @@ function ViewMember() {
           axios.post(url,data)
           .then(res=>{
             // console.log(res)
+            setOpen(false);  
           setsnackbarSuccess(true);
-          reload();
           })
           .catch(error=>{
             setsnackbarFail(true);
@@ -172,7 +172,6 @@ function ViewMember() {
             receiveAward();
           },[]);
       
-        const reload=()=>window.location.reload();
         
         const receiveAward=()=>{
               axios

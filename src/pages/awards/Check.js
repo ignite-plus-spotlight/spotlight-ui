@@ -1,53 +1,34 @@
-import React,{useState,useEffect}from 'react';
+import React, {useState, useEffect} from "react";
+import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
+import CameraIcon from '@material-ui/icons/PhotoCamera';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
+import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles ,withStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Link from '@material-ui/core/Link';
 import Layout from '../layout/Layout';
-import img1 from '../../assets/images/target1.jpg'
 import axios from "axios";
-import { red } from '@material-ui/core/colors';
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
+import img1 from '../../assets/images/target1.jpg'
+import ParticlesBg from "particles-bg";
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import ParticlesBg from "particles-bg";
 import Fab from '@material-ui/core/Fab';
+import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-
-
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.secondary.main,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
-    },
-  },
-}))(TableRow);
-
-
-
+import InputBase from '@material-ui/core/InputBase';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -76,157 +57,68 @@ const useStyles = makeStyles((theme) => ({
   cardContent: {
     flexGrow: 1,
   },
-  // root: {
-  //   maxWidth: 345,
-  // },
-  media: {
-    height: 0,
-    paddingTop: '56.25%', // 16:9
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 500,
   },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
+  selectEmpty: {
+    marginTop: theme.spacing(2),
   },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-  avatar: {
-    backgroundColor: red[500],
-  },
-  root: {
-    width: '100%',
-  },
-  table: {
-    minWidth: 700,
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular,
-  },
-}));
   
-// }));
+}));
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-export default function MyTeam() {
+
+export default function Activity() {
   const classes = useStyles();
-  const [team, setTeam] = useState([]) 
-  const [member,  setMember] = useState([
-  
-  ]) 
-
-
-
-// *******************************************************
-
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  }
-
-
-
+  const [stateNomination, setNominationState] = useState([]);
   const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = (a) => {
-    console.log(a)
-    setTeamState(a);
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-// *************************************************
-
-
-  
+  const [statePollName, setPollState] = useState([]) 
+  const [stateEmployee, setEmployeeState] = useState([]) 
   const [value, setValue] = React.useState(
     JSON.parse(localStorage.getItem('userData')) 
   );
   var current=value.data.empId;
-  const[teamMember,setTeamMember]=useState([]);
-  const [stateemployee, setemployeeState] = useState([]) 
-  const [employee, setemployee] = React.useState('');
-  const [stateTeam, setTeamState] = useState([]) 
-  const handleChange2 = (event) => {
-    setemployee(event.target.value);
-    console.log(event.target.value)
+
+  const [snackbarSuccess, setsnackbarSuccess] = React.useState(false);
+  const [snackbarFail, setsnackbarFail] = React.useState(false);
+
+  const handleClose1 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setsnackbarSuccess(false);
+ 
+
   };
 
   
-//   console.log(value);
-// const[MemberList,setMember]=useState([])
-  
-const [data,setData]=useState({
-  managerId:"",
-  teamId:"",
-  teamName:"",
-  members:"",
-  
-})
-
-  
-  useEffect(()=> {
-    getTeam();
-  },[]);
-  
-const url=`http://localhost:8081/team/${employee}/${current}/${stateTeam}`
-  
-
-  const getTeam=()=>{
-    
-  console.log(current)
-    axios
-    .get(`http://localhost:8081/manager/${current}`).
-    then(data=>{
-      console.log(data.data.teams[0].teamMembers);
-      // const[teamMember,setTeamMember]=useState([]);
-      setTeamMember(data.data.teams[0].teamMembers)
-      console.log(teamMember)
-      // console.log(data)
-
-    
-      setTeam(data.data.teams)
-      // console.log(team)
-    })
-    .catch(err=>alert(err));
+ 
+  const handleClose2 = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setsnackbarFail(false);
   };
 
 
-  
-  useEffect(()=> {
-    employeeget();
-  },[]);
 
-const employeeget=()=>{
-    
-    
-      axios
-      .get(`http://localhost:8081/employee`).
-      then(data=>{
-        console.log(data.data);
-      
-        setemployeeState(data.data)
-      })
-      .catch(err=>alert(err));
-    };
-
-    
-
-  
-  function submit(e) {
+   function submit(e) {
     e.preventDefault()
-    axios.post(url,data)
-    .then(res=>{
-      console.log(res.data)
-    })
+    axios.post(url,data,{
+      headers: {
+        'Content-Type': 'application/json',
+    }
+    
+  }) .then(res=>{
+  setsnackbarSuccess(true);
+  reload();
+  })
+  .catch(error=>{
+    setsnackbarFail(true);
+  })
+    
   }
 
   function handle(e) {
@@ -235,9 +127,91 @@ const employeeget=()=>{
     setData(newdata)
   }
 
+  //poll
 
+  const [pollName, setPollName] = React.useState('');
+  const handleChange = (event) => {
+    setPollName(event.target.value);
+    console.log(event.target.value)
+  };
 
   
+
+  const [employee, setemployee] = React.useState('');
+  const handleChange1 = (event) => {
+    setemployee(event.target.value);
+    console.log(event.target.value)
+  };
+
+  const [data,setData]=useState({
+    description:"",
+    managerId:current,   
+  })
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  useEffect(()=> {
+    getNomination();
+  },[]);
+  
+
+  const getNomination=()=>{
+ 
+    axios
+    .get(`http://localhost:8081/nominationalert`).
+    then(data=>{
+      console.log(data);
+    
+      setNominationState(data.data)
+    })
+    .catch(err=>alert(err));
+  };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const url=`http://localhost:8081/nominate/${pollName}/${employee}`
+  //   const [stateAwards, setAwardsState] = useState([]) 
+  const reload=()=>window.location.reload(); 
+  
+  //poll
+    useEffect(()=> {
+      receivePollName();
+      },[]);
+    
+    const receivePollName=()=>{
+        
+        // console.log(current)
+          axios
+          .get(`http://localhost:8081/poll`).
+          then(data=>{
+            // console.log(data.data);
+          
+            setPollState(data.data)
+          })
+          .catch(err=>alert(err));
+        };
+  
+        useEffect(()=> {
+          getEmployee();
+        },[]);
+  
+        const getEmployee=()=>{
+        
+          // console.log(current)
+            axios
+            .get(`http://localhost:8081/manager/${current}`).
+            then(data=>{
+              // console.log(data.data.teams);
+            
+              setEmployeeState(data.data.teams)
+            })
+            .catch(err=>alert(err));
+          };
+
+
   return (
     <Layout>
     <React.Fragment>
@@ -245,68 +219,65 @@ const employeeget=()=>{
       <CssBaseline />
       <main>
         <div align="right">
-      
       </div>
-        {/* Hero unit */}
-        <Container className={classes.cardGrid} maxWidth="lg">
-          {/* End hero unit */}
+        <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
-        
+          {stateNomination.map(a=>  (
+          
               <Grid item  xs={12} sm={6} md={4}>
                 <Card className={classes.card}  >
-                {team.map(a=>  (
-                   <>
                   <CardMedia
                     className={classes.cardMedia}
                     image={img1}
                     title="Image title"
                   />
                   <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                     Team Name : {a.teamName}
+                    <Typography gutterBottom variant="h5" component="h1">
+                     {a.pollName}
                     </Typography>
                     <Typography>
-                      Team id :{a.teamId}
+                     {a.description}
                     </Typography>
+                    {/* <Typography>
+                     {a.nominationStartDate}-{a.nominationEndDate}
+                    </Typography> */}
                   </CardContent>
                   <CardActions>
-                    <>
-                  <Fab variant="extended" color="secondary" onClick={()=>handleClickOpen(a.teamId)} align="right">
-                    ADD MEMBERS
-                </Fab>
-                  </>
+                  <Fab variant="extended" color="secondary" onClick={()=>handleClickOpen(a.pollId)} align="right">
+                      Nominate
+                  </Fab>
                   </CardActions>
-                  </>
-                         ))}
-                        
-                   </Card>
-                   </Grid>
+                </Card>
+              </Grid>
+              ))}  
           </Grid>
-          <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
+        </Container>
+        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
           <DialogContent >
-            <DialogTitle id="form-dialog-title" >Add Members</DialogTitle>
+            <DialogTitle id="form-dialog-title" >Nominate</DialogTitle>
                 <DialogContentText>
                     Please Enter The Details
                 </DialogContentText>
 <div>
 
 <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Employee</InputLabel>
+        <InputLabel id="demo-simple-select-outlined-label"  color="secondary">Employee</InputLabel>
                    <Select
                        labelId="demo-simple-select-outlined-label"
-                       id="demo-simple-select-outlined"
+                       id="employeeId"
                        value={employee}
-                       onChange={handleChange2}
+                       onChange={handleChange1}
                        label="Employee"
+                       color="secondary"
                       //  input={<BootstrapInput />}
                    >
                        <MenuItem value="">
                          <em>None</em>
                        </MenuItem>
-                       {stateemployee.map(a=> (
-                        //  a.teamMembers.map(b=>(
-                          <MenuItem value={a.empId}>{a.firstName}</MenuItem>
-                        //  ))
+                       {stateEmployee.map(a=> (
+                         a.teamMembers.map(b=>(
+                          <MenuItem value={b.empId}>{b.firstName}</MenuItem>
+                         ))
                          
           
                        ))}
@@ -314,18 +285,56 @@ const employeeget=()=>{
                     </Select>
                 </FormControl>
                 </div>
+                <div>
+                <FormControl variant="outlined" className={classes.formControl}>
+        <InputLabel id="demo-simple-select-outlined-label"  color="secondary">Poll Name</InputLabel>
+        <Select
+          labelId="demo-simple-select-outlined-label"
+          id="pollId"
+          value={pollName}
+          onChange={handleChange}
+          label="Poll"
+          color="secondary"
+          // input={<BootstrapInput />}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          {statePollName.map(a=> (
+          <MenuItem value={a.pollId}>{a.pollName}</MenuItem>
+          
+          ))}
+         
+        </Select>
+      </FormControl>
+      </div>
+      <div>
+      <FormControl variant="outlined" className={classes.formControl}>
+        <TextField
+         label="Description" 
+         variant="outlined" 
+         color="secondary"
+         name="Poll Description"
+         fullWidth
+         id="description"
+         type="text"
+         input onChange={(e)=>handle(e)}
+        value={data.description}/>
+      </FormControl>
+      </div>
+      
+    {/* </div> */}
     </DialogContent>
                       <DialogActions>
                         <Button onClick={handleClose} color="secondary">
                           Cancel
                         </Button>
                         <Button onClick={(e)=>submit(e)} color="secondary">
-                        confirm 
+                        Nominate 
                         </Button>
                       </DialogActions>
                     </Dialog>
-        </Container>
-            </main>
+      </main>
     </React.Fragment>
     </Layout>
   );

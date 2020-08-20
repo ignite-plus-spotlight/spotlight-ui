@@ -93,7 +93,7 @@ export default function SimpleTable() {
 
   return (
     <Layout>
-          <ParticlesBg color="#FF0000" type="cobweb" bg={true} />
+          {/* <ParticlesBg color="#FF0000" type="cobweb" bg={true} /> */}
     <TableContainer >
       {/* <div align="right" className="container"><GiveAward/></div> */}
       <div>

@@ -73,7 +73,7 @@ function NominationHistory() {
       
     return (
         <Layout>       
-               <ParticlesBg color="#FF0000" type="cobweb" bg={true} />
+               {/* <ParticlesBg color="#FF0000" type="cobweb" bg={true} /> */}
            <> 
         <Hidden xlUp color="secondary">
                <h1 align="center">Nomination History</h1>

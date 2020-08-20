@@ -89,6 +89,7 @@ function Members() {
       );
       var current=value.data.empId;
 
+
       const handleClickOpen = (emp) => {
         console.log(emp)
         setemployee(emp)
@@ -144,9 +145,9 @@ function Members() {
           axios.post(url,data)
           .then(res=>{
             console.log(res)
-          // setsnackbarSuccess(true);
-          // reload();
-          })
+            setOpen(false);  
+          setsnackbarSuccess(true);
+                 })
           .catch(error=>{
             setsnackbarFail(true);
       
@@ -182,7 +183,6 @@ function Members() {
             receiveAward();
           },[]);
       
-        const reload=()=>window.location.reload();
         
         const receiveAward=()=>{
               axios

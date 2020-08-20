@@ -155,9 +155,9 @@ function MembersVp() {
         function submit(e) {
           axios.post(url,data)
           .then(res=>{
+            setOpen(false);  
             // console.log(res)
           setsnackbarSuccess(true);
-          reload();
           })
           .catch(error=>{
             setsnackbarFail(true);
@@ -194,7 +194,6 @@ function MembersVp() {
             receiveAward();
           },[]);
       
-        const reload=()=>window.location.reload();
         
         const receiveAward=()=>{
               axios
