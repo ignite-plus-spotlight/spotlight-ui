@@ -65,11 +65,11 @@ export default function SimpleTable() {
     
     console.log(current)
       axios
-      .get(`http://localhost:8081/manager/${current}/history/givenawards`).
+      .get(`http://localhost:8081/awardshistory/${current}`).
       then(data=>{
-        console.log(data.data.empAwardWinnersUnderManagerDTOS);
+        console.log(data.data);
       
-        setAwardsState(data.data.empAwardWinnersUnderManagerDTOS)
+        setAwardsState(data.data)
       })
       .catch(err=>alert(err));
   };
@@ -94,17 +94,17 @@ export default function SimpleTable() {
 
         <TableBody>
           {stateAwards.map(a=> (          
-             a.employeeAwardsTMS.map(b=>(
+            //  a.employeeAwardsTMS.map(b=>(
                 <>
                 <StyledTableRow >
                 <StyledTableCell >{a.employee.firstName}</StyledTableCell>
-                <StyledTableCell align="left">{b.department}</StyledTableCell>
-                <StyledTableCell align="left">{b.periodName}</StyledTableCell>
-                <StyledTableCell align="left">{b.empPoints}</StyledTableCell> 
-                <StyledTableCell align="left">{b.awardName}</StyledTableCell>
+                <StyledTableCell align="left">{a.department}</StyledTableCell>
+                <StyledTableCell align="left">{a.periodName}</StyledTableCell>
+                <StyledTableCell align="left">{a.empPoints}</StyledTableCell> 
+                <StyledTableCell align="left">{a.awardName}</StyledTableCell>
                 </StyledTableRow> 
                 </>               
-              ))
+              // ))
            ))}  
        </TableBody>
       </Table>

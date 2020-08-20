@@ -57,11 +57,14 @@ export default function Activity() {
     getNomination();
   },[]);
   
-
+  const [value, setValue] = React.useState(
+    JSON.parse(localStorage.getItem('userData')) 
+  );
+  var current=value.data.empId;
   const getNomination=()=>{
  
     axios
-    .get(`http://localhost:8081/nominationalert`).
+    .get(`http://localhost:8081/nominationalert/${current}`).
     then(data=>{
       console.log(data);
     

@@ -36,6 +36,7 @@ import AwardHistory from '../awards/AwardHistory'
 import ApprovalD from '../approval/ApprovalD'
 import ApprovalV from '../approval/ApprovalV'
 import StartNomination from '../nominations/StartNomination'
+import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 
 
 const drawerWidth = 240;
@@ -260,7 +261,7 @@ class Dashboard extends React.Component {
                     <List>
                         {this.state.finallevelType.map((text, index) => (
                             <ListItem button key={text} >
-                                <ListItemIcon>{}</ListItemIcon>
+                                <ListItemIcon>{index % 2 === 0 ? <DoubleArrowIcon /> : <DoubleArrowIcon />}</ListItemIcon>
                                 <ListItemText primary={text} onClick={()=>this.knowMyName(text)} />
                             </ListItem>
                         ))}

@@ -138,9 +138,8 @@ export default function CustomizedSelects() {
       
       // console.log(current)
         axios
-        .get(`http://localhost:8081/poll`).
+        .get(`http://localhost:8081/nominationalert/${current}`).
         then(data=>{
-          // console.log(data.data);
         
           setPollState(data.data)
         })
