@@ -8,9 +8,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import axios from "axios";
 import Hidden from '@material-ui/core/Hidden';
-import CONST from "../../constants/Constants"
 import { useWindowSize } from 'react-use'
 import Confetti from 'react-confetti'
+import CONST from '../../constants/Constants';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -41,18 +41,19 @@ export default function CustomizedTables() {
   const classes = useStyles();
   const { width, height } = useWindowSize()
   const [stateAwards, setAwardsState] = useState([]) 
+  
   const [value, setValue] = React.useState(
     JSON.parse(localStorage.getItem('userData')) 
   );
   var current=value.data.empId;
 
-  const [data,setData]=useState({
-    award_name:"",
-    points:"",
-    description:"",
-    period:"",
-    team:""
-  })
+  // const [data,setData]=useState({
+  //   award_name:"",
+  //   points:"",
+  //   description:"",
+  //   period:"",
+  //   team:""
+  // })
 
   useEffect(()=> {
     getAward();
@@ -65,6 +66,7 @@ export default function CustomizedTables() {
       .get(`http://localhost:8081/employee/${current}/employeeawards`).
       then(data=>{
         console.log(data);
+      
         setAwardsState(data.data)
         console.log(stateAwards)
       })
@@ -72,7 +74,7 @@ export default function CustomizedTables() {
     };
 
   return (
-    <>
+      <>
             <Hidden xlUp color="secondary">
           <h1 align="center" >My Awards</h1>
         </Hidden>
@@ -81,9 +83,9 @@ export default function CustomizedTables() {
       height={height}
     />
     <TableContainer >
-      <Table className={classes.table} aria-label="customized table"  style={{ width: 600, margin: 'auto' }}>
-        <TableHead>
-          <TableRow  style={{backgroundColor:CONST.COLOR.PRIMARY}}>
+      <Table className={classes.table} aria-label="customized table"  style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
+        <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}}>
+          <TableRow>
             <StyledTableCell>Award Name</StyledTableCell>
             <StyledTableCell align="left">points</StyledTableCell>
             <StyledTableCell align="left">Description</StyledTableCell>
@@ -106,6 +108,6 @@ export default function CustomizedTables() {
         </TableBody>
       </Table>
     </TableContainer>
-    </>
+   </>
   );
 }

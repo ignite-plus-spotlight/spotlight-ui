@@ -53,30 +53,38 @@ export class Logintbygoogle extends Component {
           .then(res => {
             const roles = res.data;
             this.setState({ roles });
-              if (roles[0].roleName == "leader")
+              if (roles[0].roleName == "team member")
               {
                 // this.props.history.push('/dashboard')
-                return ReactDOM.render(<Dashboard levelType={"levelA"}/>,document.getElementById('root'))
+                return ReactDOM.render(<Dashboard levelType={"TeamMember"}/>,document.getElementById('root'))
               //  return  <DashboardV/>
               }
-              else {
-                if(roles[0].roleName=="manager")
+              else if(roles[0].roleName=="manager")
                 {
                 // this.props.history.push('/dashboard')
-                  return ReactDOM.render(<Dashboard levelType={"levelB"}/>,document.getElementById('root'))
+                  return ReactDOM.render(<Dashboard levelType={"Manager"}/>,document.getElementById('root'))
                   // return <DashboardM/>
                 }
-                else
-                {
-                  if(roles[0].roleName=="team member")
+                else if(roles[0].roleName=="director")
                    {
                     // this.props.history.push('/dashboard')
-                    return ReactDOM.render(<Dashboard levelType={"levelC"}/>,document.getElementById('root'))
+                    return ReactDOM.render(<Dashboard levelType={"Director"}/>,document.getElementById('root'))
                     // return <DashboardT/>
                   }
-                  
-                }
-              }
+
+                else if(roles[0].roleName=="vp")
+                   {
+                    // this.props.history.push('/dashboard')
+                    return ReactDOM.render(<Dashboard levelType={"Vp"}/>,document.getElementById('root'))
+                    // return <DashboardT/>
+                  }
+                  else if(roles[0].roleName=="admin")
+                  {
+                   // this.props.history.push('/dashboard')
+                   return ReactDOM.render(<Dashboard levelType={"Admin"}/>,document.getElementById('root'))
+                   // return <DashboardT/>
+                 }
+
           })
   };
 

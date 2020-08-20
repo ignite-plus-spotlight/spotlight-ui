@@ -6,16 +6,14 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import axios from "axios";
 import Hidden from '@material-ui/core/Hidden';
-
+import CONST from '../../constants/Constants';
 import { useWindowSize } from 'react-use'
 import Confetti from 'react-confetti'
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.secondary.main,
       color: theme.palette.common.white,
   },
   body: {
@@ -60,12 +58,19 @@ export default function CustomizedTables() {
   },[]);
 
   const getAward=()=>{
+    
     console.log(current)
+    
     axios
     .get(`http://localhost:8081/employee/${current}`).
     then(data1=>{
       console.log(data1.data);
+      // var id = data1.data[0].teamId;
+      // console.log(id);
     })
+
+    // var id = data.data;
+    // console.log(id);
 
     axios
     .get(`http://localhost:8081/teammember/${current}/teamawardstmd`).
@@ -80,8 +85,8 @@ export default function CustomizedTables() {
     const { width, height } = useWindowSize()
 
   return (
-    <>
-        <Hidden xlUp color="secondary">
+      <>
+            <Hidden xlUp color="secondary">
           <h1 align="center" >My Team Awards</h1>
         </Hidden>
         <Confetti
@@ -90,7 +95,7 @@ export default function CustomizedTables() {
     />
     <TableContainer >
       <Table className={classes.table} aria-label="customized table"  style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
-        <TableHead>
+        <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}}>
           <TableRow>
             <StyledTableCell>Award Name</StyledTableCell>
             <StyledTableCell align="left">points</StyledTableCell>
@@ -112,6 +117,6 @@ export default function CustomizedTables() {
         </TableBody>
       </Table>
     </TableContainer>
-    </>
+   </>
   );
 }

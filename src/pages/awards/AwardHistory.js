@@ -6,13 +6,14 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 import axios from "axios";
-import GiveAward from '../awards/GiveAward'
-
+import ParticlesBg from "particles-bg";
+import CONST from '../../constants/Constants';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.secondary.main,
+   
       color: theme.palette.common.white,
   },
   body: {
@@ -28,21 +29,32 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-
 const useStyles = makeStyles({
   table: {
     minWidth: 700,
   },
 });
 
-
 export default function SimpleTable() {
+
   const classes = useStyles();
+
   const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  
   const [stateAwards, setAwardsState] = useState([]) 
+  
   const [value, setValue] = React.useState(
     JSON.parse(localStorage.getItem('userData')) 
   );
+
   var current=value.data.empId;
 
   useEffect(()=> {
@@ -50,48 +62,51 @@ export default function SimpleTable() {
   },[]);
   
   const getAward=()=>{
-  console.log(current)
-    axios
-    .get(`http://localhost:8081/manager/${current}/history/givenawards`).
-    then(data=>{
-      // console.log(data.data.empAwardWinnersUnderManagerDTOS);
-      setAwardsState(data.data.empAwardWinnersUnderManagerDTOS)
-    })
-    .catch(err=>alert(err));
+    
+    console.log(current)
+      axios
+      .get(`http://localhost:8081/manager/${current}/history/givenawards`).
+      then(data=>{
+        console.log(data.data.empAwardWinnersUnderManagerDTOS);
+      
+        setAwardsState(data.data.empAwardWinnersUnderManagerDTOS)
+      })
+      .catch(err=>alert(err));
   };
 
 
   return (
     <>
     <TableContainer >
-      <div align="right" className="container"><GiveAward/></div>
       <div>
-      <Table className={classes.table} aria-label="customized table"  style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
-        <TableHead >
-          <TableRow>
-            <StyledTableCell>Name </StyledTableCell>
-            <StyledTableCell align="left">Department</StyledTableCell>
-            <StyledTableCell align="left">Period</StyledTableCell>
-            <StyledTableCell align="left">Points</StyledTableCell>
-            <StyledTableCell align="left">Award</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
+        <h1 align="center" >GRANTS</h1>
+         <Table className={classes.table} aria-label="customized table"  style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
 
-            {stateAwards.map(a=> (          
-              a.employeeAwardsTMS.map(b=>(
+            <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}}>
+               <TableRow>
+                 <StyledTableCell>Name </StyledTableCell>
+                 <StyledTableCell align="left">Department</StyledTableCell>
+                 <StyledTableCell align="left">Period</StyledTableCell>
+                 <StyledTableCell align="left">Points</StyledTableCell>
+                 <StyledTableCell align="left">Award</StyledTableCell>
+               </TableRow>
+            </TableHead>
+
+        <TableBody>
+          {stateAwards.map(a=> (          
+             a.employeeAwardsTMS.map(b=>(
                 <>
                 <StyledTableRow >
-                 <StyledTableCell >{a.employee.firstName}</StyledTableCell>
+                <StyledTableCell >{a.employee.firstName}</StyledTableCell>
                 <StyledTableCell align="left">{b.department}</StyledTableCell>
                 <StyledTableCell align="left">{b.periodName}</StyledTableCell>
                 <StyledTableCell align="left">{b.empPoints}</StyledTableCell> 
                 <StyledTableCell align="left">{b.awardName}</StyledTableCell>
                 </StyledTableRow> 
-                </> 
+                </>               
               ))
-           ))}
-      </TableBody>
+           ))}  
+       </TableBody>
       </Table>
       </div>
     </TableContainer>

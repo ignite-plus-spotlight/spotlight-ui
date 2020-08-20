@@ -8,11 +8,12 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Hidden from '@material-ui/core/Hidden';
+import CONST from '../../constants/Constants';
 
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    backgroundColor: theme.palette.secondary.main,
+    // backgroundColor: theme.palette.secondary.main,
     color: theme.palette.common.white,
   },
   body: {
@@ -59,20 +60,24 @@ function NominationHistory() {
           axios
           .get(`http://localhost:8081/nominationhistoryfromdto/manager/${current}`).
           then(data=>{
+            // console.log(data.data.teams[0].teamMembers[0]);
             console.log(data.data)
             setNomination(data.data)
+            // console.log(team)
           })
           .catch(err=>alert(err));
         };
       
     return (
-           <> 
-        <Hidden xlUp color="secondary">
+      <> 
+               {/* <ParticlesBg color="#FF0000" type="cobweb" bg={true} /> */}
+           
+        <Hidden xlUp >
                <h1 align="center">Nomination History</h1>
         </Hidden>
       <TableContainer>
       <Table className={classes.table} aria-label="customized table" style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
-        <TableHead>
+        <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}}>
           <TableRow>
             <StyledTableCell> Poll Name</StyledTableCell>
             <StyledTableCell align="left">Description</StyledTableCell>
@@ -98,6 +103,7 @@ function NominationHistory() {
     </TableContainer>
     </>   
     
+   
     )
 }
 export default NominationHistory

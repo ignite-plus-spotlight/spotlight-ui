@@ -4,6 +4,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import InputBase from '@material-ui/core/InputBase';
 import axios from "axios";
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -16,6 +17,7 @@ import Fab from '@material-ui/core/Fab';
 import TextField from '@material-ui/core/TextField';
 import Snackbar from '@material-ui/core/Snackbar'
 import MuiAlert from '@material-ui/lab/Alert';
+import CONST from '../../constants/Constants';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -37,6 +39,7 @@ function Alert(props) {
 export default function CustomizedSelects() {
 
   const classes = useStyles();
+
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -53,19 +56,22 @@ export default function CustomizedSelects() {
   var current=value.data.empId;
   const [statePollName, setPollState] = useState([]) 
   const [stateEmployee, setEmployeeState] = useState([]) 
+  
+
+
   const [snackbarSuccess, setsnackbarSuccess] = React.useState(false);
   const [snackbarFail, setsnackbarFail] = React.useState(false);
-  const reload=()=>window.location.reload(); 
 
   const handleClose1 = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
     setsnackbarSuccess(false);
-    reload();
+ 
 
   };
- 
+
+  
  
   const handleClose2 = (event, reason) => {
     if (reason === 'clickaway') {
@@ -82,8 +88,10 @@ export default function CustomizedSelects() {
       headers: {
         'Content-Type': 'application/json',
     }
+    
   }) .then(res=>{
-  setsnackbarSuccess(true);
+    setOpen(false)
+    setsnackbarSuccess(true);
   })
   .catch(error=>{
     setsnackbarFail(true);
@@ -118,6 +126,7 @@ export default function CustomizedSelects() {
     managerId:current,   
   })
   const url=`http://localhost:8081/nominate/${pollName}/${employee}`
+//   const [stateAwards, setAwardsState] = useState([]) 
 
 
 //poll
@@ -132,6 +141,7 @@ export default function CustomizedSelects() {
         .get(`http://localhost:8081/poll`).
         then(data=>{
           // console.log(data.data);
+        
           setPollState(data.data)
         })
         .catch(err=>alert(err));
@@ -142,11 +152,13 @@ export default function CustomizedSelects() {
       },[]);
 
       const getEmployee=()=>{
+      
         // console.log(current)
           axios
           .get(`http://localhost:8081/manager/${current}`).
           then(data=>{
             // console.log(data.data.teams);
+          
             setEmployeeState(data.data.teams)
           })
           .catch(err=>alert(err));
@@ -156,7 +168,7 @@ export default function CustomizedSelects() {
     <React.Fragment>
     <Snackbar open={snackbarSuccess} autoHideDuration={10000} onClose={handleClose1}>
         <Alert onClose={handleClose1} severity="success">
-          Awarded Successfully
+          Nominated Successfully
         </Alert>
       </Snackbar>
       <Snackbar open={snackbarFail} autoHideDuration={10000} onClose={handleClose2}>
@@ -166,7 +178,7 @@ export default function CustomizedSelects() {
       </Snackbar>
       <CssBaseline />
       <main>
-      <Fab variant="extended" color="secondary" onClick={handleClickOpen} align="right">
+      <Fab variant="extended" size="medium" style={{backgroundColor:CONST.COLOR.PRIMARY,color:"white"}} onClick={handleClickOpen} align="right">
         Nominate
      </Fab>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
@@ -186,6 +198,7 @@ export default function CustomizedSelects() {
                        onChange={handleChange1}
                        label="Employee"
                        color="secondary"
+                      //  input={<BootstrapInput />}
                    >
                        <MenuItem value="">
                          <em>None</em>
@@ -194,7 +207,10 @@ export default function CustomizedSelects() {
                          a.teamMembers.map(b=>(
                           <MenuItem value={b.empId}>{b.firstName}</MenuItem>
                          ))
+                         
+          
                        ))}
+         
                     </Select>
                 </FormControl>
                 </div>
@@ -208,12 +224,14 @@ export default function CustomizedSelects() {
           onChange={handleChange}
           label="Poll"
           color="secondary"
+          // input={<BootstrapInput />}
         >
           <MenuItem value="">
             <em>None</em>
           </MenuItem>
           {statePollName.map(a=> (
           <MenuItem value={a.pollId}>{a.pollName}</MenuItem>
+          
           ))}
          
         </Select>
@@ -233,17 +251,21 @@ export default function CustomizedSelects() {
         value={data.description}/>
       </FormControl>
       </div>
-        </DialogContent>
+      
+    {/* </div> */}
+    </DialogContent>
                       <DialogActions>
-                        <Button onClick={handleClose} color="secondary">
+                        <Button onClick={handleClose} style={{color:CONST.COLOR.PRIMARY}}>
                           Cancel
                         </Button>
-                        <Button onClick={(e)=>submit(e)} color="secondary">
+                        <Button onClick={(e)=>submit(e)} style={{color:CONST.COLOR.PRIMARY}}>
                         Nominate 
                         </Button>
                       </DialogActions>
-                    </Dialog>          
+                    </Dialog>
+                  
       </main>
+
     </React.Fragment>
   );
 }

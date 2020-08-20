@@ -18,39 +18,44 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import MyTeam from '../my team/MyTeam';
-import ViewMember from '../my team/ViewMember';
-import AwardsM from '../awards/AwardsM';
+import AwardsM from '../awards/AwardHistory';
 import Activity from '../activity/Activity'
 import Team from '../recognition/Team'
 import Individual from '../recognition/Individual';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
-import img1 from '../../assets/images/target1.jpg'
-import Nomination from '../nominations/Nominations';
+import CloseIcon from '@material-ui/icons/Close';
+import Nominations from '../nominations/Nominations';
 import NominationHistory from '../nomination history/NominationHistory';
-import Poll from '../poll/Poll'
 import CONST from '../../constants/Constants';
 import GoogleLogout from 'react-google-login'
+import MembersM from '../members/MembersM'
+import MembersD from '../members/MembersD';
+import MembersVp from '../members/MembersVp';
+import AwardHistory from '../awards/AwardHistory'
+import ApprovalD from '../approval/ApprovalD'
+import ApprovalV from '../approval/ApprovalV'
+import StartNomination from '../nominations/StartNomination'
 
 
 const drawerWidth = 240;
 
-const levelA =["Activity", "Poll","Logout"];
-// const levelAIcons =["ActivityIcon"]
-const levelB =  ["Activity", "Team Awards", "Individual Awards","My Team","View Members","Awards","Nominate","Nomination History","Logout"];
-const levelC = ["Activity", "Team Awards", "Individual Awards","Logout"]
+const TeamMember =["Activity", "Individual Awards","Team Awards","Logout"];
+const IconsTM =["ActivityIcon","Individual Awards","Team Awards","Logout"]
+const Manager =  ["Activity","Individual Awards","Team Awards","Add To Team","Reward","Grants","Nominate","Nomination Record","Logout"];
+const Director = ["Activity","Individual Awards","Team Awards","Add To Team","Reward ","Grants","Nominate","Nomination Record","Stamp of Approval","Logout"]
+const VP = ["Activity", "Reward  ", "Grants","Stamp of Approval ","Logout"]
+const Admin = ["Activity","Start Nomination","Logout"]
 
 
 const styles = theme => ({
     root: {
         display: 'flex',
-      
     },
     appBar: {
         transition: theme.transitions.create(['margin', 'width'], {
             easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-            
+            duration: theme.transitions.duration.leavingScreen,  
         }),
     },
     appBarShift: {
@@ -62,8 +67,6 @@ const styles = theme => ({
         }),
     },
     menuButton: {
-        // marginLeft: 12,
-        // marginRight: 20,
         marginRight: theme.spacing(0),
     },
     hide: {
@@ -75,22 +78,18 @@ const styles = theme => ({
     },
     drawerPaper: {
         width: drawerWidth,
-        // backgroundColor: theme.palette.primary.main,
-        // // backgroundColor:"primary"
+        backgroundColor:CONST.COLOR.SECONDARY
     },
     drawerHeader: {
         display: 'flex',
         alignItems: 'center',
         textAlign:'center',
-        // padding: '0 8px',
         padding: theme.spacing(2, 0),
         ...theme.mixins.toolbar,
-        // justifyContent: 'flex-end',
         justifyContent: 'center',
     },
     content: {
         flexGrow: 1,
-        // padding: theme.spacing.unit * 3,
         padding: theme.spacing(3),
         transition: theme.transitions.create('margin', {
             easing: theme.transitions.easing.sharp,
@@ -127,78 +126,91 @@ class Dashboard extends React.Component {
     }
 
     knowMyName = (event) => {
-      // alert(event)
       if(event === "Activity"){
          this.setState({finalContents:<Activity />}) 
-      }
-      if(event === "Team Awards"){
-        this.setState({finalContents:<Team />})
       }
       if(event === "Individual Awards"){
         this.setState({finalContents:<Individual />})
       }
-      if(event === "My Team"){
+      if(event === "Team Awards"){
+        this.setState({finalContents:<Team />})
+      }
+      if(event === "Add To Team"){
         this.setState({finalContents:<MyTeam />})
       }
-      if(event === "View Members"){
-        this.setState({finalContents:<ViewMember />})
+      if(event === "Reward"){
+        this.setState({finalContents:<MembersM />})
       }
-      if(event === "Awards"){
-        this.setState({finalContents:<AwardsM />})
+      if(event === "Reward "){
+        this.setState({finalContents:<MembersD />})
+      }
+      if(event === "Reward  "){
+        this.setState({finalContents:<MembersVp />})
+      }
+      if(event === "Grants"){
+        this.setState({finalContents:<AwardHistory />})
       }
       if(event === "Nominate"){
-        this.setState({finalContents:<Nomination />})
+        this.setState({finalContents:<Nominations />})
       }
-      if(event === "Nomination History"){
+      if(event === "Nomination Record"){
         this.setState({finalContents:<NominationHistory />})
       }
-      if(event === "Poll"){
-        this.setState({finalContents:<Poll />})
+      if(event === "Stamp of Approval"){
+        this.setState({finalContents:<ApprovalD />})
+      }
+      if(event === "Stamp of Approval "){
+        this.setState({finalContents:<ApprovalV />})
+      }
+      if(event === "Start Nomination"){
+        this.setState({finalContents:<StartNomination />})
       }
       if(event === "Logout"){
           }
-      
-    
     }
 
     getUserLevel = () => {
-        if (this.props.levelType === "levelA") {
-            this.setState({ finallevelType: levelA,finalContents:<Activity/> })
+        if (this.props.levelType === "TeamMember") {
+            this.setState({ finallevelType: TeamMember,finalContents:<Activity/> })
         }
-        else if (this.props.levelType === "levelB") {
-            this.setState({ finallevelType: levelB,finalContents:<Activity/> })
+        else if (this.props.levelType === "Manager") {
+            this.setState({ finallevelType: Manager,finalContents:<Activity/> })
         }
-        else if (this.props.levelType === "levelC") {
-            this.setState({ finallevelType: levelC ,finalContents:<Activity/>})
+        else if (this.props.levelType === "Director") {
+            this.setState({ finallevelType: Director ,finalContents:<Activity/>})
+        }
+        else if (this.props.levelType === "Vp") {
+            this.setState({ finallevelType: VP ,finalContents:<Activity/>})
+        }
+        else if (this.props.levelType === "Admin") {
+            this.setState({ finallevelType: Admin ,finalContents:<Activity/>})
         }
     }
 
     render() {
-        // const classes = Styles();
+
         const { classes, theme,t } = this.props;
         const { open } = this.state;
         const value= JSON.parse(localStorage.getItem('userData')) 
         const logout = () => {
             alert("successfully logged out")
           }
-      
-        
+
         return (
             <>
-             
             <div className={classes.root}>
                 <CssBaseline />
-                <AppBar style={{backgroundColor:CONST.COLOR.PRIMARY}}
-                {...classes.theme}
-                // color="secondary"
-                // backgroundColor= theme.palette.secondary.main,
-                    position="fixed"
-                    className={classNames(classes.appBar, {
-                        [classes.appBarShift]: open,
-                    })}
-                    
-                >
-                    <Toolbar disableGutters={!open}>
+
+                  <AppBar style={{backgroundColor:CONST.COLOR.PRIMARY}}
+                        {...classes.theme}
+                        position="fixed"
+                        className={classNames(classes.appBar, {
+                            [classes.appBarShift]: open,
+                        })} 
+                  >
+                  <Toolbar disableGutters={!open}>
+
+                    <Grid justify="space-between"  container spacing={2}>
                         <IconButton
                             color="inherit"
                             aria-label="Open drawer"
@@ -206,19 +218,25 @@ class Dashboard extends React.Component {
                             className={classNames(classes.menuButton, open && classes.hide)}
                         >
                             <MenuIcon />
+                            <Typography variant="h6" color="inherit" noWrap>
+                                SPOTLIGHT
+                            </Typography>
                         </IconButton>
-                        <Typography variant="h6" color="inherit" noWrap>
-                            SPOTLIGHT
-                        </Typography>
-                    </Toolbar>
-                      {/* <GoogleLogout
-                          clientId="487050070331-10md2t0pdqe7qtus6ig1ju6jtrdk22f4.apps.googleusercontent.com"
-                          buttonText="Logout"
-                          onLogoutSuccess={logout}
-                        //   redirectUri = {"http://localhost:3000"}
-                          /> */}
+                    </Grid>
+
+                    <Grid item>
+                        {  <Avatar src={value.data.imageUrl}   className={classes.small} />}
+                   </Grid>
+
+                    <Grid item>
+                        <Typography>{value.data.firstName}</Typography> 
+                    </Grid>
+
+                 </Toolbar>
                 </AppBar>
+
                 <Drawer
+
                     className={classes.drawer}
                     variant="persistent"
                     anchor="left"
@@ -228,21 +246,28 @@ class Dashboard extends React.Component {
                     }}
                 >
                     <div className={classes.drawerHeader}>
-                    {  <Avatar src={img1}   className={classes.small} />}
-                        <IconButton onClick={this.handleDrawerClose}>
-                            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                        </IconButton>
+                     {  <Avatar  src={value.data.imageUrl}   className={classes.large} />}
+                     <IconButton onClick={this.handleDrawerClose}>   
+                         <CloseIcon variant="contained" >
+                         </CloseIcon>
+                     </IconButton>
                     </div>
+
+                    <h3 align="center">Welcome {value.data.firstName}  </h3>
+
                     <Divider />
+
                     <List>
                         {this.state.finallevelType.map((text, index) => (
-                            <ListItem button key={text}>
-                                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                                <ListItemText primary={text} onClick={()=>this.knowMyName(text)}/>
+                            <ListItem button key={text} >
+                                <ListItemIcon>{}</ListItemIcon>
+                                <ListItemText primary={text} onClick={()=>this.knowMyName(text)} />
                             </ListItem>
                         ))}
                     </List>
+
                     <Divider />
+                    
                 </Drawer>
                 <main
                     className={classNames(classes.content, {

@@ -1,25 +1,28 @@
 import React, {useState, useEffect} from "react";
-
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
+import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Link from '@material-ui/core/Link';
 import axios from "axios";
 import img1 from '../../assets/images/target1.jpg'
+import { MDBMask, MDBView, MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import ParticlesBg from "particles-bg";
 import Nominate from './Nominate';
+import CONST from '../../constants/Constants';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
   },
   heroContent: {
-    backgroundColor: theme.palette.primary.main,
+    // backgroundColor: theme.palette.primary.main,
     padding: theme.spacing(8, 0, 6),
   },
   heroButtons: {
@@ -56,6 +59,7 @@ export default function Activity() {
   
 
   const getNomination=()=>{
+ 
     axios
     .get(`http://localhost:8081/nominationalert`).
     then(data=>{
@@ -67,12 +71,12 @@ export default function Activity() {
   };
 
   return (
+    
     <React.Fragment>
-    <ParticlesBg color="#FF0000" type="cobweb" bg={true} />
+    {/* <ParticlesBg color="#FF0000" type="cobweb" bg={true} /> */}
       <CssBaseline />
       <main>
         <div align="right">
-      <Nominate/>
       </div>
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
@@ -92,15 +96,19 @@ export default function Activity() {
                     <Typography>
                      {a.description}
                     </Typography>
+
                   </CardContent>
                   <CardActions>
+                  <Nominate/>
                   </CardActions>
                 </Card>
               </Grid>
+           
               ))}  
           </Grid>
         </Container>
       </main>
     </React.Fragment>
+   
   );
 }

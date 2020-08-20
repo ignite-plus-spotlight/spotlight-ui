@@ -11,6 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import axios from "axios";
 import ParticlesBg from "particles-bg";
+import CONST from '../../constants/Constants'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,16 +35,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   cardMedia: {
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '56.25%',
   },
   cardContent: {
     flexGrow: 1,
   },
   
 }));
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-
 
 export default function Activity() {
   const classes = useStyles();
@@ -53,7 +51,6 @@ export default function Activity() {
     getAward();
   },[]);
   
-
   const getAward=()=>{
     axios
     .get(`http://localhost:8081/employee/employeeawards`).
@@ -64,47 +61,63 @@ export default function Activity() {
   };
 
   return (
-    <>
+    <React.Fragment>
         <ParticlesBg color="#FF0000" type="cobweb" bg={true} />
-      <CssBaseline />
-      <main>
+        <CssBaseline />
+        <main>
           <Container maxWidth="sm">
+
+            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+            </Typography>
+
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
             "Gratitude is the most exquisite form of courtesy."
             </Typography>
+
           </Container>
+
           <Container className={classes.cardGrid} maxWidth="md">
-            <Grid container spacing={4}>
-            {stateAwards.map(a=>  (
-                <Grid item  xs={12} sm={6} md={4}>
-                  <Card className={classes.card}  >
-                    <CardMedia
+             <Grid container spacing={4}>
+               {stateAwards.map(a=>  (
+                 <Grid item  xs={12} sm={6} md={4}>
+                   <Card className={classes.card}  >
+                     <CardMedia
                       className={classes.cardMedia}
                       image={a.imgsrc}
                       title="Image title"
-                    />
-                    <CardContent className={classes.cardContent}>
+                     />
+
+                     <CardContent className={classes.cardContent}>
+
                       <Typography gutterBottom variant="h5" component="h1">
                       {a.awardName} 
                       </Typography>
+
                       <Typography>
                         {a.department} - {a.periodName}
                       </Typography>
+
                       <Typography>
                         {a.description}
                       </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button size="small" color="secondary">
-                        Like 
-                      </Button>
-                    </CardActions>
+
+                     </CardContent>
+
+                   <CardActions>
+
+                    <Button size="small" style={{color:CONST.COLOR.PRIMARY}}>
+                      Like 
+                    </Button>
+                   
+                  </CardActions>
+
                   </Card>
-                </Grid>
-              ))}
-            </Grid>
-          </Container>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
       </main>
-    </>
+    </React.Fragment>
+
   );
 }
