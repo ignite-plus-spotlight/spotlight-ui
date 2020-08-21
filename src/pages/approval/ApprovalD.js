@@ -149,7 +149,7 @@ export default function ApprovalD() {
             <StyledTableCell align="left">Manager Name</StyledTableCell>
             <StyledTableCell align="left">Period</StyledTableCell>
             <StyledTableCell align="left">Nominee </StyledTableCell>
-            <StyledTableCell align="left">Approve</StyledTableCell>
+            <StyledTableCell align="left"></StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -161,7 +161,7 @@ export default function ApprovalD() {
                 <StyledTableCell align="left">{a.head.firstName}</StyledTableCell>
                 <StyledTableCell align="left">{a.period}</StyledTableCell>
                 <StyledTableCell align="left">{a.nominee.firstName} {a.nominee.lastName}</StyledTableCell> 
-                <StyledTableCell align="left"><Fab variant="extended" color="secondary" align="left" onClick={(e)=>submit(e)}>Approve</Fab></StyledTableCell>
+                <StyledTableCell align="left"><Fab variant="extended" size="medium" style={{backgroundColor:CONST.COLOR.PRIMARY,color:"white"}} align="left" onClick={(e)=>submit(e)}>Approve</Fab></StyledTableCell>
                 </StyledTableRow> 
                 </>
            ))}  

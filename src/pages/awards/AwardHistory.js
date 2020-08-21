@@ -85,7 +85,7 @@ export default function SimpleTable() {
             <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}}>
                <TableRow>
                  <StyledTableCell>Name </StyledTableCell>
-                 <StyledTableCell align="left">Department</StyledTableCell>
+                 {/* <StyledTableCell align="left">Department</StyledTableCell> */}
                  <StyledTableCell align="left">Period</StyledTableCell>
                  <StyledTableCell align="left">Points</StyledTableCell>
                  <StyledTableCell align="left">Award</StyledTableCell>
@@ -98,7 +98,7 @@ export default function SimpleTable() {
                 <>
                 <StyledTableRow >
                 <StyledTableCell >{a.employee.firstName}</StyledTableCell>
-                <StyledTableCell align="left">{a.department}</StyledTableCell>
+                {/* <StyledTableCell align="left">{a.department}</StyledTableCell> */}
                 <StyledTableCell align="left">{a.periodName}</StyledTableCell>
                 <StyledTableCell align="left">{a.empPoints}</StyledTableCell> 
                 <StyledTableCell align="left">{a.awardName}</StyledTableCell>
