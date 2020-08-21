@@ -90,6 +90,7 @@ function MembersVp() {
     const [stateGiveAwards, setGiveAwardsState] = useState([]) 
   const [employee, setemployee] = React.useState('');
   const [snackbarSuccess, setsnackbarSuccess] = React.useState(false);
+  const [count, setCount] = useState('') 
   const [snackbarFail, setsnackbarFail] = React.useState(false);
     const [value, setValue] = React.useState(
         JSON.parse(localStorage.getItem('userData')) 
@@ -100,18 +101,34 @@ function MembersVp() {
         console.log(emp1.value.empId)
         setemployee(emp1.value.empId)
                 setOpen(true);
+                axios.get(`http://localhost:8081/employeeawards/count/${emp1.value.empId}/monthly`)
+                .then(data=>{
+                  console.log(data.data)
+                  setCount(data.data)
+                })  
+                
                 
       };
       const handleClickOpen1 = (member) => {
         console.log(member.value.empId)
         setemployee(member.value.empId)
                 setOpen(true);
+                axios.get(`http://localhost:8081/employeeawards/count/${member.value.empId}/monthly`)
+                .then(data=>{
+                  console.log(data.data)
+                  setCount(data.data)
+                })  
                 
       };
       const handleClickOpen2 = (emp) => {
         console.log(emp.value.empId)
         setemployee(emp.value.empId)
                 setOpen(true);
+                axios.get(`http://localhost:8081/employeeawards/count/${emp.value.empId}/monthly`)
+                .then(data=>{
+                  console.log(data.data)
+                  setCount(data.data)
+                })  
                 
       };
     
@@ -293,6 +310,9 @@ function MembersVp() {
             <DialogTitle id="form-dialog-title" >Give Award</DialogTitle>
                 <DialogContentText>
                     Please Enter The Details
+                </DialogContentText>
+                <DialogContentText style={{color:CONST.COLOR.PRIMARY}}>
+                    Monthly Awards Received : {count}
                 </DialogContentText>
                 <div>
                 <FormControl variant="outlined" className={classes.formControl}>

@@ -74,6 +74,7 @@ function ViewMember() {
       );
   var current=value.data.empId;
   const [stateGiveAwards, setGiveAwardsState] = useState([]) 
+  const [count, setCount] = useState('') 
   const [open, setOpen] = React.useState(false);
   const [employee, setemployee] = React.useState('');
   const [snackbarSuccess, setsnackbarSuccess] = React.useState(false);
@@ -84,7 +85,10 @@ function ViewMember() {
         console.log(teamMember)
         setemployee(teamMember.empId)
                 setOpen(true);
-                
+                axios.get(`http://localhost:8081/employeeawards/count/${teamMember.empId}/monthly`)
+                .then(data=>(
+                  setCount(data.data)
+                ))      
       };
     
       const handleClose = () => {
@@ -124,7 +128,19 @@ function ViewMember() {
           })
           .catch(err=>alert(err));
         };
-      
+  //       useEffect(()=> {
+  //         getCount();
+  //       },[]);
+
+  // const getCount=()=>{
+  //   // console.log(employee)
+  //   axios.get(`http://localhost:8081/employeeawards/count/${employee}/${period}`).
+  //   then(data=>{
+  //     console.log(data)
+  //     setCount(data.data)
+  //   })
+  //   .catch(err=>alert(err));
+  // }
        
         function submit(e) {
           axios.post(url,data)
@@ -182,7 +198,8 @@ function ViewMember() {
               })
               .catch(err=>alert(err));
             };
-      
+
+           
            
     return (
       <>
@@ -233,8 +250,11 @@ function ViewMember() {
        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
           <DialogContent >
             <DialogTitle id="form-dialog-title" >Give Award</DialogTitle>
-                <DialogContentText>
+                <DialogContentText >
                     Please Enter The Details
+                </DialogContentText>
+                <DialogContentText style={{color:CONST.COLOR.PRIMARY}}>
+                   Monthly Awards Received : {count}
                 </DialogContentText>
                 <div>
                 <FormControl variant="outlined"   style={{color:CONST.COLOR.SECONDARY}} className={classes.formControl}>

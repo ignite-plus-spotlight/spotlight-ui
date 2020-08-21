@@ -84,6 +84,7 @@ function Members() {
   const [stateGiveAwards, setGiveAwardsState] = useState([]) 
   const [snackbarSuccess, setsnackbarSuccess] = React.useState(false);
   const [snackbarFail, setsnackbarFail] = React.useState(false);
+  const [count, setCount] = useState('') 
     const [value, setValue] = React.useState(
         JSON.parse(localStorage.getItem('userData')) 
       );
@@ -93,6 +94,11 @@ function Members() {
         console.log(emp)
         setemployee(emp)
                 setOpen(true);
+                axios.get(`http://localhost:8081/employeeawards/count/${emp}/monthly`)
+                .then(data=>{
+                  console.log(data.data)
+                  setCount(data.data)
+                })   
                 
       };
 
@@ -100,6 +106,11 @@ function Members() {
         console.log(member)
         setemployee(member)
                 setOpen(true);
+                axios.get(`http://localhost:8081/employeeawards/count/${member}/monthly`)
+                .then(data=>{
+                  console.log(data.data)
+                  setCount(data.data)
+                })  
                 
       };
 
@@ -264,6 +275,9 @@ function Members() {
                 <DialogContentText>
                     Please Enter The Details
                 </DialogContentText>
+                <DialogContentText style={{color:CONST.COLOR.PRIMARY}}>
+                    Monthly Awards Received : {count}
+                </DialogContentText>
                 <div>
                 <FormControl variant="outlined"   className={classes.formControl}  >
                   <InputLabel id="award" color="secondary">Award</InputLabel>
@@ -313,7 +327,7 @@ function Members() {
       </div>
       <div>
       <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label" color="secondary" >Department</InputLabel>
+        <InputLabel id="demo-simple-select-outlined-label" style={{color:CONST.COLOR.PRIMARY}} >Department</InputLabel>
         <Select
         style={{color:CONST.COLOR.PRIMARY}}
            labelId="demo-simple-select-outlined-label"
