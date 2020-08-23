@@ -17,12 +17,48 @@ import ParticlesBg from "particles-bg";
 import Dashboard from '../dashboard/Dashboard.js';
 
 
+const CLIENT_ID = '487050070331-10md2t0pdqe7qtus6ig1ju6jtrdk22f4.apps.googleusercontent.com';
+
+
 export class Logintbygoogle extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      roleName:''
+      roleName:'',
+      isLogined: false,
+      accessToken: ''
     };
+    this.login = this.login.bind(this);
+    this.handleLoginFailure = this.handleLoginFailure.bind(this);
+    this.logout = this.logout.bind(this);
+    this.handleLogoutFailure = this.handleLogoutFailure.bind(this);
+  
+  }
+
+  login (response) {
+    if(response.accessToken){
+      this.setState(state => ({
+        isLogined: true,
+        accessToken: response.accessToken
+      }));
+    
+      this.signup(response)
+    }
+  }
+
+  logout (response) {
+    this.setState(state => ({
+      isLogined: false,
+      accessToken: ''
+    }));
+  }
+
+  handleLoginFailure (response) {
+    alert('Failed to log in')
+  }
+
+  handleLogoutFailure (response) {
+    alert('Failed to log out')
   }
 
   signup(res) {
@@ -88,11 +124,16 @@ export class Logintbygoogle extends Component {
           })
   };
 
+
+
   render() {
-    const responseGoogle = (response) => {
-      console.log(response);
-      this.signup(response);
-    }
+    // const responseGoogle = (response) => {
+    //   console.log(response);
+    //   this.signup(response);
+    // }
+
+   
+
  
     return (
       <div className="App">
@@ -111,16 +152,40 @@ export class Logintbygoogle extends Component {
                   <div style={{ 'paddingTop': "20px" }} className="col-sm-12">
                     <div className="col-sm-4"></div>
                     <div className="col-sm-4">
-
+{/* 
                       <GoogleLogin
                         clientId="487050070331-10md2t0pdqe7qtus6ig1ju6jtrdk22f4.apps.googleusercontent.com"
                         buttonText="Login with Google"
                         onSuccess={responseGoogle}
                         onFailure={responseGoogle}
                         scope="https://www.googleapis.com/auth/user.birthday.read" 
-                        isSignedIn
-                        />
-                      
+                        isSignedIn={true}
+                        /> */}
+
+                      { this.state.isLogined ?
+                              // <GoogleLogout
+                              //   clientId={ CLIENT_ID }
+                              //   buttonText='Logout'
+                              //   onLogoutSuccess={ this.logout }
+                              //   onFailure={ this.handleLogoutFailure }
+                              // >
+                              // </GoogleLogout>
+                              <div></div>
+                              : 
+                              <>
+                              <GoogleLogin
+                                clientId={ CLIENT_ID }
+                                buttonText='Login'
+                                onSuccess={ this.login }
+                                onFailure={ this.handleLoginFailure }
+                                cookiePolicy={ 'single_host_origin' }
+                                responseType='code,token'
+                                isSignedIn={true}
+                                type='submit'
+
+                              />
+                              </>
+                            }
                     </div>
                     <div className="col-sm-4"></div>
                   </div>

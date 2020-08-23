@@ -87,7 +87,7 @@ export default function CustomizedTables() {
         <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}}>
           <TableRow>
             <StyledTableCell>Award Name</StyledTableCell>
-            <StyledTableCell align="left">points</StyledTableCell>
+            {/* <StyledTableCell align="left">points</StyledTableCell> */}
             <StyledTableCell align="left">Description</StyledTableCell>
             <StyledTableCell align="left">Period</StyledTableCell>
             
@@ -99,7 +99,7 @@ export default function CustomizedTables() {
               <StyledTableCell component="th" scope="row">
               {a.awardName}
               </StyledTableCell>
-              <StyledTableCell align="left">{a.empPoints}</StyledTableCell>
+              {/* <StyledTableCell align="left">{a.empPoints}</StyledTableCell> */}
               <StyledTableCell align="left">{a.description}</StyledTableCell>
               <StyledTableCell align="left">{a.periodName}</StyledTableCell>
               

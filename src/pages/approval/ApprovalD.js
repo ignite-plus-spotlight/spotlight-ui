@@ -106,8 +106,9 @@ export default function ApprovalD() {
     axios
     .get(`http://localhost:8081/ApproveAlert/${current}`).
     then(data=>{
-      console.log(data.data[0].nominee.firstName);
-    setNominateValue(data.data[0])
+      // console.log(data.data);
+
+    setNominateValue(data.data)
     console.log(nominee);
       setNomineeState(data.data)
     })
@@ -115,8 +116,9 @@ export default function ApprovalD() {
   };
 
   const url=`http://localhost:8081/OnclickApprove/${current}`
-  function submit(e) {
-    axios.post(url,nominee)
+  function submit(a) {
+    console.log(a)
+    axios.post(url,a)
     .then(res=>{
         setOpen(false);
         setsnackbarSuccess(true);
@@ -161,7 +163,7 @@ export default function ApprovalD() {
                 <StyledTableCell align="left">{a.head.firstName}</StyledTableCell>
                 <StyledTableCell align="left">{a.period}</StyledTableCell>
                 <StyledTableCell align="left">{a.nominee.firstName} {a.nominee.lastName}</StyledTableCell> 
-                <StyledTableCell align="left"><Fab variant="extended" size="medium" style={{backgroundColor:CONST.COLOR.PRIMARY,color:"white"}} align="left" onClick={(e)=>submit(e)}>Approve</Fab></StyledTableCell>
+                <StyledTableCell align="left"><Fab variant="extended" size="medium" style={{backgroundColor:CONST.COLOR.PRIMARY,color:"white"}} align="left" onClick={()=>submit(a)} >Approve</Fab></StyledTableCell>
                 </StyledTableRow> 
                 </>
            ))}  

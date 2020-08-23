@@ -28,7 +28,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import Nominations from '../nominations/Nominations';
 import NominationHistory from '../nomination history/NominationHistory';
 import CONST from '../../constants/Constants';
-import GoogleLogout from 'react-google-login'
 import MembersM from '../members/MembersM'
 import MembersD from '../members/MembersD';
 import MembersVp from '../members/MembersVp';
@@ -37,7 +36,11 @@ import ApprovalD from '../approval/ApprovalD'
 import ApprovalV from '../approval/ApprovalV'
 import StartNomination from '../nominations/StartNomination'
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import Logintbygoogle from '../home/LoginByGoogle'
 
+
+const CLIENT_ID = '487050070331-10md2t0pdqe7qtus6ig1ju6jtrdk22f4.apps.googleusercontent.com';
 
 const drawerWidth = 240;
 
@@ -47,6 +50,8 @@ const Manager =  ["Activity","Individual Awards","Team Awards","Add To Team","Re
 const Director = ["Activity","Individual Awards","Team Awards","Add To Team","Reward ","Grants","Nominate","Nomination Record","Stamp of Approval","Logout"]
 const VP = ["Activity", "Reward  ", "Grants","Stamp of Approval ","Logout"]
 const Admin = ["Activity","Start Nomination","Logout"]
+
+const reload=()=>window.location.reload();
 
 
 const styles = theme => ({
@@ -108,11 +113,44 @@ const styles = theme => ({
 });
 
 class Dashboard extends React.Component {
-    state = {
+    constructor(props){
+        super(props)
+    this.state = {
         open: false,
         finallevelType: [],
         finalContents:"",
+        isLogined: true,
+      accessToken: ''
      };
+     this.login = this.login.bind(this);
+     this.handleLoginFailure = this.handleLoginFailure.bind(this);
+     this.logout = this.logout.bind(this);
+     this.handleLogoutFailure = this.handleLogoutFailure.bind(this);
+    }
+    login (response) {
+        if(response.accessToken){
+          this.setState(state => ({
+            isLogined: true,
+            accessToken: response.accessToken
+          }));
+        }
+      }
+    
+      logout (response) {
+        this.setState(state => ({
+          isLogined: false,
+          accessToken: '',
+        }));
+        reload();
+      }
+    
+      handleLoginFailure (response) {
+        alert('Failed to log in')
+      }
+    
+      handleLogoutFailure (response) {
+        alert('Failed to log out')
+      }
 
     handleDrawerOpen = () => {
         this.setState({ open: true });
@@ -167,6 +205,7 @@ class Dashboard extends React.Component {
         this.setState({finalContents:<StartNomination />})
       }
       if(event === "Logout"){
+          
           }
     }
 
@@ -224,13 +263,26 @@ class Dashboard extends React.Component {
                             </Typography>
                         </IconButton>
                     </Grid>
-
-                    <Grid item>
+                    <Grid>
                         {  <Avatar src={value.data.imageUrl}   className={classes.small} />}
                    </Grid>
 
-                    <Grid item>
+                    {/* <Grid item >
                         <Typography>{value.data.firstName}</Typography> 
+                    </Grid> */}
+                        <Grid item >
+                    { this.state.isLogined ?
+                        <GoogleLogout
+                        clientId={ CLIENT_ID }
+                        buttonText='Logout'
+                        onLogoutSuccess={ this.logout }
+                        onFailure={ this.handleLogoutFailure }
+                        isSignedIn={false}
+                        >
+                        </GoogleLogout>
+                        
+                        :<div></div>
+                    }
                     </Grid>
 
                  </Toolbar>

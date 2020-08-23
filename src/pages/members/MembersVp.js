@@ -311,8 +311,10 @@ function MembersVp() {
                 <DialogContentText>
                     Please Enter The Details
                 </DialogContentText>
-                <DialogContentText style={{color:CONST.COLOR.PRIMARY}}>
+                <DialogContentText >
+                <Fab variant="extended" size="small"  disabled style={{backgroundColor:"#66bb6a",color:"white"}}>
                     Monthly Awards Received : {count}
+                    </Fab>
                 </DialogContentText>
                 <div>
                 <FormControl variant="outlined" className={classes.formControl}>

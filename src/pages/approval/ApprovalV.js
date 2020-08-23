@@ -115,8 +115,8 @@ export default function ApprovalD() {
   };
 
   const url=`http://localhost:8081/award/${current}`
-  function submit(e) {
-    axios.post(url,nominee)
+  function submit(a) {
+    axios.post(url,a)
     .then(res=>{
         setOpen(false);
         setsnackbarSuccess(true);
@@ -161,7 +161,7 @@ export default function ApprovalD() {
                 <StyledTableCell align="left">{a.managerName}</StyledTableCell>
                 <StyledTableCell align="left">{a.nomineeName}</StyledTableCell>
                 <StyledTableCell align="left">{a.description}</StyledTableCell> 
-                <StyledTableCell align="left"><Fab variant="extended" size="medium" style={{backgroundColor:CONST.COLOR.PRIMARY,color:"white"}} align="left" onClick={(e)=>submit(e)}>Approve</Fab></StyledTableCell>
+                <StyledTableCell align="left"><Fab variant="extended" size="medium" style={{backgroundColor:CONST.COLOR.PRIMARY,color:"white"}} align="left" onClick={()=>submit(a)}>Approve</Fab></StyledTableCell>
                 </StyledTableRow> 
                 </>
            ))}  
