@@ -38,18 +38,18 @@ import StartNomination from '../nominations/StartNomination'
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import Logintbygoogle from '../home/LoginByGoogle'
-
+import CreateAward from '../awards/CreateAward'
 
 const CLIENT_ID = '487050070331-10md2t0pdqe7qtus6ig1ju6jtrdk22f4.apps.googleusercontent.com';
 
 const drawerWidth = 240;
 
-const TeamMember =["Activity", "Individual Awards","Team Awards","Logout"];
-const IconsTM =["ActivityIcon","Individual Awards","Team Awards","Logout"]
-const Manager =  ["Activity","Individual Awards","Team Awards","Add To Team","Reward","Grants","Nominate","Nomination Record","Logout"];
-const Director = ["Activity","Individual Awards","Team Awards","Add To Team","Reward ","Grants","Nominate","Nomination Record","Stamp of Approval","Logout"]
-const VP = ["Activity", "Reward  ", "Grants","Stamp of Approval ","Logout"]
-const Admin = ["Activity","Start Nomination","Logout"]
+const TeamMember =["Activity", "Individual Awards","Team Awards"];
+const IconsTM =["ActivityIcon","Individual Awards","Team Awards"]
+const Manager =  ["Activity","Individual Awards","Team Awards","Add To Team","Reward","Grants","Nominate","Nomination Record"];
+const Director = ["Activity","Individual Awards","Team Awards","Add To Team","Reward ","Grants","Nominate","Nomination Record","Stamp of Approval"]
+const VP = ["Activity", "Reward  ", "Grants","Stamp of Approval "]
+const Admin = ["Activity","Start Nomination","Create Award"]
 
 const reload=()=>window.location.reload();
 
@@ -204,8 +204,8 @@ class Dashboard extends React.Component {
       if(event === "Start Nomination"){
         this.setState({finalContents:<StartNomination />})
       }
-      if(event === "Logout"){
-          
+      if(event === "Create Award"){
+          this.setState({finalContents:<CreateAward/>})
           }
     }
 

@@ -36,16 +36,15 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-export default function StartNominaton() {
+export default function CreateAward() {
 
     const classes = useStyles();
 
     const [data,setData]=useState({
-      pollName:"",
+      awardName:"",
       description:"",
-      pollStart:"",
-      pollEnd:"",
-      period :""
+      imgsrc:"",
+      points:""
     })
 
     function handle(e) {
@@ -54,7 +53,7 @@ export default function StartNominaton() {
       setData(newdata)
       console.log(data);
     }
-    const url=`http://localhost:8081/postmultiple`
+    const url=`http://localhost:8081/employee/individualawards`
    
 
 
@@ -98,7 +97,7 @@ export default function StartNominaton() {
         <>
           <Snackbar open={snackbarSuccess} autoHideDuration={6000} onClose={handleClose1}>
         <Alert onClose={handleClose1} severity="success">
-          Nomination Process started successfully
+          Award Created successfully
         </Alert>
       </Snackbar>
       <Snackbar open={snackbarFail} autoHideDuration={3000} onClose={handleClose2}>
@@ -118,7 +117,7 @@ export default function StartNominaton() {
 
                    <Paper style={{ padding: 16 }}>
                    <Typography variant="h4" align="center" component="h1" gutterBottom>
-                      Start Nomination
+                      Create Individual Awards
                   </Typography>
                   <Typography variant="h5" align="center" component="h2" gutterBottom>
                         Enter the Details
@@ -131,76 +130,65 @@ export default function StartNominaton() {
                           <Field
                             fullWidth
                             required
-                            id="pollName"
-                            name="Poll Name"
+                            id="awardName"
+                            name="Award Name"
                             component={TextField}
                             type="text"
-                            label="Nomination Name"
+                            label="Award Name"
                             color="secondary"
                             input onChange={(e)=>handle(e)}
-                            value={data.pollName}
+                            value={data.awardName}
                           />
                       </Grid>
-                      <Grid item xs={12}>
-                          <Field
-                            fullWidth
-                            required
-                            id="period"
-                            name="Nomination period"
-                            component={TextField}
-                            type="text"
-                            color="secondary"
-                            label="Nomination Period"
-                            input onChange={(e)=>handle(e)}
-                            value={data.period}
-                          />
-                      </Grid>
-
                       <Grid item xs={12}>
                         <Field
-                          name="Nomination Description"
+                          name="Award Description"
                           fullWidth
                           id="description"
                           // color={CONST.COLOR.PRIMARY}
                           component={TextField}
                           type="text"
-                          label="Nomination Description"
+                          label="Award Description"
                           color="secondary"
                           input onChange={(e)=>handle(e)}
                           value={data.description}
   
                         />
                       </Grid>
-               
+
                       <Grid item xs={12}>
-                 <TextField
-                    id="pollStart"
-                    label="Process Start Date"
-                    type="datetime-local"
-                    // defaultValue="2017-05-24T10:30"
-                    input onChange={(e)=>handle(e)}
-                    value={data.pollStartDate}
-                    color="secondary"
-                    // className={classes.textField}
-                    InputLabelProps={{
-                     shrink: true,
-                    }}
-                 />
-                   <TextField
-                    id="pollEnd"
-                    label="Process End Date"
-                    type="datetime-local"
-                    // defaultValue="2017-05-24T10:30"
-                    input onChange={(e)=>handle(e)}
-                    value={data.pollEndDate}
-                    color="secondary"
-                    
-                    // className={classes.textField}
-                    InputLabelProps={{
-                     shrink: true,
-                    }}
-                 />
-                 </Grid>
+                        <Field
+                          name="Image Url"
+                          fullWidth
+                          id="imgsrc"
+                          // color={CONST.COLOR.PRIMARY}
+                          component={TextField}
+                          type="text"
+                          label="Image Url"
+                          color="secondary"
+                          input onChange={(e)=>handle(e)}
+                          value={data.imgsrc}
+  
+                        />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Field
+                          name="Points"
+                          fullWidth
+                          id="points"
+                          // color={CONST.COLOR.PRIMARY}
+                          component={TextField}
+                          type="text"
+                          label="Points"
+                          color="secondary"
+                          input onChange={(e)=>handle(e)}
+                          value={data.points}
+  
+                        />
+                      </Grid>
+               
+                     
+                  
                
                 <Grid item style={{ marginTop: 16 }}>
                   
@@ -213,7 +201,7 @@ export default function StartNominaton() {
                     type="submit"
                     disabled={submitting}
                   >
-                    START
+                    CREATE
                   </Button>
                 </Grid>
               </Grid>

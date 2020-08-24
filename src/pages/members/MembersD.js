@@ -276,7 +276,9 @@ function Members() {
                     Please Enter The Details
                 </DialogContentText>
                 <DialogContentText style={{color:CONST.COLOR.PRIMARY}}>
+                <Fab variant="extended" size="small"  disabled style={{backgroundColor:"#66bb6a",color:"white"}}>
                     Monthly Awards Received : {count}
+                    </Fab>
                 </DialogContentText>
                 <div>
                 <FormControl variant="outlined"   className={classes.formControl}  >
@@ -306,7 +308,7 @@ function Members() {
       <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel id="demo-simple-select-outlined-label" color="secondary">Period</InputLabel>
         <Select
-        style={{color:CONST.COLOR.PRIMARY}}
+        // style={{color:CONST.COLOR.PRIMARY}}
           labelId="demo-simple-select-outlined-label"
           id="demo-simple-select-outlined"
           value={period}
@@ -327,9 +329,9 @@ function Members() {
       </div>
       <div>
       <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label" style={{color:CONST.COLOR.PRIMARY}} >Department</InputLabel>
+        <InputLabel id="demo-simple-select-outlined-label" color="secondary" >Department</InputLabel>
         <Select
-        style={{color:CONST.COLOR.PRIMARY}}
+        // style={{color:CONST.COLOR.PRIMARY}}
            labelId="demo-simple-select-outlined-label"
            id="demo-simple-select-outlined"
            color="secondary"

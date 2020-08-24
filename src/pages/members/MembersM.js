@@ -253,8 +253,10 @@ function ViewMember() {
                 <DialogContentText >
                     Please Enter The Details
                 </DialogContentText>
-                <DialogContentText style={{color:CONST.COLOR.PRIMARY}}>
-                   Monthly Awards Received : {count}
+                <DialogContentText >
+                <Fab variant="extended" size="small"  disabled style={{backgroundColor:"#66bb6a",color:"white"}}>
+                    Monthly Awards Received : {count}
+                    </Fab>
                 </DialogContentText>
                 <div>
                 <FormControl variant="outlined"   style={{color:CONST.COLOR.SECONDARY}} className={classes.formControl}>

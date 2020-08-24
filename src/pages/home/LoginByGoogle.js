@@ -7,7 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBContainer } from "mdbreact";
-import img1 from '../../assets/images/targetwelcome.png';
+import img1 from '../../assets/images/t9.jpg';
 import Typical from 'react-typical'
 // import LogoutButton from '@material-ui/core/Logout'
 import AccountCircleSharpIcon from '@material-ui/icons/AccountCircleSharp';
@@ -15,9 +15,12 @@ import Cookies from 'universal-cookie';
 import ReactDOM from 'react-dom';
 import ParticlesBg from "particles-bg";
 import Dashboard from '../dashboard/Dashboard.js';
+import Snackbar from '@material-ui/core/Snackbar'
+import MuiAlert from '@material-ui/lab/Alert';
 
 
 const CLIENT_ID = '487050070331-10md2t0pdqe7qtus6ig1ju6jtrdk22f4.apps.googleusercontent.com';
+
 
 
 export class Logintbygoogle extends Component {
