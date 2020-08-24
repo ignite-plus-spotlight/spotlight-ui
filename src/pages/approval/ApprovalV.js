@@ -48,11 +48,11 @@ function Alert(props) {
 
 export default function ApprovalD() {
   const classes = useStyles();
-  const [snackbarSuccess1, setsnackbarSuccess1] = React.useState(false);
-  const [snackbarSuccess2, setsnackbarSuccess2] = React.useState(false);
+  const [snackbarSuccessApprove, setsnackbarSuccessApprove] = React.useState(false);
+  const [snackbarSuccessReject, setsnackbarSuccessReject] = React.useState(false);
+  const [snackbarFailReject, setsnackbarFailReject] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-  const [snackbarFail1, setsnackbarFail1] = React.useState(false);
-  const [snackbarFail2, setsnackbarFail2] = React.useState(false);
+  const [snackbarFailApprove, setsnackbarFailApprove] = React.useState(false);
   const [stateNominee, setNomineeState] = useState([]) 
   const [nominee,setNominateValue]=useState({
     // approvedById: "",
@@ -67,36 +67,36 @@ export default function ApprovalD() {
     // processId: ""
   })
 
-  const handleClose1 = (event, reason) => {
+  const handleCloseApprove1 = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-    setsnackbarSuccess1(false);
+    setsnackbarSuccessApprove(false);
     
 
   };
 
-  const handleClose2 = (event, reason) => {
+  const handleCloseApprove2 = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-    setsnackbarFail1(false);
+    setsnackbarFailApprove(false);
   };
 
-  const handleCloseRejection1 = (event, reason) => {
+  const handleCloseReject1 = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-    setsnackbarSuccess2(false);
+    setsnackbarSuccessReject(false);
     
 
   };
 
-  const handleCloseRejection2 = (event, reason) => {
+  const handleCloseReject2 = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-    setsnackbarFail2(false);
+    setsnackbarFailReject(false);
   };
 
   
@@ -132,52 +132,49 @@ export default function ApprovalD() {
     .catch(err=>alert(err));
   };
 
-  const url1=`http://localhost:8081/OnclickApprove/${current}`
-  function submit1(a) {
-    console.log(a)
-    axios.post(url1,a)
+  const urlApprove=`http://localhost:8081/award/${current}`
+  function submitApprove(a) {
+    axios.post(urlApprove,a)
     .then(res=>{
         setOpen(false);
-        setsnackbarSuccess1(true);
+        setsnackbarSuccessApprove(true);
     })
     .catch(error=>{
-        setsnackbarFail1(true);
+        setsnackbarFailApprove(true);
     })
   }
-  const url2=`http://localhost:8081/vprejections/${current}`
-  
-  function submit2(a) {
-    console.log(a)
-    axios.post(url2,a)
+  const urlReject=`http://localhost:8081/vprejections/${current}`
+  function submitReject(a) {
+    axios.post(urlReject,a)
     .then(res=>{
         setOpen(false);
-        setsnackbarSuccess2(true);
+        setsnackbarSuccessReject(true);
     })
     .catch(error=>{
-        setsnackbarFail2(true);
+        setsnackbarFailReject(true);
     })
   }
 
   return (
     <>
-         <Snackbar open={snackbarSuccess1} autoHideDuration={6000} onClose={handleClose1}>
-        <Alert onClose={handleClose1} severity="success">
-          Approved Successfully
+        <Snackbar open={snackbarSuccessApprove} autoHideDuration={6000} onClose={handleCloseApprove1}>
+        <Alert onClose={handleCloseApprove1} severity="success">
+          Approved Successfully and Award is sent!
         </Alert>
       </Snackbar>
-      <Snackbar open={snackbarFail1} autoHideDuration={6000} onClose={handleClose2}>
-        <Alert onClose={handleClose2} severity="error">
-         Connection Error ! Try Again 
+      <Snackbar open={snackbarFailApprove} autoHideDuration={6000} onClose={handleCloseApprove2}>
+        <Alert onClose={handleCloseApprove2} severity="error">
+         Oops ! Try Again 
         </Alert>
       </Snackbar>
-      <Snackbar open={snackbarSuccess2} autoHideDuration={6000} onClose={handleCloseRejection1}>
-        <Alert onClose={handleClose1} severity="success">
-          Rejected Successfully
+      <Snackbar open={snackbarSuccessReject} autoHideDuration={6000} onClose={handleCloseReject1}>
+        <Alert onClose={handleCloseReject1} severity="success">
+          Rejected !
         </Alert>
       </Snackbar>
-      <Snackbar open={snackbarFail2} autoHideDuration={6000} onClose={handleCloseRejection2}>
-        <Alert onClose={handleClose2} severity="error">
-         Connection Error ! Try Again 
+      <Snackbar open={snackbarFailReject} autoHideDuration={6000} onClose={handleCloseReject2}>
+        <Alert onClose={handleCloseReject2} severity="error">
+         Oops ! Try Again 
         </Alert>
       </Snackbar>
           {/* <ParticlesBg color="#FF0000" type="cobweb" bg={true} /> */}
@@ -193,6 +190,7 @@ export default function ApprovalD() {
             <StyledTableCell align="left">Description </StyledTableCell>
             <StyledTableCell align="left"></StyledTableCell>
             <StyledTableCell align="left"></StyledTableCell>
+
           </TableRow>
         </TableHead>
         <TableBody>
@@ -204,8 +202,9 @@ export default function ApprovalD() {
                 <StyledTableCell align="left">{a.managerName}</StyledTableCell>
                 <StyledTableCell align="left">{a.nomineeName}</StyledTableCell>
                 <StyledTableCell align="left">{a.description}</StyledTableCell> 
-                <StyledTableCell align="left"><Fab variant="extended" size="medium" style={{backgroundColor:"green",color:"white"}} align="left" onClick={()=>submit1(a)}>Approve</Fab></StyledTableCell>
-                <StyledTableCell align="left"><Fab variant="extended" size="medium" style={{backgroundColor:CONST.COLOR.PRIMARY,color:"white"}} align="left" onClick={()=>submit2(a)} >Reject</Fab></StyledTableCell>
+                <StyledTableCell align="left"><Fab variant="extended" size="medium" style={{backgroundColor:"green",color:"white"}} align="left" onClick={()=>submitApprove(a)}>Approve</Fab></StyledTableCell>
+                <StyledTableCell align="left"><Fab variant="extended" size="medium" style={{backgroundColor:CONST.COLOR.PRIMARY,color:"white"}} align="left" onClick={()=>submitReject(a)}>Reject</Fab></StyledTableCell>
+
                 </StyledTableRow> 
                 </>
            ))}  
