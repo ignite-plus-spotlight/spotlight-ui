@@ -176,7 +176,7 @@ export default function StartNominaton() {
                  <TextField
                     id="pollStart"
                     label="Process Start Date"
-                    type="datetime-local"
+                    type="datetime-local"                    
                     // defaultValue="2017-05-24T10:30"
                     input onChange={(e)=>handle(e)}
                     value={data.pollStartDate}
