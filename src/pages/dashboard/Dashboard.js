@@ -46,10 +46,10 @@ const CLIENT_ID = '487050070331-10md2t0pdqe7qtus6ig1ju6jtrdk22f4.apps.googleuser
 
 const drawerWidth = 240;
 
-const TeamMember =["Activity", "Individual Awards","Team Awards"];
-const IconsTM =["ActivityIcon","Individual Awards","Team Awards"]
-const Manager =  ["Activity","Individual Awards","Team Awards","Add To Team","Reward","Grants","Nominate","Nomination Record"];
-const Director = ["Activity","Individual Awards","Team Awards","Add To Team","Reward ","Grants","Nominate","Nomination Record","Stamp of Approval","Approval/Rejection"]
+const TeamMember =["Activity", "Individual Awards"];
+const IconsTM =["ActivityIcon","Individual Awards"]
+const Manager =  ["Activity","Individual Awards","Add To Team","Reward","Grants","Nominate","Nomination Record"];
+const Director = ["Activity","Individual Awards","Add To Team","Reward ","Grants","Nominate","Nomination Record","Stamp of Approval","Approval/Rejection"]
 const VP = ["Activity", "Reward  ", "Grants","Stamp of Approval ","Rejected List"]
 const Admin = ["Activity","Start Nomination","Create Award"]
 
