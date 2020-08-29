@@ -12,6 +12,10 @@ import Container from '@material-ui/core/Container';
 import axios from "axios";
 import ParticlesBg from "particles-bg";
 import CONST from '../../constants/Constants'
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+
+ 
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,6 +50,10 @@ const useStyles = makeStyles((theme) => ({
 export default function Activity() {
   const classes = useStyles();
   const [stateAwards, setAwardsState] = useState([]) 
+  const [value, setValue] = React.useState(
+    JSON.parse(localStorage.getItem('userData')) 
+  );
+  var current=value.data.empId;
 
   useEffect(()=> {
     getAward();
@@ -53,12 +61,25 @@ export default function Activity() {
   
   const getAward=()=>{
     axios
-    .get(`http://localhost:8081/employee/employeeawards`).
+    .get(`http://localhost:8081/activityfeed`).
     then(data=>{
       setAwardsState(data.data)
     })
     .catch(err=>alert(err));
   };
+
+  const url = `http://localhost:8081/likes/${current}`
+
+  function handleChange(value){
+    console.log(value)
+   axios.post(url,value)
+   .then(response=> {
+     console.log(response)
+   
+   })
+  }
+
+
 
   return (
     <React.Fragment>
@@ -89,12 +110,12 @@ export default function Activity() {
 
                      <CardContent className={classes.cardContent}>
 
-                      <Typography gutterBottom variant="h5" component="h1">
-                      {a.awardName} 
+                     <Typography gutterBottom variant="h5" component="h2">
+                         {a.awardeeName}
                       </Typography>
 
-                      <Typography>
-                        {a.department} - {a.periodName}
+                      <Typography gutterBottom variant="h6" component="h2">
+                      {a.awardName} 
                       </Typography>
 
                       <Typography>
@@ -105,9 +126,16 @@ export default function Activity() {
 
                    <CardActions>
 
-                    <Button size="small" style={{color:CONST.COLOR.PRIMARY}}>
-                      Like 
+                    <Button size="small" onClick={()=>handleChange(a)} style={{color:CONST.COLOR.PRIMARY}} >
+                    <FavoriteBorderIcon></FavoriteBorderIcon><Typography color="primary">
+                             {a.likes}
+                      </Typography>
                     </Button>
+
+                    
+
+                    
+
                    
                   </CardActions>
 

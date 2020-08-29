@@ -124,9 +124,7 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 export default function MyTeam() {
   const classes = useStyles();
   const [team, setTeam] = useState([]) 
-  const [member,  setMember] = useState([
-  
-  ]) 
+
 
 
 
@@ -195,13 +193,7 @@ const url=`http://localhost:8081/team/${employee}/${current}/${stateTeam}`
     axios
     .get(`http://localhost:8081/manager/${current}`).
     then(data=>{
-      console.log(data.data.teams[0].teamMembers);
-      // const[teamMember,setTeamMember]=useState([]);
-      setTeamMember(data.data.teams[0].teamMembers)
-      console.log(teamMember)
-      // console.log(data)
-
-    
+      console.log(data);
       setTeam(data.data.teams)
       // console.log(team)
     })
@@ -278,7 +270,7 @@ const employeeget=()=>{
     {/* <ParticlesBg color="#FF0000" type="cobweb" bg={true} /> */}
     <Snackbar open={snackbarSuccess} autoHideDuration={10000} onClose={handleClose1}>
         <Alert onClose={handleClose1} severity="success">
-          Nomination Process started successfully
+         Member Added Successfully
         </Alert>
       </Snackbar>
       <Snackbar open={snackbarFail} autoHideDuration={10000} onClose={handleClose2}>
