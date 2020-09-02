@@ -154,7 +154,7 @@ function Members() {
         function submit(e) {
           axios.post(url,data)
           .then(res=>{
-            console.log(res)
+            // console.log(res)
             setOpen(false)
           setsnackbarSuccess(true);
           

@@ -49,7 +49,7 @@ const drawerWidth = 240;
 const TeamMember =["Activity", "Individual Awards"];
 const IconsTM =["ActivityIcon","Individual Awards"]
 const Manager =  ["Activity","Individual Awards","Add To Team","Reward","Grants","Nominate","Nomination Record"];
-const Director = ["Activity","Individual Awards","Add To Team","Reward ","Grants","Nominate","Nomination Record","Stamp of Approval","Approval/Rejection"]
+const Director = ["Activity","Individual Awards","Reward ","Grants","Nominate","Nomination Record","Stamp of Approval","Approval/Rejection"]
 const VP = ["Activity", "Reward  ", "Grants","Stamp of Approval ","Rejected List"]
 const Admin = ["Activity","Start Nomination","Create Award"]
 

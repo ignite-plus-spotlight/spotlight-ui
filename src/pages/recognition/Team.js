@@ -11,6 +11,7 @@ import Hidden from '@material-ui/core/Hidden';
 import CONST from '../../constants/Constants';
 import { useWindowSize } from 'react-use'
 import Confetti from 'react-confetti'
+import AdjustIcon from '@material-ui/icons/Adjust';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -98,7 +99,7 @@ export default function CustomizedTables() {
         <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}}>
           <TableRow>
             <StyledTableCell>Award Name</StyledTableCell>
-            <StyledTableCell align="left">points</StyledTableCell>
+            <StyledTableCell align="left"><AdjustIcon/>points</StyledTableCell>
             <StyledTableCell align="left">Description</StyledTableCell>
             <StyledTableCell align="left">Team Name</StyledTableCell>
           </TableRow>
@@ -109,7 +110,7 @@ export default function CustomizedTables() {
               <StyledTableCell component="th" scope="row">
               {a.awardName}
               </StyledTableCell>
-              <StyledTableCell align="left">{a.teamPoints}</StyledTableCell>
+              <StyledTableCell align="left"><AdjustIcon/>{a.teamPoints}</StyledTableCell>
               <StyledTableCell align="left">{a.description}</StyledTableCell>
               <StyledTableCell align="left">{a.teamName}</StyledTableCell>
             </StyledTableRow>

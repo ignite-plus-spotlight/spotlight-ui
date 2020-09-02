@@ -103,7 +103,7 @@ export default function StartNominaton() {
       </Snackbar>
       <Snackbar open={snackbarFail} autoHideDuration={3000} onClose={handleClose2}>
         <Alert onClose={handleClose2} severity="error">
-         Oops ! Try Again 
+        Invalid Dates ! Try again
         </Alert>
       </Snackbar>
           <ParticlesBg color="#FF0000" type="cobweb" bg={true} />

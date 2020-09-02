@@ -14,6 +14,7 @@ import ParticlesBg from "particles-bg";
 import CONST from '../../constants/Constants'
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 
  
 
@@ -75,6 +76,7 @@ export default function Activity() {
    axios.post(url,value)
    .then(response=> {
      console.log(response)
+     getAward()
    
    })
   }
@@ -127,7 +129,7 @@ export default function Activity() {
                    <CardActions>
 
                     <Button size="small" onClick={()=>handleChange(a)} style={{color:CONST.COLOR.PRIMARY}} >
-                    <FavoriteBorderIcon></FavoriteBorderIcon><Typography color="primary">
+                    <ThumbUpAltIcon></ThumbUpAltIcon><Typography color="black">
                              {a.likes}
                       </Typography>
                     </Button>
