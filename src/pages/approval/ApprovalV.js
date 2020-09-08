@@ -33,7 +33,6 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-
 const useStyles = makeStyles({
   table: {
     minWidth: 1000,
@@ -44,8 +43,6 @@ function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   }
 
-
-
 export default function ApprovalD() {
   const classes = useStyles();
   const [snackbarSuccessApprove, setsnackbarSuccessApprove] = React.useState(false);
@@ -55,16 +52,6 @@ export default function ApprovalD() {
   const [snackbarFailApprove, setsnackbarFailApprove] = React.useState(false);
   const [stateNominee, setNomineeState] = useState([]) 
   const [nominee,setNominateValue]=useState({
-    // approvedById: "",
-    // description: "",
-    // directorName: "",
-    // endDate: "",
-    // managerId: "",
-    // managerName: "",
-    // nominationId: "",
-    // nomineeName: "",
-    // nominee_id: "",
-    // processId: ""
   })
 
   const handleCloseApprove1 = (event, reason) => {
@@ -72,8 +59,6 @@ export default function ApprovalD() {
       return;
     }
     setsnackbarSuccessApprove(false);
-    
-
   };
 
   const handleCloseApprove2 = (event, reason) => {
@@ -88,8 +73,6 @@ export default function ApprovalD() {
       return;
     }
     setsnackbarSuccessReject(false);
-    
-
   };
 
   const handleCloseReject2 = (event, reason) => {
@@ -106,22 +89,17 @@ export default function ApprovalD() {
   var current=value.data.empId;
 //   console.log(value);
   const [data,setData]=useState({
-    // award_name:"",
-    // points:"",
-    // description:"",
-    // period:"",
-    // team:""
   })
 
   useEffect(()=> {
     getNominee();
   },[]);
   
-
   const getNominee=()=>{
     
   console.log(current)
     axios
+    //ApprovalController
     .get(`http://localhost:8081/vpsApprovalList/${current}`).
     then(data=>{
       console.log(data.data);
@@ -132,9 +110,10 @@ export default function ApprovalD() {
     .catch(err=>alert(err));
   };
 
+  //ApprovalController
   const urlApprove=`http://localhost:8081/award/${current}`
-  function submitApprove(a) {
-    axios.post(urlApprove,a)
+  function submitApprove(data) {
+    axios.post(urlApprove,data)
     .then(res=>{
         setOpen(false);
         setsnackbarSuccessApprove(true);
@@ -143,9 +122,11 @@ export default function ApprovalD() {
         setsnackbarFailApprove(true);
     })
   }
+
+  //RejectedNominationsController
   const urlReject=`http://localhost:8081/vprejections/${current}`
-  function submitReject(a) {
-    axios.post(urlReject,a)
+  function submitReject(data) {
+    axios.post(urlReject,data)
     .then(res=>{
         setOpen(false);
         setsnackbarSuccessReject(true);
@@ -156,64 +137,63 @@ export default function ApprovalD() {
   }
 
   return (
-    <>
-        <Snackbar open={snackbarSuccessApprove} autoHideDuration={6000} onClose={handleCloseApprove1}>
-        <Alert onClose={handleCloseApprove1} severity="success">
-          Approved Successfully and Award is sent!
-        </Alert>
-      </Snackbar>
-      <Snackbar open={snackbarFailApprove} autoHideDuration={6000} onClose={handleCloseApprove2}>
-        <Alert onClose={handleCloseApprove2} severity="error">
-         Oops ! Try Again 
-        </Alert>
-      </Snackbar>
-      <Snackbar open={snackbarSuccessReject} autoHideDuration={6000} onClose={handleCloseReject1}>
-        <Alert onClose={handleCloseReject1} severity="success">
-          Rejected !
-        </Alert>
-      </Snackbar>
-      <Snackbar open={snackbarFailReject} autoHideDuration={6000} onClose={handleCloseReject2}>
-        <Alert onClose={handleCloseReject2} severity="error">
-         Oops ! Try Again 
-        </Alert>
-      </Snackbar>
-          {/* <ParticlesBg color="#FF0000" type="cobweb" bg={true} /> */}
-    <TableContainer >
-      {/* <div align="right" className="container"><GiveAward/></div> */}
-      <div>
-      <Table className={classes.table} aria-label="customized table"  style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
-        <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}} >
-          <TableRow>
-            <StyledTableCell align="left">Director </StyledTableCell>
-            <StyledTableCell align="left">Manager </StyledTableCell>
-            <StyledTableCell align="left">Nominee</StyledTableCell>
-            <StyledTableCell align="left">Description </StyledTableCell>
-            <StyledTableCell align="left"></StyledTableCell>
-            <StyledTableCell align="left"></StyledTableCell>
+         <>
+            <Snackbar open={snackbarSuccessApprove} autoHideDuration={6000} onClose={handleCloseApprove1}>
+              <Alert onClose={handleCloseApprove1} severity="success">
+                Approved Successfully and Award is sent!
+              </Alert>
+            </Snackbar>
 
-          </TableRow>
-        </TableHead>
-        <TableBody>
+            <Snackbar open={snackbarFailApprove} autoHideDuration={6000} onClose={handleCloseApprove2}>
+              <Alert onClose={handleCloseApprove2} severity="error">
+              Oops ! Try Again 
+              </Alert>
+            </Snackbar>
 
-{stateNominee.map(a=> (                 
-                <>
-                <StyledTableRow >
-                 <StyledTableCell >{a.directorName}</StyledTableCell>
-                <StyledTableCell align="left">{a.managerName}</StyledTableCell>
-                <StyledTableCell align="left">{a.nomineeName}</StyledTableCell>
-                <StyledTableCell align="left">{a.description}</StyledTableCell> 
-                <StyledTableCell align="left"><Fab variant="extended" size="medium" style={{backgroundColor:"green",color:"white"}} align="left" onClick={()=>submitApprove(a)}>Approve</Fab></StyledTableCell>
-                <StyledTableCell align="left"><Fab variant="extended" size="medium" style={{backgroundColor:CONST.COLOR.PRIMARY,color:"white"}} align="left" onClick={()=>submitReject(a)}>Reject</Fab></StyledTableCell>
+            <Snackbar open={snackbarSuccessReject} autoHideDuration={6000} onClose={handleCloseReject1}>
+              <Alert onClose={handleCloseReject1} severity="success">
+                Rejected !
+              </Alert>
+            </Snackbar>
 
-                </StyledTableRow> 
-                </>
-           ))}  
-      </TableBody>
-      </Table>
-      </div>
-    </TableContainer>
-    </>
+            <Snackbar open={snackbarFailReject} autoHideDuration={6000} onClose={handleCloseReject2}>
+              <Alert onClose={handleCloseReject2} severity="error">
+              Oops ! Try Again 
+              </Alert>
+            </Snackbar>
+
+            <TableContainer >
+             <div>
+              <Table className={classes.table} aria-label="customized table"  style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
+                <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}} >
+                  <TableRow>
+                    <StyledTableCell align="left">Director </StyledTableCell>
+                    <StyledTableCell align="left">Manager </StyledTableCell>
+                    <StyledTableCell align="left">Nominee</StyledTableCell>
+                    <StyledTableCell align="left">Description </StyledTableCell>
+                    <StyledTableCell align="left"></StyledTableCell>
+                    <StyledTableCell align="left"></StyledTableCell>
+                  </TableRow>
+                </TableHead>
+
+                <TableBody>
+                    {stateNominee.map(a=> (                 
+                     <>
+                      <StyledTableRow >
+                      <StyledTableCell >{a.directorName}</StyledTableCell>
+                      <StyledTableCell align="left">{a.managerName}</StyledTableCell>
+                      <StyledTableCell align="left">{a.nomineeName}</StyledTableCell>
+                      <StyledTableCell align="left">{a.description}</StyledTableCell> 
+                      <StyledTableCell align="left"><Fab variant="extended" size="medium" style={{backgroundColor:"green",color:"white"}} align="left" onClick={()=>submitApprove(a)}>Approve</Fab></StyledTableCell>
+                      <StyledTableCell align="left"><Fab variant="extended" size="medium" style={{backgroundColor:CONST.COLOR.PRIMARY,color:"white"}} align="left" onClick={()=>submitReject(a)}>Reject</Fab></StyledTableCell>
+                      </StyledTableRow> 
+                    </>
+                   ))}  
+                </TableBody>
+             </Table>
+         </div>
+      </TableContainer>
+     </>
   );
- 
-        //   })}
+
 }

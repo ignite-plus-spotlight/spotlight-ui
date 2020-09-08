@@ -32,7 +32,6 @@ import MuiAlert from '@material-ui/lab/Alert';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    // backgroundColor: theme.palette.secondary.main,
     color: theme.palette.common.white,
   },
   body: {
@@ -48,16 +47,11 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-
-
-
-
 const useStyles = makeStyles((theme) => ({
   icon: {
     marginRight: theme.spacing(2),
   },
   heroContent: {
-    // backgroundColor: theme.palette.primary.main,
     padding: theme.spacing(8, 0, 6),
   },
   heroButtons: {
@@ -78,12 +72,9 @@ const useStyles = makeStyles((theme) => ({
   cardContent: {
     flexGrow: 1,
   },
-  // root: {
-  //   maxWidth: 345,
-  // },
   media: {
     height: 0,
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '56.25%', 
   },
   expand: {
     transform: 'rotate(0deg)',
@@ -116,8 +107,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
 }));
-  
-// }));
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -128,22 +117,17 @@ export default function MyTeam() {
   
   ]) 
 
-
-
-// *******************************************************
-
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   }
 
-
-
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = (a) => {
     console.log(a)
+    employeeget();
     setTeamState(a);
     setOpen(true);
   };
@@ -152,10 +136,6 @@ export default function MyTeam() {
     setOpen(false);
   };
 
-// *************************************************
-
-
-  
   const [value, setValue] = React.useState(
     JSON.parse(localStorage.getItem('userData')) 
   );
@@ -170,9 +150,6 @@ export default function MyTeam() {
   };
 
   
-//   console.log(value);
-// const[MemberList,setMember]=useState([])
-  
 const [data,setData]=useState({
   managerId:"",
   teamId:"",
@@ -181,11 +158,11 @@ const [data,setData]=useState({
   
 })
 
-  
   useEffect(()=> {
     getTeam();
   },[]);
   
+//team controller
 const url=`http://localhost:8081/team/${employee}/${current}/${stateTeam}`
   
 
@@ -193,6 +170,7 @@ const url=`http://localhost:8081/team/${employee}/${current}/${stateTeam}`
     
   console.log(current)
     axios
+    //Employee controller
     .get(`http://localhost:8081/manager/${current}`).
     then(data=>{
       console.log(data.data.teams[0].teamMembers);
@@ -200,38 +178,41 @@ const url=`http://localhost:8081/team/${employee}/${current}/${stateTeam}`
       setTeamMember(data.data.teams[0].teamMembers)
       console.log(teamMember)
       // console.log(data)
-
-    
       setTeam(data.data.teams)
       // console.log(team)
     })
     .catch(err=>alert(err));
   };
 
+//   useEffect(()=> {
+//     employeeget();
+//   },[]);
 
-  
-  useEffect(()=> {
-    employeeget();
-  },[]);
+// const employeeget=()=>{
+//       axios
+//       .get(`http://localhost:8081/employee`).
+//       then(data=>{
+//         console.log(data.data);
+//         setemployeeState(data.data)
+//       })
+//       .catch(err=>alert(err));
+//     };
 
-const employeeget=()=>{
-    
-    
-      axios
-      .get(`http://localhost:8081/employee`).
-      then(data=>{
-        console.log(data.data);
-      
-        setemployeeState(data.data)
-      })
-      .catch(err=>alert(err));
-    };
+function employeeget()
+{
+        axios
+        //employee controller
+        .get(`http://localhost:8081/employee`).
+        then(data=>{
+          console.log(data.data);
+          setemployeeState(data.data)
+        })
+        .catch(err=>alert(err));
+}
 
     function Alert(props) {
       return <MuiAlert elevation={6} variant="filled" {...props} />;
     }    
-
-  
   function submit(e) {
     e.preventDefault()
     axios.post(url,data)
@@ -252,13 +233,9 @@ const employeeget=()=>{
     if (reason === 'clickaway') {
       return;
     }
-
     setsnackbarSuccess(false);
-
-
   };
 
-  
   const [snackbarSuccess, setsnackbarSuccess] = React.useState(false);
   const [snackbarFail, setsnackbarFail] = React.useState(false);
   const reload=()=>window.location.reload();
@@ -270,15 +247,12 @@ const employeeget=()=>{
     setsnackbarFail(false);
   };
 
-
-  
   return (
    
     <React.Fragment>
-    {/* <ParticlesBg color="#FF0000" type="cobweb" bg={true} /> */}
     <Snackbar open={snackbarSuccess} autoHideDuration={10000} onClose={handleClose1}>
         <Alert onClose={handleClose1} severity="success">
-          Nomination Process started successfully
+          Member added successfully.
         </Alert>
       </Snackbar>
       <Snackbar open={snackbarFail} autoHideDuration={10000} onClose={handleClose2}>
@@ -332,9 +306,9 @@ const employeeget=()=>{
                 <DialogContentText>
                     Please Enter The Details
                 </DialogContentText>
-<div>
+        <div>
 
-<FormControl variant="outlined" className={classes.formControl}>
+        <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel id="demo-simple-select-outlined-label" color="secondary">Employee</InputLabel>
                    <Select
                        labelId="demo-simple-select-outlined-label"
@@ -349,17 +323,13 @@ const employeeget=()=>{
                          <em>None</em>
                        </MenuItem>
                        {stateemployee.map(a=> (
-                        //  a.teamMembers.map(b=>(
                           <MenuItem value={a.empId}>{a.firstName}</MenuItem>
-                        //  ))
-                         
-          
                        ))}
          
                     </Select>
                 </FormControl>
                 </div>
-    </DialogContent>
+              </DialogContent>
                       <DialogActions>
                         <Button onClick={handleClose} style={{color:CONST.COLOR.PRIMARY}}>
                           Cancel

@@ -10,10 +10,8 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Hidden from '@material-ui/core/Hidden';
 import CONST from '../../constants/Constants';
 
-
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    // backgroundColor: theme.palette.secondary.main,
     color: theme.palette.common.white,
   },
   body: {
@@ -42,8 +40,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
 function HistoryVp() {
     const classes = useStyles();
     const [history, setHistory] = useState([]);
@@ -51,6 +47,7 @@ function HistoryVp() {
         JSON.parse(localStorage.getItem('userData')) 
       );
       var current=value.data.empId;
+
       useEffect(()=> {
         getHistory();
       },[]);
@@ -58,10 +55,11 @@ function HistoryVp() {
       const getHistory=()=>{
         console.log(current)
           axios
+          //RejectedNominationsController
           .get(`http://localhost:8081/rejections/${current}`).
           then(data=>{
             // console.log(data.data.teams[0].teamMembers[0]);
-            console.log(data.data)
+            // console.log(data.data)
             setHistory(data.data)
             // console.log(team)
           })
@@ -69,42 +67,36 @@ function HistoryVp() {
         };
       
     return (
-      <> 
-            
-           
+      <>    
         <Hidden xlUp >
                <h1 align="center">Rejection History</h1>
         </Hidden>
-      <TableContainer>
-      <Table className={classes.table} aria-label="customized table" style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
-        <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}}>
-          <TableRow>
-            {/* <StyledTableCell> Approved By</StyledTableCell> */}
-            <StyledTableCell> Nominated By</StyledTableCell>
-            <StyledTableCell> Nominee</StyledTableCell>
-            <StyledTableCell >Description</StyledTableCell>
-            {/* <StyledTableCell align="left">Process Name</StyledTableCell> */}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-        {history.map(a=>  (     
-             <StyledTableRow >
-              {/* <StyledTableCell component="th" scope="row">
-                
-                {a.directorName}
-              </StyledTableCell> */}
-              <StyledTableCell align="left">{a.managerName}</StyledTableCell>
-              <StyledTableCell align="left">{a.nomineeName}</StyledTableCell>
-              <StyledTableCell align="left">{a.description}</StyledTableCell>
-            
-            </StyledTableRow> 
-              ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    </>   
-    
-   
+
+          <TableContainer>
+            <Table className={classes.table} aria-label="customized table" style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
+             
+              <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}}>
+               <TableRow>
+                <StyledTableCell> Nominated By</StyledTableCell>
+                <StyledTableCell> Nominee</StyledTableCell>
+                <StyledTableCell >Description</StyledTableCell>
+               </TableRow>
+              </TableHead>
+       
+              <TableBody>
+                {history.map(a=>  (    
+
+                    <StyledTableRow >
+                      <StyledTableCell align="left">{a.managerName}</StyledTableCell>
+                      <StyledTableCell align="left">{a.nomineeName}</StyledTableCell>
+                      <StyledTableCell align="left">{a.description}</StyledTableCell>                    
+                    </StyledTableRow> 
+                 ))}
+              </TableBody>
+
+             </Table>
+           </TableContainer>
+         </>   
     )
 }
 export default HistoryVp

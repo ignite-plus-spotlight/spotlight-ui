@@ -12,11 +12,8 @@ import Container from '@material-ui/core/Container';
 import axios from "axios";
 import ParticlesBg from "particles-bg";
 import CONST from '../../constants/Constants'
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-
- 
-
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import img1 from "../../assets/images/award.jpg"
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -48,104 +45,97 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Activity() {
-  const classes = useStyles();
-  const [stateAwards, setAwardsState] = useState([]) 
-  const [value, setValue] = React.useState(
-    JSON.parse(localStorage.getItem('userData')) 
-  );
-  var current=value.data.empId;
 
-  useEffect(()=> {
-    getAward();
-  },[]);
-  
-  const getAward=()=>{
-    axios
-    .get(`http://localhost:8081/activityfeed`).
-    then(data=>{
-      setAwardsState(data.data)
-    })
-    .catch(err=>alert(err));
-  };
+        const classes = useStyles();
+        const [stateAwards, setAwardsState] = useState([]) 
+        const [value, setValue] = React.useState(
+          JSON.parse(localStorage.getItem('userData')) 
+        );
+        var current=value.data.empId;
 
-  const url = `http://localhost:8081/likes/${current}`
+        useEffect(()=> {
+          getAward();
+        },[]);
+        
+        const getAward=()=>{
+          axios
+          //activity feed controller
+          .get(`http://localhost:8081/activityfeed`)
+          .then(data=>{
+            // console.log(data.data)
+            setAwardsState(data.data)
+          })
+          .catch(err=>alert(err));
+        };
 
-  function handleChange(value){
-    console.log(value)
-   axios.post(url,value)
-   .then(response=> {
-     console.log(response)
-   
-   })
-  }
+        //activity feed controller
+        const url = `http://localhost:8081/likes/${current}`
 
+        function handleChange(value){
+          // console.log(value)
+        axios.post(url,value)
+        .then(response=> {
+          //  console.log(response)
+          getAward()
+        })
+        }
+         return (
+              <React.Fragment>
+     
+              <ParticlesBg color="#FF0000" type="cobweb" bg={true} />
+              <CssBaseline />
+                <main>               
+                  <Container maxWidth="sm">        
+                    <Typography variant="h5" align="center" color="textSecondary" paragraph>
+                    "Gratitude is the most exquisite form of courtesy."
+                    </Typography>
+                  </Container>
 
+                  <Container className={classes.cardGrid} maxWidth="md">
+                    <Grid container spacing={4}>
+                      {stateAwards.map(a=>  (
+                        <Grid item  xs={12} sm={6} md={4}>
+                          
+                          <Card className={classes.card}  >
+                            <CardMedia
+                              className={classes.cardMedia}
+                              // image={img1}
+                              image={a.imgsrc}
+                              title="Image title"
+                            />
 
-  return (
-    <React.Fragment>
-        <ParticlesBg color="#FF0000" type="cobweb" bg={true} />
-        <CssBaseline />
-        <main>
-          <Container maxWidth="sm">
+                            <CardContent className={classes.cardContent}>
 
-            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-            </Typography>
+                              <Typography gutterBottom variant="h5" component="h2">
+                                  {a.awardeeName}
+                                </Typography>
 
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
-            "Gratitude is the most exquisite form of courtesy."
-            </Typography>
+                              <Typography gutterBottom variant="h6" component="h2">
+                              {a.awardName} 
+                              </Typography>
 
-          </Container>
+                              <Typography>
+                                {a.description}
+                              </Typography>
 
-          <Container className={classes.cardGrid} maxWidth="md">
-             <Grid container spacing={4}>
-               {stateAwards.map(a=>  (
-                 <Grid item  xs={12} sm={6} md={4}>
-                   <Card className={classes.card}  >
-                     <CardMedia
-                      className={classes.cardMedia}
-                      image={a.imgsrc}
-                      title="Image title"
-                     />
+                            </CardContent>
 
-                     <CardContent className={classes.cardContent}>
+                            <CardActions>
+                               <Button size="small" onClick={()=>handleChange(a)} style={{color:CONST.COLOR.PRIMARY}} >                 
+                                    <ThumbUpAltIcon ></ThumbUpAltIcon>
+                                    <Typography >
+                                     {a.likes}
+                                    </Typography>                    
+                                </Button>
+                            </CardActions>
 
-                     <Typography gutterBottom variant="h5" component="h2">
-                         {a.awardeeName}
-                      </Typography>
+                           </Card>
+                        </Grid>
+                       ))}
+                     </Grid>
+                  </Container>
+                 </main>
+               </React.Fragment>
 
-                      <Typography gutterBottom variant="h6" component="h2">
-                      {a.awardName} 
-                      </Typography>
-
-                      <Typography>
-                        {a.description}
-                      </Typography>
-
-                     </CardContent>
-
-                   <CardActions>
-
-                    <Button size="small" onClick={()=>handleChange(a)} style={{color:CONST.COLOR.PRIMARY}} >
-                    <FavoriteBorderIcon></FavoriteBorderIcon><Typography color="primary">
-                             {a.likes}
-                      </Typography>
-                    </Button>
-
-                    
-
-                    
-
-                   
-                  </CardActions>
-
-                  </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </main>
-    </React.Fragment>
-
-  );
+            );
 }

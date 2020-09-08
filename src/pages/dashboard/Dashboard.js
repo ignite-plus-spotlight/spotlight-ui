@@ -10,17 +10,11 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import MyTeam from '../my team/MyTeam';
-import AwardsM from '../awards/AwardHistory';
 import Activity from '../activity/Activity'
-import Team from '../recognition/Team'
 import Individual from '../recognition/Individual';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
@@ -37,7 +31,6 @@ import ApprovalV from '../approval/ApprovalV'
 import StartNomination from '../nominations/StartNomination'
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 import { GoogleLogin, GoogleLogout } from 'react-google-login';
-import Logintbygoogle from '../home/LoginByGoogle'
 import CreateAward from '../awards/CreateAward'
 import HistoryD from '../approval/HistoryD'
 import HistoryVP from '../approval/HistoryVP'
@@ -47,14 +40,12 @@ const CLIENT_ID = '487050070331-10md2t0pdqe7qtus6ig1ju6jtrdk22f4.apps.googleuser
 const drawerWidth = 240;
 
 const TeamMember =["Activity", "Individual Awards"];
-const IconsTM =["ActivityIcon","Individual Awards"]
 const Manager =  ["Activity","Individual Awards","Add To Team","Reward","Grants","Nominate","Nomination Record"];
 const Director = ["Activity","Individual Awards","Add To Team","Reward ","Grants","Nominate","Nomination Record","Stamp of Approval","Approval/Rejection"]
 const VP = ["Activity", "Reward  ", "Grants","Stamp of Approval ","Rejected List"]
 const Admin = ["Activity","Start Nomination","Create Award"]
 
 const reload=()=>window.location.reload();
-
 
 const styles = theme => ({
     root: {
@@ -116,19 +107,20 @@ const styles = theme => ({
 
 class Dashboard extends React.Component {
     constructor(props){
-        super(props)
+    super(props)
     this.state = {
         open: false,
         finallevelType: [],
         finalContents:"",
         isLogined: true,
-      accessToken: ''
+        accessToken: ''
      };
      this.login = this.login.bind(this);
      this.handleLoginFailure = this.handleLoginFailure.bind(this);
      this.logout = this.logout.bind(this);
      this.handleLogoutFailure = this.handleLogoutFailure.bind(this);
     }
+
     login (response) {
         if(response.accessToken){
           this.setState(state => ({
@@ -173,9 +165,7 @@ class Dashboard extends React.Component {
       if(event === "Individual Awards"){
         this.setState({finalContents:<Individual />})
       }
-      if(event === "Team Awards"){
-        this.setState({finalContents:<Team />})
-      }
+      
       if(event === "Add To Team"){
         this.setState({finalContents:<MyTeam />})
       }
@@ -237,7 +227,7 @@ class Dashboard extends React.Component {
 
     render() {
 
-        const { classes, theme,t } = this.props;
+        const { classes, theme } = this.props;
         const { open } = this.state;
         const value= JSON.parse(localStorage.getItem('userData')) 
         const logout = () => {
@@ -248,8 +238,7 @@ class Dashboard extends React.Component {
             <>
             <div className={classes.root}>
                 <CssBaseline />
-
-                  <AppBar style={{backgroundColor:CONST.COLOR.PRIMARY}}
+                 <AppBar style={{backgroundColor:CONST.COLOR.PRIMARY}}
                         {...classes.theme}
                         position="fixed"
                         className={classNames(classes.appBar, {
@@ -271,6 +260,7 @@ class Dashboard extends React.Component {
                             </Typography>
                         </IconButton>
                     </Grid>
+
                     <Grid>
                         {  <Avatar src={value.data.imageUrl}   className={classes.small} />}
                    </Grid>
@@ -278,8 +268,9 @@ class Dashboard extends React.Component {
                     {/* <Grid item >
                         <Typography>{value.data.firstName}</Typography> 
                     </Grid> */}
-                        <Grid item >
-                    { this.state.isLogined ?
+
+                    <Grid item >
+                      { this.state.isLogined ?
                         <GoogleLogout
                         clientId={ CLIENT_ID }
                         buttonText='Logout'
@@ -291,14 +282,13 @@ class Dashboard extends React.Component {
                         </GoogleLogout>
                         
                         :<div></div>
-                    }
+                     }
                     </Grid>
 
                  </Toolbar>
                 </AppBar>
 
                 <Drawer
-
                     className={classes.drawer}
                     variant="persistent"
                     anchor="left"
@@ -309,6 +299,7 @@ class Dashboard extends React.Component {
                 >
                     <div className={classes.drawerHeader}>
                      {  <Avatar  src={value.data.imageUrl}   className={classes.large} />}
+
                      <IconButton onClick={this.handleDrawerClose}>   
                          <CloseIcon variant="contained" >
                          </CloseIcon>
@@ -319,14 +310,14 @@ class Dashboard extends React.Component {
 
                     <Divider />
 
-                    <List>
-                        {this.state.finallevelType.map((text, index) => (
-                            <ListItem button key={text} >
-                                <ListItemIcon>{index % 2 === 0 ? <DoubleArrowIcon /> : <DoubleArrowIcon />}</ListItemIcon>
-                                <ListItemText primary={text} onClick={()=>this.knowMyName(text)} />
-                            </ListItem>
-                        ))}
-                    </List>
+                        <List>
+                            {this.state.finallevelType.map((text, index) => (
+                                <ListItem button key={text} >
+                                    <ListItemIcon>{index % 2 === 0 ? <DoubleArrowIcon /> : <DoubleArrowIcon />}</ListItemIcon>
+                                    <ListItemText primary={text} onClick={()=>this.knowMyName(text)} />
+                                </ListItem>
+                            ))}
+                        </List>
 
                     <Divider />
                     

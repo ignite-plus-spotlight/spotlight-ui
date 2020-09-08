@@ -6,10 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import axios from "axios";
-import Cookies from 'universal-cookie';
-import Button from '@material-ui/core/Button'
 import Fab from '@material-ui/core/Fab';
 import Snackbar from '@material-ui/core/Snackbar'
 import MuiAlert from '@material-ui/lab/Alert';
@@ -47,6 +44,7 @@ function Alert(props) {
 
 
 export default function ApprovalD() {
+
   const classes = useStyles();
   const [snackbarSuccess1, setsnackbarSuccess1] = React.useState(false);
   const [snackbarSuccess2, setsnackbarSuccess2] = React.useState(false);
@@ -55,16 +53,6 @@ export default function ApprovalD() {
   const [snackbarFail2, setsnackbarFail2] = React.useState(false);
   const [stateNominee, setNomineeState] = useState([]) 
   const [nominee,setNominateValue]=useState({
-    // approvedById: "",
-    // description: "",
-    // directorName: "",
-    // endDate: "",
-    // managerId: "",
-    // managerName: "",
-    // nominationId: "",
-    // nomineeName: "",
-    // nominee_id: "",
-    // processId: ""
   })
 
   const handleClose1 = (event, reason) => {
@@ -72,8 +60,6 @@ export default function ApprovalD() {
       return;
     }
     setsnackbarSuccess1(false);
-    
-
   };
 
   const handleClose2 = (event, reason) => {
@@ -88,8 +74,6 @@ export default function ApprovalD() {
       return;
     }
     setsnackbarSuccess2(false);
-    
-
   };
 
   const handleCloseRejection2 = (event, reason) => {
@@ -99,33 +83,24 @@ export default function ApprovalD() {
     setsnackbarFail2(false);
   };
 
-  
   const [value, setValue] = React.useState(
     JSON.parse(localStorage.getItem('userData')) 
   );
   var current=value.data.empId;
-//   console.log(value);
   const [data,setData]=useState({
-    // award_name:"",
-    // points:"",
-    // description:"",
-    // period:"",
-    // team:""
   })
 
   useEffect(()=> {
     getNominee();
   },[]);
   
-
   const getNominee=()=>{
     
   console.log(current)
     axios
+    //NominationsController
     .get(`http://localhost:8081/ApproveAlert/${current}`).
     then(data=>{
-      // console.log(data.data);
-
     setNominateValue(data.data)
     console.log(nominee);
       setNomineeState(data.data)
@@ -133,6 +108,7 @@ export default function ApprovalD() {
     .catch(err=>alert(err));
   };
 
+  //NominationsController
   const url1=`http://localhost:8081/OnclickApprove/${current}`
   function submit1(a) {
     console.log(a)
@@ -145,6 +121,8 @@ export default function ApprovalD() {
         setsnackbarFail1(true);
     })
   }
+
+  //RejectedNominationsController
   const url2=`http://localhost:8081/rejections/${current}`
   
   function submit2(a) {
@@ -160,46 +138,49 @@ export default function ApprovalD() {
   }
 
   return (
-    <>
+      <>
         <Snackbar open={snackbarSuccess1} autoHideDuration={6000} onClose={handleClose1}>
-        <Alert onClose={handleClose1} severity="success">
-          Approved Successfully
-        </Alert>
-      </Snackbar>
-      <Snackbar open={snackbarFail1} autoHideDuration={6000} onClose={handleClose2}>
-        <Alert onClose={handleClose2} severity="error">
-         Connection Error ! Try Again 
-        </Alert>
-      </Snackbar>
-      <Snackbar open={snackbarSuccess2} autoHideDuration={6000} onClose={handleCloseRejection1}>
-        <Alert onClose={handleClose1} severity="success">
-          Rejected Successfully
-        </Alert>
-      </Snackbar>
-      <Snackbar open={snackbarFail2} autoHideDuration={6000} onClose={handleCloseRejection2}>
-        <Alert onClose={handleClose2} severity="error">
-         Connection Error ! Try Again 
-        </Alert>
-      </Snackbar>
-          {/* <ParticlesBg color="#FF0000" type="cobweb" bg={true} /> */}
-    <TableContainer >
-      {/* <div align="right" className="container"><GiveAward/></div> */}
-      <div>
-      <Table className={classes.table} aria-label="customized table"  style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
-        <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}}>
-          <TableRow>
-            <StyledTableCell align="left">Process Name </StyledTableCell>
-            <StyledTableCell align="left">Manager Name</StyledTableCell>
-            <StyledTableCell align="left">Period</StyledTableCell>
-            <StyledTableCell align="left">Nominee </StyledTableCell>
-            <StyledTableCell align="left"></StyledTableCell>
-            <StyledTableCell align="left"></StyledTableCell>
+          <Alert onClose={handleClose1} severity="success">
+            Approved Successfully
+          </Alert>
+        </Snackbar>
 
-          </TableRow>
-        </TableHead>
-        <TableBody>
+        <Snackbar open={snackbarFail1} autoHideDuration={6000} onClose={handleClose2}>
+          <Alert onClose={handleClose2} severity="error">
+          Connection Error ! Try Again 
+          </Alert>
+        </Snackbar>
 
-{stateNominee.map(a=> (                 
+        <Snackbar open={snackbarSuccess2} autoHideDuration={6000} onClose={handleCloseRejection1}>
+          <Alert onClose={handleClose1} severity="success">
+            Rejected Successfully
+          </Alert>
+        </Snackbar>
+
+        <Snackbar open={snackbarFail2} autoHideDuration={6000} onClose={handleCloseRejection2}>
+          <Alert onClose={handleClose2} severity="error">
+          Connection Error ! Try Again 
+          </Alert>
+        </Snackbar>
+
+        <TableContainer >
+     
+          <div>
+          <Table className={classes.table} aria-label="customized table"  style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
+
+            <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}}>
+              <TableRow>
+                <StyledTableCell align="left">Process Name </StyledTableCell>
+                <StyledTableCell align="left">Manager Name</StyledTableCell>
+                <StyledTableCell align="left">Period</StyledTableCell>
+                <StyledTableCell align="left">Nominee </StyledTableCell>
+                <StyledTableCell align="left"></StyledTableCell>
+                <StyledTableCell align="left"></StyledTableCell>
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              {stateNominee.map(a=> (                 
                 <>
                 <StyledTableRow >
                  <StyledTableCell >{a.processName}</StyledTableCell>
@@ -210,13 +191,12 @@ export default function ApprovalD() {
                 <StyledTableCell align="left"><Fab variant="extended" size="medium" style={{backgroundColor:CONST.COLOR.PRIMARY,color:"white"}} align="left" onClick={()=>submit2(a)} >Reject</Fab></StyledTableCell>
                 </StyledTableRow> 
                 </>
-           ))}  
-      </TableBody>
-      </Table>
-      </div>
-    </TableContainer>
+              ))}  
+            </TableBody>
+
+          </Table>
+          </div>
+       </TableContainer>
     </>
   );
- 
-        //   })}
 }

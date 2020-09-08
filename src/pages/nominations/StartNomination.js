@@ -54,10 +54,11 @@ export default function StartNominaton() {
       setData(newdata)
       console.log(data);
     }
+
+    //post nomination
+    //NominationController
     const url=`http://localhost:8081/postmultiple`
    
-
-
   const onSubmit = e => {
     // e.preventDefault()
     axios.post(url,data,{
@@ -103,7 +104,7 @@ export default function StartNominaton() {
       </Snackbar>
       <Snackbar open={snackbarFail} autoHideDuration={3000} onClose={handleClose2}>
         <Alert onClose={handleClose2} severity="error">
-         Oops ! Try Again 
+          Invalid Dates! Enter Again
         </Alert>
       </Snackbar>
           <ParticlesBg color="#FF0000" type="cobweb" bg={true} />
@@ -190,12 +191,9 @@ export default function StartNominaton() {
                     id="pollEnd"
                     label="Process End Date"
                     type="datetime-local"
-                    // defaultValue="2017-05-24T10:30"
                     input onChange={(e)=>handle(e)}
                     value={data.pollEndDate}
                     color="secondary"
-                    
-                    // className={classes.textField}
                     InputLabelProps={{
                      shrink: true,
                     }}
@@ -203,10 +201,7 @@ export default function StartNominaton() {
                  </Grid>
                
                 <Grid item style={{ marginTop: 16 }}>
-                  
-                   {/* <Button onClick={(e)=>onSubmit(e)} color="secondary">
-       Send 
-       </Button> */}
+
        <Button
                     variant="contained"
                     style={{backgroundColor:CONST.COLOR.PRIMARY,color:"white"}}

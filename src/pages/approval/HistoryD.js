@@ -10,10 +10,8 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Hidden from '@material-ui/core/Hidden';
 import CONST from '../../constants/Constants';
 
-
 const StyledTableCell = withStyles((theme) => ({
   head: {
-    // backgroundColor: theme.palette.secondary.main,
     color: theme.palette.common.white,
   },
   body: {
@@ -42,32 +40,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
 function NominationHistory() {
+
     const classes = useStyles();
     const [approval, setApproval] = useState([]);
     const [rejection, setRejection] = useState([]);
     const [value, setValue] = React.useState(
         JSON.parse(localStorage.getItem('userData')) 
       );
+
       var current=value.data.empId;
+
       useEffect(()=> {
         getApproval();
       },[]);
 
       const getApproval=()=>{
-        console.log(current)
+        // console.log(current)
           axios
+          //ApprovalController
           .get(`http://localhost:8081/approvalList/${current}`).
           then(data=>{
             // console.log(data.data.teams[0].teamMembers[0]);
-            console.log(data.data)
+            // console.log(data.data)
             setApproval(data.data)
             // console.log(team)
           })
           .catch(err=>alert(err));
         };
+
         useEffect(()=> {
           getRejection();
         },[]);
@@ -75,75 +76,73 @@ function NominationHistory() {
         const getRejection=()=>{
           console.log(current)
             axios
+            //RejectedNominationsController
             .get(`http://localhost:8081/rejections/${current}`).
             then(data=>{
               // console.log(data.data.teams[0].teamMembers[0]);
-              console.log(data.data)
+              // console.log(data.data)
               setRejection(data.data)
               // console.log(team)
             })
             .catch(err=>alert(err));
           };
       
-    return (
-      <> 
-               {/* <ParticlesBg color="#FF0000" type="cobweb" bg={true} /> */}
-           
-        <Hidden xlUp >
+     return (
+          <>            
+           <Hidden xlUp >
                <h1 align="center">Approval History</h1>
-        </Hidden>
-      <TableContainer>
-      <Table className={classes.table} aria-label="customized table" style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
-        <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}}>
-          <TableRow>
-            <StyledTableCell> Nominated By</StyledTableCell>
-            <StyledTableCell align="left">Nominee</StyledTableCell>
-            <StyledTableCell align="left">Description</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-        {approval.map(a=>  (     
-             <StyledTableRow >
-        <StyledTableCell align="left">{a.managerName}</StyledTableCell>
-        <StyledTableCell align="left">{a.nomineeName}</StyledTableCell>
-        <StyledTableCell align="left">{a.description}</StyledTableCell>
-            
-            </StyledTableRow> 
-               ))} 
-        </TableBody>
-      </Table>
-    </TableContainer>
+           </Hidden>
 
+            <TableContainer>
+             <Table className={classes.table} aria-label="customized table" style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
+              <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}}>
+                <TableRow>
+                  <StyledTableCell> Nominated By</StyledTableCell>
+                  <StyledTableCell align="left">Nominee</StyledTableCell>
+                  <StyledTableCell align="left">Description</StyledTableCell>
+                </TableRow>
+              </TableHead>
+
+              <TableBody>
+                {approval.map(a=>  (     
+                    <StyledTableRow >
+                      <StyledTableCell align="left">{a.managerName}</StyledTableCell>
+                      <StyledTableCell align="left">{a.nomineeName}</StyledTableCell>
+                      <StyledTableCell align="left">{a.description}</StyledTableCell>                   
+                    </StyledTableRow> 
+                ))} 
+             </TableBody>
+            </Table>
+         </TableContainer>
 
     {/* **************************Rejections******************* */}
 
-    <Hidden xlUp >
-               <h1 align="center">Rejection History</h1>
-        </Hidden>
+      <Hidden xlUp >
+        <h1 align="center">Rejection History</h1>
+      </Hidden>
+      
       <TableContainer>
-      <Table className={classes.table} aria-label="customized table" style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
-        <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}}>
-          <TableRow>
-            <StyledTableCell> Nominated By</StyledTableCell>
-            <StyledTableCell align="left">Nominee</StyledTableCell>
-            <StyledTableCell align="left">Description</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-        {rejection.map(a=>  (     
-             <StyledTableRow >
-        <StyledTableCell align="left">{a.managerName}</StyledTableCell>
-        <StyledTableCell align="left">{a.nomineeName}</StyledTableCell>
-        <StyledTableCell align="left">{a.description}</StyledTableCell>
-            
-            </StyledTableRow> 
-               ))} 
-        </TableBody>
-      </Table>
-    </TableContainer>
+        <Table className={classes.table} aria-label="customized table" style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
+          <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}}>
+            <TableRow>
+              <StyledTableCell> Nominated By</StyledTableCell>
+              <StyledTableCell align="left">Nominee</StyledTableCell>
+              <StyledTableCell align="left">Description</StyledTableCell>
+            </TableRow>
+          </TableHead>
+
+          <TableBody>
+            {rejection.map(a=>  (     
+                <StyledTableRow >
+                  <StyledTableCell align="left">{a.managerName}</StyledTableCell>
+                  <StyledTableCell align="left">{a.nomineeName}</StyledTableCell>
+                  <StyledTableCell align="left">{a.description}</StyledTableCell>               
+                </StyledTableRow> 
+              ))} 
+          </TableBody>
+        </Table>
+      </TableContainer>
     </>   
-    
-   
     )
 }
 export default NominationHistory

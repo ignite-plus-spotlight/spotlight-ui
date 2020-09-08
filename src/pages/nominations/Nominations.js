@@ -70,13 +70,10 @@ const useStyles = makeStyles((theme) => ({
   
 }));
 
-
-
 export default function Nominations() {
   const classes = useStyles();
   const [stateNomination, setNominationState] = useState([]) 
   const [open, setOpen] = React.useState(false);
-
 
   const handleClose = () => {
     setOpen(false);
@@ -97,16 +94,14 @@ export default function Nominations() {
       return;
     }
     setsnackbarSuccess(false);
- 
-
   };
+
   function submit(e) {
     e.preventDefault()
     axios.post(url,data,{
       headers: {
         'Content-Type': 'application/json',
     }
-    
   }) .then(res=>{
     setOpen(false)
     setsnackbarSuccess(true);
@@ -122,11 +117,7 @@ export default function Nominations() {
             setOpen(true); 
             
   };
-  // const [pollName, setPollName] = React.useState('');
-  // const handleChange = (event) => {
-  //   setPollName(event.target.value);
-  //   console.log(event.target.value)
-  // };
+
   const [employee, setemployee] = React.useState('');
   const handleChange1 = (event) => {
     setemployee(event.target.value);
@@ -140,6 +131,9 @@ export default function Nominations() {
     description:"",
     managerId:current,   
   })
+
+  //post nominate
+  //nominations controller
   const url=`http://localhost:8081/nominate/${pollId}/${employee}`
   function handle(e) {
     const newdata={...data}
@@ -153,14 +147,14 @@ export default function Nominations() {
     setsnackbarFail(false);
   };
 
-  
+  //all nominations present
   const getNomination=()=>{
  
     axios
+    //NominationsDateController
     .get(`http://localhost:8081/nominationalert/${current}`).
     then(data=>{
       console.log(data);
-    
       setNominationState(data.data)
     })
     .catch(err=>alert(err));
@@ -170,44 +164,41 @@ export default function Nominations() {
       useEffect(()=> {
         getEmployee();
       },[]);
+
+      //dropdown employees
       const getEmployee=()=>{
-      
         // console.log(current)
           axios
+          //EmployeeController
           .get(`http://localhost:8081/manager/${current}`).
           then(data=>{
             // console.log(data.data.teams);
-          
             setEmployeeState(data.data.teams)
           })
           .catch(err=>alert(err));
         };
 
 
-  return (
-    
-    <>
+  return ( 
+       <>
         <Snackbar open={snackbarSuccess} autoHideDuration={10000} onClose={handleClose1}>
-        <Alert onClose={handleClose1} severity="success">
-          Nominated Successfully
-        </Alert>
-      </Snackbar>
-      <Snackbar open={snackbarFail} autoHideDuration={10000} onClose={handleClose2}>
-        <Alert onClose={handleClose2} severity="error">
-         Oops ! Try Again 
-        </Alert>
-      </Snackbar>
+          <Alert onClose={handleClose1} severity="success">
+            Nominated Successfully
+          </Alert>
+        </Snackbar>
+
+        <Snackbar open={snackbarFail} autoHideDuration={10000} onClose={handleClose2}>
+          <Alert onClose={handleClose2} severity="error">
+          Oops ! Try Again 
+          </Alert>
+        </Snackbar>
+
       <CssBaseline />
-      <main>
-        <div align="right">
-      </div>
+        <main>
+          <div align="right"></div>
         <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
-          {stateNomination.map(a=>  (
-        //  statePollName.map(b=> (
-        //    b.data.map(c=>(
-
-           
+             {stateNomination.map(a=>  (   
               <Grid item  xs={12} sm={6} md={4}>
                 <Card className={classes.card}  >
                   <CardMedia
@@ -215,53 +206,45 @@ export default function Nominations() {
                     image={img1}
                     title="Image title"
                   />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h1">
-                     {a.pollName}
-                    </Typography>
-                    <Typography>
-                     {a.description}
-                    </Typography>
-
-                  </CardContent>
-                  
-                  <CardActions>
-                  {/* <Nominate/> */}
-                  
-                  <Fab variant="extended" size="medium" style={{backgroundColor:CONST.COLOR.PRIMARY,color:"white"}} onClick={()=>handleClickOpen(a.processId)} align="right">
-           
-        Nominate
-     </Fab>
-                 
-                  </CardActions>
-               
+                   <CardContent className={classes.cardContent}>
+                      <Typography gutterBottom variant="h5" component="h1">
+                      {a.pollName}
+                      </Typography>
+                      <Typography>
+                      {a.description}
+                      </Typography>
+                  </CardContent>                  
+                  <CardActions> 
+                    <Fab variant="extended" size="medium" style={{backgroundColor:CONST.COLOR.PRIMARY,color:"white"}} onClick={()=>handleClickOpen(a.processId)} align="right">
+                      Nominate
+                    </Fab>                 
+                  </CardActions>              
                 </Card>
               </Grid>
-              // ))
-              //  ))
               ))}  
           </Grid>
         </Container>
       </main>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
-          <DialogContent >
-            <DialogTitle id="form-dialog-title" >Nominate</DialogTitle>
-                <DialogContentText>
-                    Please Enter The Details
-                </DialogContentText>
-<div>
+        <DialogContent >
+          <DialogTitle id="form-dialog-title" >Nominate</DialogTitle>
+            <DialogContentText>
+                Please Enter The Details
+            </DialogContentText>
+              <div>
 
-<FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label"  color="secondary">Employee</InputLabel>
-                   <Select
-                       labelId="demo-simple-select-outlined-label"
-                       id="employeeId"
-                       value={employee}
-                       onChange={handleChange1}
-                       label="Employee"
-                       color="secondary"
-                      //  input={<BootstrapInput />}
-                   >
+              <FormControl variant="outlined" className={classes.formControl}>
+                <InputLabel id="demo-simple-select-outlined-label"  color="secondary">
+                  Employee
+                </InputLabel>
+                <Select
+                    labelId="demo-simple-select-outlined-label"
+                    id="employeeId"
+                    value={employee}
+                    onChange={handleChange1}
+                    label="Employee"
+                    color="secondary"
+                >
                        <MenuItem value="">
                          <em>None</em>
                        </MenuItem>
@@ -269,53 +252,28 @@ export default function Nominations() {
                          a.teamMembers.map(b=>(
                           <MenuItem value={b.empId}>{b.firstName}</MenuItem>
                          ))
-                         
-          
                        ))}
          
-                    </Select>
+                </Select>
                 </FormControl>
                 </div>
+                <div> </div>
                 <div>
-                {/* <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label"  color="secondary">Poll Name</InputLabel>
-        <Select
-          labelId="demo-simple-select-outlined-label"
-          id="pollId"
-          value={pollName}
-          onChange={handleChange}
-          label="Poll"
-          color="secondary"
-          // input={<BootstrapInput />}
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          {statePollName.map(a=> (
-          <MenuItem value={a.pollId}>{a.pollName}</MenuItem>
-          
-          ))}
-         
-        </Select>
-      </FormControl> */}
-      </div>
-      <div>
-      <FormControl variant="outlined" className={classes.formControl}>
-        <TextField
-         label="Description" 
-         variant="outlined" 
-         color="secondary"
-         name="Poll Description"
-         fullWidth
-         id="description"
-         type="text"
-         input onChange={(e)=>handle(e)}
-        value={data.description}/>
-      </FormControl>
-      </div>
-      
-    {/* </div> */}
-    </DialogContent>
+                <FormControl variant="outlined" className={classes.formControl}>
+                  <TextField
+                  label="Description" 
+                  variant="outlined" 
+                  color="secondary"
+                  name="Poll Description"
+                  fullWidth
+                  id="description"
+                  type="text"
+                  input onChange={(e)=>handle(e)}
+                  value={data.description}/>
+                </FormControl>
+                </div>
+
+             </DialogContent>
                       <DialogActions>
                         <Button onClick={handleClose} style={{color:CONST.COLOR.PRIMARY}}>
                           Cancel
@@ -325,8 +283,6 @@ export default function Nominations() {
                         </Button>
                       </DialogActions>
                     </Dialog>
-                  
-      {/* </main> */}
     </>
    
   );

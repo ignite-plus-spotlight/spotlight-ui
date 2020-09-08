@@ -85,6 +85,7 @@ function ViewMember() {
         console.log(teamMember)
         setemployee(teamMember.empId)
                 setOpen(true);
+               // employee awards controller
                 axios.get(`http://localhost:8081/employeeawards/count/${teamMember.empId}/monthly`)
                 .then(data=>(
                   setCount(data.data)
@@ -121,6 +122,7 @@ function ViewMember() {
       const getTeam=()=>{
         console.log(current)
           axios
+          //employee controller
           .get(`http://localhost:8081/manager/${current}`).
           then(data=>{
             console.log(data.data)
@@ -128,19 +130,6 @@ function ViewMember() {
           })
           .catch(err=>alert(err));
         };
-  //       useEffect(()=> {
-  //         getCount();
-  //       },[]);
-
-  // const getCount=()=>{
-  //   // console.log(employee)
-  //   axios.get(`http://localhost:8081/employeeawards/count/${employee}/${period}`).
-  //   then(data=>{
-  //     console.log(data)
-  //     setCount(data.data)
-  //   })
-  //   .catch(err=>alert(err));
-  // }
        
         function submit(e) {
           axios.post(url,data)
@@ -179,18 +168,17 @@ function ViewMember() {
           setdepartment(event.target.value);
           console.log(event.target.value)
         };
-      
-      
-      
+        
+        //Employee Awards Controller 
         const url=`http://localhost:8081/employee/${employee}/employeeawards/award/${award}/period/${period}/department/${department}/manager/${current}`
      
         useEffect(()=> {
             receiveAward();
           },[]);
 
-        
         const receiveAward=()=>{
               axios
+              //AwardToIndividualController
               .get(`http://localhost:8081/employee/individualawards`).
               then(data=>{
                 console.log(data.data);
@@ -198,55 +186,54 @@ function ViewMember() {
               })
               .catch(err=>alert(err));
             };
-
-           
-           
+     
     return (
-      <>
+         <>
            <Snackbar open={snackbarSuccess} autoHideDuration={10000} onClose={handleClose1}>
-        <Alert onClose={handleClose1} severity="success">
-          Awarded Successfully
-        </Alert>
-      </Snackbar>
-      <Snackbar open={snackbarFail} autoHideDuration={10000} onClose={handleClose2}>
-        <Alert onClose={handleClose2} severity="error">
-         Oops ! Try Again 
-        </Alert>
-      </Snackbar>
-               {team.map(team=>  (     
-           <> 
-        <Hidden xlUp color="secondary">
-               <h1 align="center">Team Name : {team.teamName}</h1>
-        </Hidden>
-      <TableContainer >
-      <Table className={classes.table} aria-label="customized table" style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
-        <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}}>
-          <TableRow>
-            {/* <StyledTableCell> Employee Id</StyledTableCell> */}
-            <StyledTableCell align="left">First Name</StyledTableCell>
-            <StyledTableCell align="left">Last Name</StyledTableCell>
-            <StyledTableCell align="left">Email id</StyledTableCell>
-            <StyledTableCell align="left">Give Awards</StyledTableCell>
+              <Alert onClose={handleClose1} severity="success">
+                Awarded Successfully
+              </Alert>
+           </Snackbar>
 
-          </TableRow>
-        </TableHead>
-        <TableBody>
- {team.teamMembers.map(teamMember=>(
-             <StyledTableRow >
-              <StyledTableCell align="left">{teamMember.firstName}</StyledTableCell>
-              <StyledTableCell align="left">{teamMember.lastName}</StyledTableCell>
-              <StyledTableCell align="left">{teamMember.empEmail}</StyledTableCell>
-              <StyledTableCell align="left"><Fab variant="extended" size="medium" style={{backgroundColor:CONST.COLOR.PRIMARY,color:"white"}} onClick={()=>handleClickOpen(teamMember)} align="right">
-                 Award
-     </Fab></StyledTableCell>
+            <Snackbar open={snackbarFail} autoHideDuration={10000} onClose={handleClose2}>
+              <Alert onClose={handleClose2} severity="error">
+              Oops ! Try Again 
+              </Alert>
+            </Snackbar>
 
-            </StyledTableRow> 
-   ))}  
-        </TableBody>
-      </Table>
-    </TableContainer>
-    </>   
-      ))}
+            {team.map(team=>  (     
+              <> 
+              <Hidden xlUp color="secondary">
+                    <h1 align="center">Team Name : {team.teamName}</h1>
+              </Hidden>
+              <TableContainer >
+              <Table className={classes.table} aria-label="customized table" style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
+                <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}}>
+                  <TableRow>
+                    {/* <StyledTableCell> Employee Id</StyledTableCell> */}
+                    <StyledTableCell align="left">First Name</StyledTableCell>
+                    <StyledTableCell align="left">Last Name</StyledTableCell>
+                    <StyledTableCell align="left">Email id</StyledTableCell>
+                    <StyledTableCell align="left">Give Awards</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                   {team.teamMembers.map(teamMember=>(
+                      <StyledTableRow >
+                        <StyledTableCell align="left">{teamMember.firstName}</StyledTableCell>
+                        <StyledTableCell align="left">{teamMember.lastName}</StyledTableCell>
+                        <StyledTableCell align="left">{teamMember.empEmail}</StyledTableCell>
+                        <StyledTableCell align="left"><Fab variant="extended" size="medium" style={{backgroundColor:CONST.COLOR.PRIMARY,color:"white"}} onClick={()=>handleClickOpen(teamMember)} align="right">
+                          Award
+                         </Fab></StyledTableCell>
+
+                      </StyledTableRow> 
+                   ))}  
+                </TableBody>
+              </Table>
+            </TableContainer>
+            </>   
+          ))}
        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" >
           <DialogContent >
             <DialogTitle id="form-dialog-title" >Give Award</DialogTitle>
@@ -297,8 +284,6 @@ function ViewMember() {
           </MenuItem>
          
           <MenuItem value={"monthly"}>Monthly</MenuItem>
-          {/* <MenuItem value={"quarterly"}>Quarterly</MenuItem>
-          <MenuItem value={"yearly"}>yearly</MenuItem> */}
         </Select>
       </FormControl>
       </div>

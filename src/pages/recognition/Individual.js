@@ -56,6 +56,7 @@ export default function CustomizedTables() {
     
     // console.log(current)
       axios
+      //employee awards controller
       .get(`http://localhost:8081/employee/${current}/employeeawards`).
       then(data=>{
         console.log(data);
