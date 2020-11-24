@@ -34,6 +34,7 @@ import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import CreateAward from '../awards/CreateAward'
 import HistoryD from '../approval/HistoryD'
 import HistoryVP from '../approval/HistoryVP'
+import RewardTeam from '../Team/RewardTeam'
 
 const CLIENT_ID = '487050070331-10md2t0pdqe7qtus6ig1ju6jtrdk22f4.apps.googleusercontent.com';
 
@@ -41,7 +42,7 @@ const drawerWidth = 240;
 
 const TeamMember =["Activity", "Individual Awards"];
 const Manager =  ["Activity","Individual Awards","Add To Team","Reward","Grants","Nominate","Nomination Record"];
-const Director = ["Activity","Individual Awards","Add To Team","Reward ","Grants","Nominate","Nomination Record","Stamp of Approval","Approval/Rejection"]
+const Director = ["Activity","Individual Awards","Add To Team","Reward ","Reward Team","Grants","Nominate","Nomination Record","Stamp of Approval","Approval/Rejection"]
 const VP = ["Activity", "Reward  ", "Grants","Stamp of Approval ","Rejected List"]
 const Admin = ["Activity","Start Nomination","Create Award"]
 
@@ -204,6 +205,9 @@ class Dashboard extends React.Component {
             }
     if(event === "Rejected List"){
         this.setState({finalContents:<HistoryVP/>})
+    }
+    if(event === "Reward Team"){
+        this.setState({finalContents:<RewardTeam/>})
     }
     }
 
