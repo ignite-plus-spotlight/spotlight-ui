@@ -199,7 +199,7 @@ export default function Nominations() {
        <>
         <Snackbar open={snackbarSuccess} autoHideDuration={10000} onClose={handleClose1}>
           <Alert onClose={handleClose1} severity="success">
-            Nominated Successfully
+            Awarded Successfully
           </Alert>
         </Snackbar>
 
@@ -297,25 +297,6 @@ export default function Nominations() {
         </FormControl>
       </div>
       <div>
-      {/* <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label" color="secondary" >Department</InputLabel>
-        <Select
-           labelId="demo-simple-select-outlined-label"
-           id="demo-simple-select-outlined"
-           color="secondary"
-          value={department}
-          onChange={handleChange3}
-          label="Department"
-        >
-           <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-         
-          <MenuItem value={"Technology"}>Technology</MenuItem>
-          <MenuItem value={"Management"}>Management</MenuItem>
-          <MenuItem value={"Finance"}>Finance</MenuItem>
-        </Select>
-      </FormControl> */}
       </div>
     </DialogContent>
     <DialogActions>

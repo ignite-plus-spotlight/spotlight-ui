@@ -39,6 +39,7 @@ export default function SimpleTable() {
   const classes = useStyles();
   
   const [stateAwards, setAwardsState] = useState([]) 
+  const [stateTeamAwards, setTeamAwardsState] = useState([])
   
   const [value, setValue] = React.useState(
     JSON.parse(localStorage.getItem('userData')) 
@@ -48,6 +49,10 @@ export default function SimpleTable() {
 
   useEffect(()=> {
     getAward();
+  },[]);
+
+  useEffect(()=> {
+    getTeamAward();
   },[]);
   
   const getAward=()=>{
@@ -64,11 +69,25 @@ export default function SimpleTable() {
       .catch(err=>alert(err));
   };
 
+  const getTeamAward=()=>{
+    
+    console.log(current)
+      axios
+      //employee awards controller
+      .get(`http://localhost:8081/teamawardshistory/${current}`).
+      then(data=>{
+        console.log(data.data[0].teamName);
+      
+        setTeamAwardsState(data.data)
+      })
+      .catch(err=>alert(err));
+  };
+
   return (
     <>
     <TableContainer >
       <div>
-        <h1 align="center" >GRANTS</h1>
+        <h2 align="center" >INDIVIDUAL GRANTS</h2>
          <Table className={classes.table} aria-label="customized table"  style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
             <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}}>
                <TableRow>
@@ -86,6 +105,36 @@ export default function SimpleTable() {
                   <StyledTableCell >{a.employee.firstName}</StyledTableCell>
                   <StyledTableCell align="left">{a.periodName}</StyledTableCell>
                   <StyledTableCell align="left"><AdjustIcon/>{a.empPoints}</StyledTableCell> 
+                  <StyledTableCell align="left">{a.awardName}</StyledTableCell>
+                </StyledTableRow> 
+                </>               
+              ))}  
+            </TableBody>
+            
+        </Table>
+       </div>
+      </TableContainer>
+
+      <TableContainer >
+      <div>
+        <h2 align="center" >TEAM GRANTS</h2>
+         <Table className={classes.table} aria-label="customized table"  style={{ width: 600, margin: 'auto' }} Color= 'secondary'>
+            <TableHead style={{backgroundColor:CONST.COLOR.PRIMARY}}>
+               <TableRow>
+                 <StyledTableCell>Team Name </StyledTableCell>
+                 <StyledTableCell align="left">Period</StyledTableCell>
+                 <StyledTableCell align="left">Points</StyledTableCell>
+                 <StyledTableCell align="left">Award</StyledTableCell>
+               </TableRow>
+            </TableHead>
+
+            <TableBody>
+              {stateTeamAwards.map(a=> (          
+                <>
+                <StyledTableRow >
+                  <StyledTableCell >{a.teamName}</StyledTableCell>
+                  <StyledTableCell align="left">{a.periodName}</StyledTableCell>
+                  <StyledTableCell align="left"><AdjustIcon/>{a.teamPoints}</StyledTableCell> 
                   <StyledTableCell align="left">{a.awardName}</StyledTableCell>
                 </StyledTableRow> 
                 </>               
